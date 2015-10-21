@@ -62,8 +62,16 @@
 
 		</section>
 
-		<nav id="site-navigation" class="left-navigation" role="navigation">
-			<?php wp_nav_menu( array( 'theme_location' => 'left' ) ); ?>
+		<nav class="navigation left-navigation" role="navigation">
+			<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'left',
+						// 'before'          => '<h4>Shop</h4>',
+						'items_wrap'      => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+					)
+				);
+			?>
 		</nav><!-- #site-navigation -->
 
 		<div class="site-branding">
@@ -96,7 +104,7 @@
 			</a>
 		</div><!-- .site-branding -->
 
-		<nav id="site-navigation" class="right-navigation" role="navigation">
+		<nav class="navigation right-navigation" role="navigation">
 			<?php wp_nav_menu( array( 'theme_location' => 'right' ) ); ?>
 		</nav><!-- #site-navigation -->
 	</header><!-- #masthead -->

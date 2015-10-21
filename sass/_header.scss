@@ -1,12 +1,11 @@
-
-
 .header {
 	position: relative;
 	z-index: 1;
 	.utility-header {
 		@include row();
 		display: none;
-		padding-top: $fifteen;
+		margin-bottom: $fifty;
+		padding-top: $five;
 		@include media( $large-screen ) {
 			display: block;
 		}
@@ -33,27 +32,71 @@
 			}
 			.search-form {
 				@include span-columns(2);
-				color: $gray;
+				color: $medium-gray;
 				font-size: 16px;
 				label {
 					margin-right: $ten;
 				}
 				input[type="search"] {
 					padding: $five $five $five $twentyfive;
-					border: 1px solid $gray;
+					border: 1px solid $light-gray;
 					background: {
 						image: url('../images/magnifying_glass.svg');
+						position: $five;
+						repeat: no-repeat;
+						size: 18px;
 					}
 				}
 			}
 		}
 		svg {
-			fill: $gray;
+			fill: $medium-gray;
 			vertical-align: middle;
 			width: 16px;
 		}
 		a {
-			color: $gray;
+			color: $medium-gray;
+		}
+	}
+	.navigation {
+		.menu {
+			position: relative;
+			li.menu-item-has-children {
+				position: relative;
+			    display: inline-block;
+				z-index: 10;
+				&:first-child > a {
+					color: $gray;
+					height: $twentyfive;
+					padding-right: $fifteen;
+					text-transform: uppercase;
+					background: {
+						image: url(../images/chevron_down.svg);
+						position: center right;
+						repeat: no-repeat;
+						size: 14px;
+					}
+					font: {
+						weight: 400;
+						size: 18px;
+					}
+				}
+				&:first-child:hover {
+				 .sub-menu {
+						display: block;
+					}
+				}
+			}
+			.sub-menu {
+				display: none;
+				a {
+					color: $gray;
+					text-transform: none;
+					&:hover {
+						color: $pink;
+					}
+				}
+			}
 		}
 	}
 	@include media( $large-screen ) {

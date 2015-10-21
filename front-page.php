@@ -45,7 +45,6 @@ get_header(); ?>
 				<?php $desktop_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-desktop'); ?>
 				<?php $retina_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-retina'); ?>
 
-				<a href="<?php echo the_sub_field('page_link'); ?>">
 					<picture>
 						<!--[if IE 9]><video style="display: none"><![endif]-->
 						<source
@@ -64,10 +63,11 @@ get_header(); ?>
 						<img srcset="<?php echo $image[0]; ?>">
 					</picture>
 
-					<div class="slide-caption <?php if( get_sub_field( 'caption_position' ) == 'Top of image') : ?>top-caption <?php else: ?>bottom-caption <?php endif; ?>">
-						<?php the_sub_field('caption'); ?>
-					</div>
-				</a>
+					<a href="<?php echo the_sub_field('page_link'); ?>">
+						<div class="slide-caption <?php if( get_sub_field( 'caption_position' ) == 'Top of image') : ?>top-caption <?php else: ?>bottom-caption <?php endif; ?>">
+							<?php the_sub_field('caption'); ?>
+						</div>
+					</a>
 
 		    <?php endwhile; ?>
 

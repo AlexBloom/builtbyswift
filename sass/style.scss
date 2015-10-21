@@ -12,17 +12,17 @@
 * License:     Commercial
 */
 
+@import "variables";
+@import "slick";
 @import "bourbon/bourbon";
 @import "base/grid-settings";
 @import "neat/neat";
 @import "base/base";
 
-@import "variables";
-@import "slick";
 @import "header";
 
 body {
-	font-family: $sans-serif;
+	font-family: $basic;
 	.home-page-slider {
 		height: 100%;
 		left: 0;
@@ -30,5 +30,29 @@ body {
 		top: 0;
 		width: 100%;
 		z-index: 0;
+	}
+	select {
+		background: $white;
+		border-color: $gray;
+		color: $gray;
+		height: $thirty;
+		width: 100%;
+	}
+	.skip-link {
+		clip: rect(1px, 1px, 1px, 1px);
+		position: absolute;
+		text-indent: -9999px;
+	}
+	button {
+		font-size: 20px;
+	}
+	.button,
+	.wc-proceed-to-checkout a {
+		background: $gray;
+		border-radius: 0;
+		color: $white;
+		font-weight: 900;
+		padding: $ten $fifteen;
+		text-transform: uppercase;
 	}
 }
