@@ -18,3 +18,17 @@
 @import "base/base";
 
 @import "variables";
+@import "slick";
+@import "header";
+
+body {
+	font-family: $sans-serif;
+	.home-page-slider {
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: 0;
+	}
+}

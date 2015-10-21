@@ -1,0 +1,72 @@
+
+
+.header {
+	position: relative;
+	z-index: 1;
+	.utility-header {
+		@include row();
+		display: none;
+		padding-top: $fifteen;
+		@include media( $large-screen ) {
+			display: block;
+		}
+		.inner-container {
+			@include outer-container;
+			.account-link {
+				@include shift(7);
+				@include span-columns(2);
+				font-size: 16px;
+				height: 20px;
+				padding-top: 3px;
+				text-align: right;
+				.account-title {
+				}
+			}
+			.cart-link {
+				@include span-columns(1);
+				font-size: 16px;
+				height: 20px;
+				padding-top: 3px;
+				text-align: right;
+				.cart-title {
+				}
+			}
+			.search-form {
+				@include span-columns(2);
+				color: $gray;
+				font-size: 16px;
+				label {
+					margin-right: $ten;
+				}
+				input[type="search"] {
+					padding: $five $five $five $twentyfive;
+					border: 1px solid $gray;
+					background: {
+						image: url('../images/magnifying_glass.svg');
+					}
+				}
+			}
+		}
+		svg {
+			fill: $gray;
+			vertical-align: middle;
+			width: 16px;
+		}
+		a {
+			color: $gray;
+		}
+	}
+	@include media( $large-screen ) {
+		.left-navigation {
+			@include span-columns(2);
+			@include shift(3);
+		}
+		.site-branding {
+			@include span-columns(2);
+		}
+		.right-navigation {
+			@include span-columns(2);
+			@include shift(1);
+		}
+	}
+}

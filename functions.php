@@ -50,7 +50,8 @@ function swift_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
-		'primary' => __( 'Primary Menu', 'swiftindustries' ),
+		'left' => __( 'Left of logo', 'swiftindustries' ),
+		'right' => __( 'Right of logo', 'swiftindustries' ),
 	) );
 
 	/*
@@ -134,11 +135,25 @@ add_image_size( 'portal-retina', '2400', '1800', 'true' );
 // Remove Woo styling
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 
+add_role('dealer', 'Dealer', array(
+    'read' => true, // True allows that capability
+    'edit_posts' => true,
+    'delete_posts' => false, // Use false to explicitly deny
+));
+
+// Force price to show on variation products
+add_filter('woocommerce_available_variation', function ($value, $object = null, $variation = null) {
+if ($value['price_html'] == '') {
+$value['price_html'] = '<span class="price">' . $variation->get_price_html() . '</span>';
+}
+return $value;
+}, 10, 3);
+
 /**
  * TypeKit Fonts
  */
 function theme_typekit() {
-    wp_enqueue_script( 'theme_typekit', '//use.typekit.net/bpk6lyp.js');
+    wp_enqueue_script( 'theme_typekit', '//use.typekit.net/vmv6ysj.js');
 }
 add_action( 'wp_enqueue_scripts', 'theme_typekit' );
 
@@ -178,3 +193,8 @@ function my_login_logo_url_title() {
     return 'Built by Swift';
 }
 add_filter( 'login_headertitle', 'my_login_logo_url_title' );
+
+add_filter( 'woocommerce_bundles_optional_bundled_item_suffix', 'wc_pb_remove_optional_suffix', 10, 3 );
+function wc_pb_remove_optional_suffix( $suffix, $bundled_item, $bundle ) {
+	return '';
+}
