@@ -21,16 +21,15 @@
 
 @import "header";
 
+* {
+	box-sizing: border-box;
+	margin: 0;
+}
+
+html,
 body {
 	font-family: $basic;
-	.home-page-slider {
-		height: 100%;
-		left: 0;
-		position: absolute;
-		top: 0;
-		width: 100%;
-		z-index: 0;
-	}
+	height: 100%;
 	select {
 		background: $white;
 		border-color: $gray;
@@ -54,5 +53,148 @@ body {
 		font-weight: 900;
 		padding: $ten $fifteen;
 		text-transform: uppercase;
+	}
+}
+
+div {
+	width: 100%;
+	height: 100%;
+	&.first {
+		background-image: url('http://i.imgur.com/PbV1Grl.jpg');
+		background-attachment: fixed;
+		background-size: cover;
+	}
+}
+
+.front-page {
+	.home-page-slider-container {
+		.slide {
+			.slide-caption {
+				bottom: 0;
+				font-family: $orator;
+				height: auto;
+				position: absolute;
+			}
+		}
+		@include media( $large-screen ) {
+			left: 0;
+			position: absolute;
+			top: 0;
+			width: 100%;
+			z-index: 0;
+			img {
+				width: 100%
+			}
+		}
+	}
+	.second {
+		// background-color: red;
+		// background-size: cover;
+		// height: 1000px;
+		// width: 100%;
+		// z-index: 10;
+	}
+}
+
+
+/* Overlay style */
+#trigger-overlay {
+	background: transparent;
+	position: absolute;
+	z-index: 1;
+	svg {
+		width: $thirty;
+	}
+	@include media( $large-screen ) {
+		display: none;
+	}
+}
+
+.overlay {
+	position: fixed;
+	width: 100%;
+	display: none;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: $medium-gray;
+	z-index: 2;
+	.overlay-close {
+		position: absolute;
+		right: 20px;
+		top: 20px;
+		overflow: hidden;
+		border: none;
+		background: none;
+		outline: none;
+		z-index: 100;
+		svg {
+			width: $twentyfive;
+		}
+	}
+	.social-links {
+		svg {
+			margin: 0 $ten;
+			width: $twentyfive;
+		}
+	}
+	.mobile-logo-container {
+		@include row();
+		height: auto;
+		.mobile-logo {
+			@include span-columns(4);
+			@include shift(4);
+			@include omega;
+			padding-top: $twentyfive;
+			svg {
+				width: 100%
+			}
+		}
+	}
+	nav {
+		@include row();
+		position: absolute;
+		top: 50%;
+		@include transform(translateY(-50%));
+		width: 100%;
+		.menus {
+			a {
+				color: $gray;
+				font-size: 18px;
+			}
+			li.menu-item-has-children:first-child {
+				text-transform: uppercase;
+			}
+			li.menu-item-has-children:first-child > a {
+				padding-right: $fifteen;
+				background: {
+					image: url(../images/chevron_down.svg);
+					position: center right;
+					repeat: no-repeat;
+					size: 14px;
+				}
+			}
+			.sub-menu {
+				position: relative;
+				top: $twentyfive;
+				a {
+					text-transform: none;
+				}
+			}
+			.left-menu {
+				@include span-columns(4);
+				@include shift(2);
+			}
+			.right-menu {
+				@include span-columns(4);
+			}
+		}
+	}
+	.social-links {
+		@include row();
+		bottom: $fifty;
+		height: auto;
+		position: absolute;
+		text-align: center;
 	}
 }

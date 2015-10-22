@@ -1,8 +1,14 @@
 .header {
+	@include media( $large-screen ) {
+		position: relative;
+	}
 	position: relative;
 	z-index: 1;
 	.utility-header {
-		@include row();
+		display: none;
+		@include media( $large-screen ) {
+			@include row();
+		}
 		display: none;
 		margin-bottom: $fifty;
 		padding-top: $five;
@@ -97,6 +103,20 @@
 					}
 				}
 			}
+		}
+	}
+	.left-navigation,
+	.right-navigation {
+		display: none;
+	}
+	.site-branding {
+		@include span-columns(4);
+		@include shift(4);
+		@include omega;
+		position: absolute;
+		top: $twentyfive;
+		svg {
+			width: 100%
 		}
 	}
 	@include media( $large-screen ) {

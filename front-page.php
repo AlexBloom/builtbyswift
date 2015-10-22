@@ -15,69 +15,94 @@ get_header(); ?>
 <script>
 	jQuery(document).ready(function(){
 
-	  jQuery('.home-page-slider').slick({
-		  arrows: false,
-		  dots: true,
-		  centered: true,
-		  mobileFirst: true,
-		//   lazyLoad: 'ondemand',
-	  });
+		jQuery('.home-page-slider').slick({
+			arrows: false,
+			dots: false,
+			centered: true,
+			mobileFirst: true,
+			//   lazyLoad: 'ondemand',
+		});
+
+
+		if (jQuery(window).width() > 375) {
+
+			var answer = jQuery(window).height();
+			jQuery( '.home-page-slider' ).css('height', answer);
+
+			var width_answer = jQuery(window).width();
+			jQuery( '.home-page-slider' ).css('width', width_answer);
+
+		}
 
 	});
 
 </script>
 
-<?php while ( have_posts() ) : the_post(); ?>
 
-	<!-- Begin Gallery -->
+<section class="front-page">
 
-	<section class="home-page-slider">
+	<?php while ( have_posts() ) : the_post(); ?>
 
-		<!-- Repeater -->
-		<?php if( have_rows('gallery_images') ) : ?>
+		<!-- Begin Gallery -->
 
-		    <?php while ( have_rows('gallery_images') ) : ?>
+		<section class="home-page-slider-container">
 
-		        <?php the_row(); ?>
+			<section class="home-page-slider">
 
-				<?php $mobile_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-mobile'); ?>
-				<?php $tablet_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-tablet'); ?>
-				<?php $desktop_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-desktop'); ?>
-				<?php $retina_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-retina'); ?>
+				<!-- Repeater -->
+				<?php if( have_rows('gallery_images') ) : ?>
 
-					<picture>
-						<!--[if IE 9]><video style="display: none"><![endif]-->
-						<source
-							srcset="<?php echo $mobile_page_banner[0]; ?>"
-							media="(max-width: 500px)" />
-						<source
-							srcset="<?php echo $tablet_page_banner[0]; ?>"
-							media="(max-width: 860px)" />
-						<source
-							srcset="<?php echo $desktop_page_banner[0]; ?>"
-							media="(max-width: 1180px)" />
-						<source
-							srcset="<?php echo $retina_page_banner[0]; ?>"
-							media="(min-width: 1181px)" />
-						<!--[if IE 9]></video><![endif]-->
-						<img srcset="<?php echo $image[0]; ?>">
-					</picture>
+				    <?php while ( have_rows('gallery_images') ) : ?>
 
-					<a href="<?php echo the_sub_field('page_link'); ?>">
-						<div class="slide-caption <?php if( get_sub_field( 'caption_position' ) == 'Top of image') : ?>top-caption <?php else: ?>bottom-caption <?php endif; ?>">
-							<?php the_sub_field('caption'); ?>
-						</div>
-					</a>
+				        <?php the_row(); ?>
 
-		    <?php endwhile; ?>
+						<div class="slide">
 
-		<?php endif; ?>
+							<?php $mobile_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-mobile'); ?>
+							<?php $tablet_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-tablet'); ?>
+							<?php $desktop_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-desktop'); ?>
+							<?php $retina_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-retina'); ?>
 
-	</section>
+								<picture>
+									<!--[if IE 9]><video style="display: none"><![endif]-->
+									<source
+										srcset="<?php echo $mobile_page_banner[0]; ?>"
+										media="(max-width: 500px)" />
+									<source
+										srcset="<?php echo $tablet_page_banner[0]; ?>"
+										media="(max-width: 860px)" />
+									<source
+										srcset="<?php echo $desktop_page_banner[0]; ?>"
+										media="(max-width: 1180px)" />
+									<source
+										srcset="<?php echo $retina_page_banner[0]; ?>"
+										media="(min-width: 1181px)" />
+									<!--[if IE 9]></video><![endif]-->
+									<img srcset="<?php echo $image[0]; ?>">
+								</picture>
+
+								<div class="slide-caption <?php if( get_sub_field( 'caption_position' ) == 'Top of image') : ?>top-caption <?php else: ?>bottom-caption <?php endif; ?>">
+									<a href="<?php echo the_sub_field('page_link'); ?>">
+										<?php the_sub_field('caption'); ?>
+									</a>
+								</div>
+
+							</div>
+
+				    <?php endwhile; ?>
+
+				<?php endif; ?>
+
+			</section>
+		</section>
 
 
-<!-- End Gallery -->
+	<!-- End Gallery -->
 
-<?php endwhile; // end of the loop. ?>
+	<div class="second"><?php get_template_part( 'content', 'page' ); ?></div>
+
+	<?php endwhile; // end of the loop. ?>
+
+</section>
 
 <?php get_footer(); ?>
