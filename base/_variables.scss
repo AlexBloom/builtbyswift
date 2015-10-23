@@ -5,12 +5,12 @@ $base-font-family: $sans-serif;
 $header-font-family: $base-font-family;
 
 // Font Sizes
-$base-font-size: 1em;
-$h1-font-size: $base-font-size * 2.25;
-$h2-font-size: $base-font-size * 2;
-$h3-font-size: $base-font-size * 1.75;
-$h4-font-size: $base-font-size * 1.5;
-$h5-font-size: $base-font-size * 1.25;
+$base-font-size: 18px;
+$h1-font-size: 36px;
+$h2-font-size: 24px;
+$h3-font-size: 18px;
+$h4-font-size: 18px;
+$h5-font-size: 16px;
 $h6-font-size: $base-font-size;
 
 // Line height
@@ -35,7 +35,7 @@ $light-green: #E6EFC2;
 $base-background-color: white;
 
 // Font Colors
-$base-font-color: $dark-gray;
+$base-font-color: $gray;
 $base-accent-color: $blue;
 
 // Link Colors
