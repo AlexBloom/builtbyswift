@@ -20,6 +20,7 @@
 @import "base/base";
 
 @import "header";
+@import "footer";
 
 * {
 	box-sizing: border-box;
@@ -56,41 +57,33 @@ body {
 	}
 }
 
-.front-page {
-	position: absolute;
-	top: 0;
-	width: 100%;
-	.home-page-slider-container {
-		@include media( $large-screen ) {
-			overflow: hidden;
-			position: absolute;
-		}
-		.home-page-slider {
-			// height: 100%;
-			// width: 100%;
-		}
-		.picture {
-			img {
-				height: 100%;
+.site-content {
+	position: relative;
+	.front-page {
+		.home-page-slider-container {
+			@include media( $large-screen ) {
+				overflow: hidden;
+				// position: absolute;
+			}
+			.picture {
+				img {
+					height: 100%;
+				}
+			}
+			.slide-caption {
+				bottom: 0;
+				font-family: $orator;
+				height: auto;
+				position: absolute;
 			}
 		}
-		.slide-caption {
-			bottom: 0;
-			font-family: $orator;
-			height: auto;
-			position: absolute;
+		.page-content {
+			position: relative;
 		}
-	}
-	.page-content {
-		position: relative;
 	}
 }
 
 .page-content {
 	@include row();
 	position: relative;
-}
-
-.footer {
-	@include row();
 }

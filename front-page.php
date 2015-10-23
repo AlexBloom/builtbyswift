@@ -39,12 +39,21 @@ get_header(); ?>
 
 		if (jQuery(window).width() > 375) {
 
-			var answer = jQuery(window).height();
-			jQuery( '.home-page-slider-container' ).css('height', answer);
-			jQuery( '.page-content' ).css('top', answer);
+			var windowHeight = jQuery(window).height();
+			var windowWidth = jQuery(window).width();
 
-			var width_answer = jQuery(window).width();
-			jQuery( '.home-page-slider-container' ).css('width', width_answer);
+			jQuery( '.home-page-slider-container' ).css('height', windowHeight);
+			jQuery(window).resize(function(){
+			    jQuery(".home-page-slider-container").width(jQuery(window).width());
+			});
+
+			// jQuery(window).resize(function() {
+			//
+			// 	if(jQuery(window).width()!=windowWidth) {
+			// 		jQuery( '.home-page-slider-container' ).css('height', windowHeight);
+			// 		jQuery( '.home-page-slider-container' ).css('width', windowWidth);
+			// 	}
+			// });
 
 		}
 
@@ -112,7 +121,7 @@ get_header(); ?>
 
 	<!-- End Gallery -->
 
-		<section class="page-content">
+		<div class="page-content">
 			<?php get_template_part( 'content', 'page' ); ?>
 		</div>
 

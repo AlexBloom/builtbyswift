@@ -1,0 +1,7 @@
+.footer {
+	@include row();
+	position: absolute;
+	.site-info {
+		@include span-columns(1);
+	}
+}
