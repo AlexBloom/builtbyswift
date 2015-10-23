@@ -94,6 +94,19 @@
 		svg {
 			fill: $gray;
 		}
+		form {
+			margin-top: $five;
+			input[type="search"] {
+				padding: $five $five $five $twentyfive;
+				border: 1px solid $light-gray;
+				background: {
+					image: url('../images/magnifying_glass.svg');
+					position: $five;
+					repeat: no-repeat;
+					size: 18px;
+				}
+			}
+		}
 	}
 	.social-links {
 		bottom: $twentyfive;
