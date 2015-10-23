@@ -52,6 +52,8 @@ function swift_setup() {
 	register_nav_menus( array(
 		'left' => __( 'Left of logo', 'swiftindustries' ),
 		'right' => __( 'Right of logo', 'swiftindustries' ),
+		'shop-footer' => __( 'Footer Shop Navigation', 'swiftindustries'),
+		'support-footer' => __( 'Footer Support Navigation', 'swiftindustries'),
 	) );
 
 	/*
