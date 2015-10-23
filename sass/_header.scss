@@ -1,4 +1,6 @@
 .mobile-header {
+	color: $gray;
+	font-size: 14px;
 	position: absolute;
 	width: 100%;
 	z-index: 1;
@@ -17,7 +19,11 @@
 		position: absolute;
 		top: $twentyfive;
 		width: $twentyfive;
-		.menu-hook {
+	}
+	a {
+		color: $gray;
+		&:hover {
+			color: $pink;
 		}
 	}
 }
@@ -45,7 +51,8 @@
 	.mobile-navigation {
 		height: auto;
 		position: absolute;
-		top: 150px;
+		top: 50%;
+		@include transform(translateY(-50%));
 		width: 100%;
 		z-index: 0;
 		.navigation {
@@ -65,12 +72,6 @@
 					}
 				}
 			}
-			a {
-				color: $gray;
-				&:hover {
-					color: $pink;
-				}
-			}
 		}
 		.left-navigation {
 			@include span-columns(5);
@@ -79,6 +80,19 @@
 		.right-navigation {
 			@include span-columns(5);
 			@include shift(1);
+			@include omega;
+		}
+	}
+	.utility-header {
+		@include span-columns(10);
+		@include shift(1);
+		margin-bottom: $fifteen;
+		text-align: center;
+		.utility-link {
+			margin: 0 $ten;
+		}
+		svg {
+			fill: $gray;
 		}
 	}
 	.social-links {
@@ -90,7 +104,17 @@
 		svg {
 			margin: 0 $five;
 			width: $twentyfive;
+			path {
+				fill: $gray;
+			}
 		}
+	}
+}
+
+.utility-header {
+	svg {
+		vertical-align: middle;
+		width: 16px;
 	}
 }
 
@@ -151,8 +175,6 @@
 		}
 		svg {
 			fill: $medium-gray;
-			vertical-align: middle;
-			width: 16px;
 		}
 		a {
 			color: $medium-gray;
