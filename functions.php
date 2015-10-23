@@ -95,11 +95,11 @@ function swift_scripts() {
 
 	wp_enqueue_script( 'swift-pictureFill', get_template_directory_uri() . '/js/pictureFill.js', array(), '20130115', true );
 
-	wp_enqueue_script( 'swift-modernizr', get_template_directory_uri() . '/js/modernizr.js', array(), '20130115', true );
-
-	wp_enqueue_script( 'swift-overlay', get_template_directory_uri() . '/js/overlay.js', array(), '20130115', true );
-
-	wp_enqueue_script( 'swift-classie', get_template_directory_uri() . '/js/classie.js', array(), '20130115', true );
+	// wp_enqueue_script( 'swift-modernizr', get_template_directory_uri() . '/js/modernizr.js', array(), '20130115', true );
+	//
+	// wp_enqueue_script( 'swift-overlay', get_template_directory_uri() . '/js/overlay.js', array(), '20130115', true );
+	//
+	// wp_enqueue_script( 'swift-classie', get_template_directory_uri() . '/js/classie.js', array(), '20130115', true );
 
 	wp_enqueue_script( 'swift-slick', get_template_directory_uri() . '/js/slick.min.js', array(), '20130115', true );
 

@@ -7,6 +7,7 @@
 // $max-width: em(1088);
 
 // Neat Breakpoints
+$mobile-screen: new-breakpoint(max-width em(640));
 $medium-screen: em(640);
 $large-screen: em(860);
 

@@ -1,19 +1,112 @@
-.header {
+.mobile-header {
+	position: absolute;
+	width: 100%;
+	z-index: 1;
 	@include media( $large-screen ) {
-		position: relative;
+		display: none;
 	}
+	.site-branding {
+		height: auto;
+		margin: $fifteen auto;
+		width: 30%;
+		z-index: 1;
+	}
+	.menu-hook-container {
+		right: $twentyfive;
+		height: $twentyfive;
+		position: absolute;
+		top: $twentyfive;
+		width: $twentyfive;
+		.menu-hook {
+		}
+	}
+}
+
+.overlay {
+	position: fixed;
+	width: 100%;
+	display: none;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: $medium-gray;
+	z-index: 2;
+	.overlay-close {
+		height: $twentyfive;
+		position: absolute;
+		right: $twentyfive;
+		top: $twentyfive;
+		width: $twentyfive;
+		z-index: 2;
+		svg {
+			width: $twentyfive;
+		}
+	}
+	.mobile-navigation {
+		height: auto;
+		position: absolute;
+		top: 150px;
+		width: 100%;
+		z-index: 0;
+		.navigation {
+			li.menu-item-has-children {
+				&:first-child > a {
+					padding-right: $fifteen;
+					text-transform: uppercase;
+					background: {
+						image: url(../images/chevron_down.svg);
+						position: center right;
+						repeat: no-repeat;
+						size: 14px;
+					}
+					font: {
+						weight: 400;
+						size: 18px;
+					}
+				}
+			}
+			a {
+				color: $gray;
+				&:hover {
+					color: $pink;
+				}
+			}
+		}
+		.left-navigation {
+			@include span-columns(5);
+			@include shift(1);
+		}
+		.right-navigation {
+			@include span-columns(5);
+			@include shift(1);
+		}
+	}
+	.social-links {
+		bottom: $twentyfive;
+		left: 50%;
+		position: absolute;
+		text-align: center;
+		@include transform(translateX(-50%));
+		svg {
+			margin: 0 $five;
+			width: $twentyfive;
+		}
+	}
+}
+
+.desktop-header {
+	display: none;
 	position: relative;
 	z-index: 1;
+	@include media( $large-screen) {
+		@include row();
+	}
 	.utility-header {
-		display: none;
-		@include media( $large-screen ) {
-			@include row();
-		}
 		display: none;
 		margin-bottom: $fifty;
 		padding-top: $five;
 		@include media( $large-screen ) {
-			display: block;
+			@include row();
 		}
 		.inner-container {
 			@include outer-container;
@@ -64,68 +157,61 @@
 			color: $medium-gray;
 		}
 	}
-	.navigation {
-		.menu {
-			position: relative;
-			li.menu-item-has-children {
+	.main-navigation {
+		@include row();
+		.navigation {
+			.menu {
 				position: relative;
-			    display: inline-block;
-				z-index: 10;
-				&:first-child > a {
-					color: $gray;
-					height: $twentyfive;
-					padding-right: $fifteen;
-					text-transform: uppercase;
-					background: {
-						image: url(../images/chevron_down.svg);
-						position: center right;
-						repeat: no-repeat;
-						size: 14px;
+				li.menu-item-has-children {
+					position: relative;
+				    display: inline-block;
+					z-index: 10;
+					&:first-child > a {
+						color: $gray;
+						height: $twentyfive;
+						padding-right: $fifteen;
+						text-transform: uppercase;
+						background: {
+							image: url(../images/chevron_down.svg);
+							position: center right;
+							repeat: no-repeat;
+							size: 14px;
+						}
+						font: {
+							weight: 400;
+							size: 18px;
+						}
 					}
-					font: {
-						weight: 400;
-						size: 18px;
+					&:first-child:hover {
+					 .sub-menu {
+							display: block;
+						}
 					}
 				}
-				&:first-child:hover {
-				 .sub-menu {
-						display: block;
-					}
-				}
-			}
-			.sub-menu {
-				display: none;
-				a {
-					color: $gray;
-					text-transform: none;
-					&:hover {
-						color: $pink;
+				.sub-menu {
+					display: none;
+					a {
+						color: $gray;
+						text-transform: none;
+						&:hover {
+							color: $pink;
+						}
 					}
 				}
 			}
 		}
-	}
-	.left-navigation,
-	.right-navigation {
-		display: none;
-	}
-	.site-branding {
-		@include span-columns(4);
-		@include shift(4);
-		@include omega;
-		position: absolute;
-		top: $twentyfive;
-		svg {
-			width: 100%
+		.navigation {
+			display: none;
 		}
-	}
-	@include media( $large-screen ) {
 		.left-navigation {
 			@include span-columns(2);
 			@include shift(3);
 		}
 		.site-branding {
 			@include span-columns(2);
+			svg {
+				width: 100%
+			}
 		}
 		.right-navigation {
 			@include span-columns(2);

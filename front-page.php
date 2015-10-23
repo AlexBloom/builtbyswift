@@ -20,24 +20,37 @@ get_header(); ?>
 			dots: false,
 			centered: true,
 			mobileFirst: true,
-			//   lazyLoad: 'ondemand',
+		    lazyLoad: 'ondemand',
 		});
 
+		function updateImageSize() {
+			jQuery(".home-page-slider-container").each(function(){
+				var ratio_cont = jQuery(this).width()/jQuery(this).height();
+				var $img = jQuery(this).find("img");
+				var ratio_img = $img.width()/$img.height();
+				if (ratio_cont > ratio_img) {
+					$img.css({"width": "100%", "height": "auto"});
+				}
+				else if (ratio_cont < ratio_img) {
+					$img.css({"width": "auto", "height": "100%"});
+				}
+			});
+		};
 
 		if (jQuery(window).width() > 375) {
 
 			var answer = jQuery(window).height();
-			jQuery( '.home-page-slider' ).css('height', answer);
+			jQuery( '.home-page-slider-container' ).css('height', answer);
+			jQuery( '.page-content' ).css('top', answer);
 
 			var width_answer = jQuery(window).width();
-			jQuery( '.home-page-slider' ).css('width', width_answer);
+			jQuery( '.home-page-slider-container' ).css('width', width_answer);
 
 		}
 
 	});
 
 </script>
-
 
 <section class="front-page">
 
@@ -63,43 +76,45 @@ get_header(); ?>
 							<?php $desktop_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-desktop'); ?>
 							<?php $retina_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-retina'); ?>
 
-								<picture>
-									<!--[if IE 9]><video style="display: none"><![endif]-->
-									<source
-										srcset="<?php echo $mobile_page_banner[0]; ?>"
-										media="(max-width: 500px)" />
-									<source
-										srcset="<?php echo $tablet_page_banner[0]; ?>"
-										media="(max-width: 860px)" />
-									<source
-										srcset="<?php echo $desktop_page_banner[0]; ?>"
-										media="(max-width: 1180px)" />
-									<source
-										srcset="<?php echo $retina_page_banner[0]; ?>"
-										media="(min-width: 1181px)" />
-									<!--[if IE 9]></video><![endif]-->
-									<img srcset="<?php echo $image[0]; ?>">
-								</picture>
+							<picture class="picture">
+								<!--[if IE 9]><video style="display: none"><![endif]-->
+								<source
+									srcset="<?php echo $mobile_page_banner[0]; ?>"
+									media="(max-width: 500px)" />
+								<source
+									srcset="<?php echo $tablet_page_banner[0]; ?>"
+									media="(max-width: 860px)" />
+								<source
+									srcset="<?php echo $desktop_page_banner[0]; ?>"
+									media="(max-width: 1180px)" />
+								<source
+									srcset="<?php echo $retina_page_banner[0]; ?>"
+									media="(min-width: 1181px)" />
+								<!--[if IE 9]></video><![endif]-->
+								<img srcset="<?php echo $image[0]; ?>">
+							</picture>
 
-								<div class="slide-caption <?php if( get_sub_field( 'caption_position' ) == 'Top of image') : ?>top-caption <?php else: ?>bottom-caption <?php endif; ?>">
-									<a href="<?php echo the_sub_field('page_link'); ?>">
-										<?php the_sub_field('caption'); ?>
-									</a>
-								</div>
-
+							<div class="slide-caption <?php if( get_sub_field( 'caption_position' ) == 'Top of image') : ?>top-caption <?php else: ?>bottom-caption <?php endif; ?>">
+								<a href="<?php echo the_sub_field('page_link'); ?>">
+									<?php the_sub_field('caption'); ?>
+								</a>
 							</div>
+
+						</div>
 
 				    <?php endwhile; ?>
 
 				<?php endif; ?>
 
 			</section>
-		</section>
 
+		</section>
 
 	<!-- End Gallery -->
 
-	<div class="second"><?php get_template_part( 'content', 'page' ); ?></div>
+		<section class="page-content">
+			<?php get_template_part( 'content', 'page' ); ?>
+		</div>
 
 	<?php endwhile; // end of the loop. ?>
 
