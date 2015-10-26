@@ -29,4 +29,10 @@ jQuery(document).ready(function(){
 
 	}
 
+	// Check and uncheck classes on product image selections
+	jQuery('.gfield_radio input').click(function(){
+		jQuery('input:not(:checked)').removeClass("checked");
+        jQuery('input:checked').addClass("checked");
+	})
+
 });
