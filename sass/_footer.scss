@@ -98,6 +98,12 @@
 					width: $twentyfive;
 					path {
 						fill: $slate;
+						@include transition(all, .2s, ease-in-out);
+					}
+					&:hover {
+						path {
+							fill: $pink;
+						}
 					}
 				}
 			}
