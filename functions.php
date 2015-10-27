@@ -140,6 +140,11 @@ add_image_size( 'portal-tablet', '768', '576', 'true' );
 add_image_size( 'portal-desktop', '1280', '960', 'true' );
 add_image_size( 'portal-retina', '2400', '1800', 'true' );
 
+add_image_size( 'product-banner-mobile', '480', '315', 'true' );
+add_image_size( 'product-banner-tablet', '768', '500', 'true' );
+add_image_size( 'product-banner-desktop', '1280', '830', 'true' );
+add_image_size( 'product-banner-retina', '2000', '1300', 'true' );
+
 // Remove Woo styling
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
 

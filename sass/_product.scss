@@ -1,0 +1,143 @@
+.single-product {
+	.product-section {
+		@include outer-container;
+	}
+	.product-description {
+		@include media( $large-screen ) {
+			@include span-columns(10);
+			@include shift(1);
+		}
+	}
+	.product-specs {
+		@include media( $large-screen ) {
+			@include span-columns(5);
+			@include shift(1);
+		}
+	}
+	.product-features {
+		@include media( $large-screen ) {
+			@include span-columns(5);
+		}
+	}
+	.product-gallery-container {
+		@include media( $large-screen ) {
+			@include span-columns(5);
+			@include shift(1);
+		}
+	}
+	.product-add-to-cart {
+		@include media( $large-screen ) {
+			@include span-columns(5);
+		}
+		.gform_wrapper {
+			.gform_body {
+				.ginput_container {
+					.gfield_radio {
+						li {
+							@include span-columns(2);
+							@include omega(6n);
+							text-align: center;
+							label {
+								clear: both;
+								margin: 0;
+							}
+						}
+					}
+				}
+				input[type="radio"] {
+					// height: 65px;
+					margin: 0;
+					outline: 0;
+					width: 100% !important;
+					@include appearance(inherit);
+					background: {
+						color: transparent;
+						repeat: no-repeat;
+						size: 100%;
+					}
+					&.checked + label {
+						color: $pink;
+					}
+					label {
+						@include transition(all .2s ease-in-out);
+					}
+				}
+				input[value="Navy|0"] {
+					background: {
+						image: url( ../images/navy_color_swatch.jpg );
+					}
+				}
+				input[value="Steel|0"] {
+					background: {
+						image: url( ../images/steel_color_swatch.jpg );
+					}
+				}
+				input[value="Olive|0"] {
+					background: {
+						image: url( ../images/olive_color_swatch.jpg );
+					}
+				}
+				input[value="Teal|0"] {
+					background: {
+						image: url( ../images/teal_color_swatch.jpg );
+					}
+				}
+				input[value="Black|0"] {
+					background: {
+						image: url( ../images/black_color_swatch.jpg );
+					}
+				}
+				input[value="Rust|0"] {
+					background: {
+						image: url( ../images/rust_color_swatch.jpg );
+					}
+				}
+				input[value="Mandarin|0"] {
+					background: {
+						image: url( ../images/mandarin_color_swatch.jpg );
+					}
+				}
+				input[value="Neon Orange|0"] {
+					background: {
+						image: url( ../images/neon_orange_color_swatch.jpg );
+					}
+				}
+				input[value="Hot Pink|0"] {
+					background: {
+						image: url( ../images/hot_pink_color_swatch.jpg );
+					}
+				}
+				input[value="Burgundy|0"] {
+					background: {
+						image: url( ../images/burgundy_color_swatch.jpg );
+					}
+				}
+				input[value="Saffron|0"] {
+					background: {
+						image: url( ../images/saffron_color_swatch.jpg );
+					}
+				}
+				input[value="Mint Green|0"] {
+					background: {
+						image: url( ../images/mint_green_color_swatch.jpg );
+					}
+				}
+				input[value="Neon Green|0"] {
+					background: {
+						image: url( ../images/neon_green_color_swatch.jpg );
+					}
+				}
+				input[value="Turquoise|0"] {
+					background: {
+						image: url( ../images/turquoise_color_swatch.jpg );
+					}
+				}
+				input[value="Royal Blue|0"] {
+					background: {
+						image: url( ../images/royal_blue_color_swatch.jpg );
+					}
+				}
+			}
+		}
+	}
+}
