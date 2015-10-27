@@ -13,13 +13,13 @@
 */
 
 @import "variables";
-@import "slick";
 @import "bourbon/bourbon";
 @import "base/grid-settings";
 @import "neat/neat";
 @import "base/base";
 
 @import "header";
+@import "slick";
 @import "product";
 @import "footer";
 
@@ -66,20 +66,22 @@ body {
 				overflow: hidden;
 				// position: absolute;
 			}
-			.picture {
-				img {
-					height: 100%;
+			.slide {
+				text-align: center;
+				.picture {
+					img {
+						// height: 100%;
+					}
+				}
+				.slide-caption {
+					font-family: $orator;
+					height: auto;
+					// left: 0;
+					position: absolute;
+					top: 50%;
+					@include transform(translateY(-50%));
 				}
 			}
-			.slide-caption {
-				bottom: 0;
-				font-family: $orator;
-				height: auto;
-				position: absolute;
-			}
-		}
-		.page-content {
-			position: relative;
 		}
 	}
 }
@@ -87,4 +89,76 @@ body {
 .page-content {
 	@include row();
 	position: relative;
+	.product-row-descriptor {
+		margin-bottom: $twentyfive;
+	}
+	.collection-title {
+		font-family: $orator;
+		margin-bottom: $twentyfive;
+		text-align: center;
+		a {
+			color: $gray;
+			&:hover {
+				color: $pink;
+			}
+		}
+	}
+	.product-portal-row {
+		@include outer-container;
+		margin-bottom: ($hundred * 2);
+		margin-top: $hundred;
+		.product-portal {
+			a {
+				color: $medium-gray;
+				&:hover {
+					color: $pink;
+				}
+			}
+			img {
+				margin: 0 auto;
+			}
+		}
+	}
+	.content-portal-row {
+		@include outer-container;
+		.retail-portal {
+			@include media( $large-screen ) {
+				@include span-columns(6);
+				margin-bottom: 2.35765%;
+			}
+		}
+		.blog-portal {
+			@include media( $large-screen ) {
+				@include span-columns(6);
+				margin-bottom: 2.35765%;
+			}
+		}
+		.story-portal {
+			margin-bottom: ($hundred * 2);
+		}
+		.portal {
+			position: relative;
+			a {
+				color: $gray;
+			}
+			.portal-content {
+				background: $white-overlay;
+				left: 0;
+				padding: $twentyfive 0;
+				position: absolute;
+				text-align: center;
+				top: 50%;
+				@include transform(translateY(-50%));
+				width: 100%;
+				p {
+					margin: 0;
+				}
+			}
+			&:hover {
+				a {
+					color: $pink;
+				}
+			}
+		}
+	}
 }

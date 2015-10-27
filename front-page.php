@@ -18,6 +18,18 @@ get_header(); ?>
 		jQuery('.home-page-slider').slick({
 			arrows: false,
 			dots: false,
+			// autoplay: true,
+			// autoplaySpeed: 3000,
+			// pauseOnHover: true,
+			centered: true,
+			mobileFirst: true,
+		    lazyLoad: 'ondemand',
+		});
+
+		jQuery('.product-slider').slick({
+			arrows: true,
+			dots: false,
+			slidesToShow: 4,
 			centered: true,
 			mobileFirst: true,
 		    lazyLoad: 'ondemand',
@@ -44,16 +56,9 @@ get_header(); ?>
 
 			jQuery( '.home-page-slider-container' ).css('height', windowHeight);
 			jQuery(window).resize(function(){
-			    jQuery(".home-page-slider-container").width(jQuery(window).width());
+				jQuery(".home-page-slider-container").width(jQuery(window).width());
 			});
-
-			// jQuery(window).resize(function() {
-			//
-			// 	if(jQuery(window).width()!=windowWidth) {
-			// 		jQuery( '.home-page-slider-container' ).css('height', windowHeight);
-			// 		jQuery( '.home-page-slider-container' ).css('width', windowWidth);
-			// 	}
-			// });
+			// jQuery(".home-page-slider-container .slide").css('width', windowWidth);
 
 		}
 
@@ -119,39 +124,248 @@ get_header(); ?>
 
 		</section>
 
-	<!-- End Gallery -->
+<!-- End Gallery -->
 
-		<div class="page-content">
+		<section class="page-content">
 
-			<?php
+			<div class="product-portal-row">
+				<?php
 
-			    $args = array(
-			        'post_type' => 'product',
-					'tax_query' => array(
-						array(
-							'taxonomy' => 'product_cat',
-							'field' => 'slug',
-							'terms' => 'hinterland',
+				    $args = array(
+				        'post_type' => 'product',
+						'tax_query' => array(
+							array(
+								'taxonomy' => 'product_cat',
+								'field' => 'slug',
+								'terms' => 'hinterland',
+							),
+							array(
+								'taxonomy' => 'product_cat',
+								'field' => 'slug',
+								'terms' => array(
+									'bundled-simple',
+									'bundled-variable',
+									'add-on'
+								),
+								'operator' => 'NOT IN'
+							)
 						)
-					)
-			    );
-			    $query = new WP_Query($args);
+				    );
+				    $query = new WP_Query($args);
 
-			    if($query->have_posts()) : ?>
+				    if($query->have_posts()) : ?>
 
-			      <?php while($query->have_posts()) : ?>
+					<h2 class="product-row-descriptor"><?php the_field('collection_title', 886); ?></h2>
+					<h1 class="collection-title"><a href="/product-category/hinterland/">Hinterland</a></h1>
 
-			        <?php $query->the_post(); ?>
+					<section class="product-slider">
 
-			        <h1><?php the_title() ?></h1>
-			        <div class="post-content"><?php the_content(); ?></div>
+					      <?php while($query->have_posts()) : ?>
 
-			      <?php endwhile; ?>
+					        <?php $query->the_post(); ?>
 
-			<?php endif; ?>
+							<div class="slide">
 
-			<?php get_template_part( 'content', 'page' ); ?>
-		</div>
+								<div class="product-portal">
+									<a href="<?php the_permalink(); ?>">
+										<?php the_post_thumbnail('thumbnail'); ?>
+										<h3><?php the_title(); ?></h3>
+									</a>
+								</div>
+
+							</div>
+
+						  <?php endwhile; ?>
+
+					  </section>
+
+				<?php endif; ?>
+
+			</div>
+
+			<div class="product-portal-row">
+				<?php
+
+					$args = array(
+						'post_type' => 'product',
+						'tax_query' => array(
+							// array(
+							// 	'taxonomy' => 'product_cat',
+							// 	'field' => 'slug',
+							// 	'terms' => 'hinterland',
+							// ),
+							array(
+								'taxonomy' => 'product_cat',
+								'field' => 'slug',
+								'terms' => array(
+									'bundled-simple',
+									'bundled-variable',
+									'add-on'
+								),
+								'operator' => 'NOT IN'
+							)
+						)
+					);
+					$query = new WP_Query($args);
+
+					if($query->have_posts()) : ?>
+
+					<h2 class="product-row-descriptor"><?php the_field('design_title', 886); ?></h2>
+
+					<section class="product-slider">
+
+						  <?php while($query->have_posts()) : ?>
+
+							<?php $query->the_post(); ?>
+
+							<div class="slide">
+
+								<div class="product-portal">
+									<a href="<?php the_permalink(); ?>">
+										<?php the_post_thumbnail('thumbnail'); ?>
+										<h3><?php the_title(); ?></h3>
+									</a>
+								</div>
+
+							</div>
+
+						  <?php endwhile; ?>
+
+					  </section>
+
+				<?php endif; ?>
+
+			</div>
+
+			<div class="product-portal-row">
+				<?php
+
+					$args = array(
+						'post_type' => 'product',
+						'tax_query' => array(
+							array(
+								'taxonomy' => 'product_cat',
+								'field' => 'slug',
+								'terms' => 'general-store',
+							),
+							array(
+								'taxonomy' => 'product_cat',
+								'field' => 'slug',
+								'terms' => array(
+									'bundled-simple',
+									'bundled-variable',
+									'add-on'
+								),
+								'operator' => 'NOT IN'
+							)
+						)
+					);
+					$query = new WP_Query($args);
+
+					if($query->have_posts()) : ?>
+
+					<h2 class="product-row-descriptor"><?php the_field('adventure_title', 886); ?></h2>
+
+					<section class="product-slider">
+
+						  <?php while($query->have_posts()) : ?>
+
+							<?php $query->the_post(); ?>
+
+							<div class="slide">
+
+								<div class="product-portal">
+									<a href="<?php the_permalink(); ?>">
+										<?php the_post_thumbnail('thumbnail'); ?>
+										<h3><?php the_title(); ?></h3>
+									</a>
+								</div>
+
+							</div>
+
+						  <?php endwhile; ?>
+
+					  </section>
+
+				<?php endif; ?>
+
+			</div>
+
+			<div class="content-portal-row">
+				<div class="retail-portal portal">
+					<?php $mobile_page_banner = wp_get_attachment_image_src(get_field('retail_portal_image', 886), 'portal-mobile'); ?>
+					<?php $tablet_page_banner = wp_get_attachment_image_src(get_field('retail_portal_image', 886), 'portal-tablet'); ?>
+
+					<a href="<?php the_field('retail_link'); ?>">
+						<picture class="picture">
+							<!--[if IE 9]><video style="display: none"><![endif]-->
+							<source
+								srcset="<?php echo $mobile_page_banner[0]; ?>"
+								media="(max-width: 500px)" />
+							<source
+								srcset="<?php echo $tablet_page_banner[0]; ?>"
+								media="(min-width: 860px)" />
+							<!--[if IE 9]></video><![endif]-->
+							<img srcset="<?php echo $image[0]; ?>">
+						</picture>
+						<div class="portal-content">
+							<h4><?php the_field('retail_portal_content', 886); ?></h4>
+						</div>
+					</a>
+				</div>
+
+				<div class="blog-portal portal">
+					<?php $mobile_page_banner = wp_get_attachment_image_src(get_field('blog_portal_image', 886), 'portal-mobile'); ?>
+					<?php $tablet_page_banner = wp_get_attachment_image_src(get_field('blog_portal_image', 886), 'portal-tablet'); ?>
+
+					<a href="<?php the_field('blog_link'); ?>">
+						<picture class="picture">
+							<!--[if IE 9]><video style="display: none"><![endif]-->
+							<source
+								srcset="<?php echo $mobile_page_banner[0]; ?>"
+								media="(max-width: 500px)" />
+							<source
+								srcset="<?php echo $tablet_page_banner[0]; ?>"
+								media="(min-width: 860px)" />
+							<!--[if IE 9]></video><![endif]-->
+							<img srcset="<?php echo $image[0]; ?>">
+						</picture>
+						<div class="portal-content">
+							<h4><?php the_field('blog_portal_content', 886); ?></h4>
+						</div>
+					</a>
+				</div>
+			</div>
+
+			<div class="content-portal-row story-portal">
+				<div class="story-portal portal">
+					<?php $mobile_page_banner = wp_get_attachment_image_src(get_field('story_portal_image', 886), 'story-portal-mobile'); ?>
+					<?php $tablet_page_banner = wp_get_attachment_image_src(get_field('story_portal_image', 886), 'story-portal-tablet'); ?>
+					<?php $desktop_page_banner = wp_get_attachment_image_src(get_field('story_portal_image', 886), 'story-portal-desktop'); ?>
+
+					<a href="<?php the_field('story_link'); ?>">
+						<picture class="picture">
+							<!--[if IE 9]><video style="display: none"><![endif]-->
+							<source
+								srcset="<?php echo $mobile_page_banner[0]; ?>"
+								media="(max-width: 500px)" />
+							<source
+								srcset="<?php echo $tablet_page_banner[0]; ?>"
+								media="(max-width: 860px)" />
+							<source
+								srcset="<?php echo $desktop_page_banner[0]; ?>"
+								media="(min-width: 1180px)" />
+							<!--[if IE 9]></video><![endif]-->
+							<img srcset="<?php echo $image[0]; ?>">
+						</picture>
+						<div class="portal-content">
+							<h4><?php the_field('story_portal_content', 886); ?></h4>
+						</div>
+					</a>
+				</div>
+			</div>
+
+		</section>
 
 	<?php endwhile; // end of the loop. ?>
 
