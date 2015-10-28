@@ -1,0 +1,39 @@
+.product-taxonomies {
+	@include outer-container;
+	.taxonomy-title {
+		margin: $hundred 0;
+		text-align: center;
+		text-transform: capitalize;
+	}
+	.products-column {
+		@include span-columns(6);
+		text-align: center;
+		img {
+			margin: 0 auto;
+		}
+	}
+	.product-portal {
+		margin-bottom: $fifty;
+		position: relative;
+		a {
+			color: $gray;
+		}
+		.image {
+
+		}
+		.product-title {
+			background: $white-overlay;
+			left: 50%;
+			padding: $twentyfive 0;
+			position: absolute;
+			top: 50%;
+			@include transform(translate(-50%,-50%));
+			width: 100%;
+		}
+		&:hover {
+			a {
+				color: $pink;
+			}
+		}
+	}
+}
