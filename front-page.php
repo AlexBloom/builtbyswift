@@ -27,12 +27,29 @@ get_header(); ?>
 		});
 
 		jQuery('.product-slider').slick({
-			arrows: true,
 			dots: false,
-			slidesToShow: 4,
-			centered: true,
 			mobileFirst: true,
 		    lazyLoad: 'ondemand',
+			responsive: [
+				{
+			  		breakpoint: 1024,
+			  		settings: {
+						arrows: true,
+						centered: true,
+						infinite: true,
+						slidesToScroll: 1,
+					    slidesToShow: 4,
+			  		}
+				},
+				{
+					breakpoint: 480,
+					settings: {
+						arrows: true,
+					    slidesToScroll: 1,
+						slidesToShow: 1,
+			  		}
+				}
+			]
 		});
 
 	});

@@ -62,19 +62,30 @@ body {
 	position: relative;
 	.front-page {
 		.home-page-slider-container {
-			.slide-caption {
-				bottom: $fifty;
-				left: 50%;
-				position: relative;
-				@include transform(translateX(-50%));
-				a {
-					color: $white;
-					font: {
-						family: $orator;
-						size: 36px;
-					}
-					&:hover {
-						color: $pink;
+			.slick-track {
+				height: 315px;
+				@include media( $medium-screen ) {
+					height: auto;
+				}
+				.slide-caption {
+					bottom: $fifty;
+					left: 50%;
+					position: relative;
+					@include transform(translateX(-50%));
+					a {
+						color: $white;
+						font: {
+							family: $orator;
+							size: 18px;
+						}
+						@include media( $large-screen ) {
+							font: {
+								size: 36px;
+							}
+						}
+						&:hover {
+							color: $pink;
+						}
 					}
 				}
 			}
@@ -103,6 +114,12 @@ body {
 		@include outer-container;
 		margin-bottom: ($hundred * 2);
 		margin-top: $hundred;
+		h2 {
+			text-align: center;
+			@include media( $large-screen ) {
+				text-align: left;
+			}
+		}
 		.product-portal {
 			a {
 				color: $medium-gray;
@@ -118,19 +135,24 @@ body {
 	.content-portal-row {
 		@include outer-container;
 		.retail-portal {
+			margin-bottom: $fifty;
 			@include media( $large-screen ) {
 				@include span-columns(6);
 				margin-bottom: 2.35765%;
 			}
 		}
 		.blog-portal {
+			margin-bottom: $fifty;
 			@include media( $large-screen ) {
 				@include span-columns(6);
 				margin-bottom: 2.35765%;
 			}
 		}
 		.story-portal {
-			margin-bottom: ($hundred * 2);
+			margin-bottom: $hundred;
+			@include media( $large-screen ) {
+				margin-bottom: ($hundred * 2);
+			}
 		}
 		.portal {
 			position: relative;

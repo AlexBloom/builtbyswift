@@ -158,10 +158,16 @@ $slick-opacity-not-active: 0.25 !default;
 }
 
 .slick-prev {
-    left: -35px;
+    left: 0;
+    @include media( $large-screen ) {
+        left: -35px;
+    }
     [dir="rtl"] & {
-        left: auto;
-        right: -35px;
+        right: 0;
+        @include media( $large-screen ) {
+            left: auto;
+            right: -35px;
+        }
     }
     &:before {
         content: $slick-prev-character;
@@ -172,10 +178,16 @@ $slick-opacity-not-active: 0.25 !default;
 }
 
 .slick-next {
-    right: -35px;
+    right: 0;
+    @include media( $large-screen ) {
+        right: -35px;
+    }
     [dir="rtl"] & {
-        left: -35px;
-        right: auto;
+        left: 0;
+        @include media( $large-screen ) {
+            left: -35px;
+            right: auto;
+        }
     }
     &:before {
         content: $slick-next-character;
