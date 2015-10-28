@@ -68,7 +68,7 @@ body {
 					height: auto;
 				}
 				.slide-caption {
-					bottom: $fifty;
+					bottom: $hundred;
 					left: 50%;
 					position: relative;
 					@include transform(translateX(-50%));
@@ -76,7 +76,7 @@ body {
 						color: $white;
 						font: {
 							family: $orator;
-							size: 18px;
+							size: 24px;
 						}
 						@include media( $large-screen ) {
 							font: {
