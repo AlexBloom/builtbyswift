@@ -145,9 +145,9 @@ add_image_size( 'story-portal-tablet', '768', '230', 'true' );
 add_image_size( 'story-portal-desktop', '2000', '600', 'true' );
 
 add_image_size( 'product-banner-mobile', '480', '315', 'true' );
-add_image_size( 'product-banner-tablet', '768', '500', 'true' );
-add_image_size( 'product-banner-desktop', '1280', '830', 'true' );
-add_image_size( 'product-banner-retina', '2000', '1300', 'true' );
+add_image_size( 'product-banner-tablet', '768', '307', 'true' );
+add_image_size( 'product-banner-desktop', '1280', '512', 'true' );
+add_image_size( 'product-banner-retina', '2000', '800', 'true' );
 
 // Remove Woo styling
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );

@@ -21,7 +21,7 @@ get_header(); ?>
 			// autoplay: true,
 			// autoplaySpeed: 3000,
 			// pauseOnHover: true,
-			centered: true,
+			// centered: true,
 			mobileFirst: true,
 		    lazyLoad: 'ondemand',
 		});
@@ -34,33 +34,6 @@ get_header(); ?>
 			mobileFirst: true,
 		    lazyLoad: 'ondemand',
 		});
-
-		function updateImageSize() {
-			jQuery(".home-page-slider-container").each(function(){
-				var ratio_cont = jQuery(this).width()/jQuery(this).height();
-				var $img = jQuery(this).find("img");
-				var ratio_img = $img.width()/$img.height();
-				if (ratio_cont > ratio_img) {
-					$img.css({"width": "100%", "height": "auto"});
-				}
-				else if (ratio_cont < ratio_img) {
-					$img.css({"width": "auto", "height": "100%"});
-				}
-			});
-		};
-
-		if (jQuery(window).width() > 375) {
-
-			var windowHeight = jQuery(window).height();
-			var windowWidth = jQuery(window).width();
-
-			jQuery( '.home-page-slider-container' ).css('height', windowHeight);
-			jQuery(window).resize(function(){
-				jQuery(".home-page-slider-container").width(jQuery(window).width());
-			});
-			// jQuery(".home-page-slider-container .slide").css('width', windowWidth);
-
-		}
 
 	});
 
@@ -83,38 +56,69 @@ get_header(); ?>
 
 				        <?php the_row(); ?>
 
-						<div class="slide">
+						<?php if( get_row_layout() == 'home_page_slider' ) : ?>
 
-							<?php $mobile_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-mobile'); ?>
-							<?php $tablet_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-tablet'); ?>
-							<?php $desktop_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-desktop'); ?>
-							<?php $retina_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'portal-retina'); ?>
+							<div class="slide">
 
-							<picture class="picture">
-								<!--[if IE 9]><video style="display: none"><![endif]-->
-								<source
-									srcset="<?php echo $mobile_page_banner[0]; ?>"
-									media="(max-width: 500px)" />
-								<source
-									srcset="<?php echo $tablet_page_banner[0]; ?>"
-									media="(max-width: 860px)" />
-								<source
-									srcset="<?php echo $desktop_page_banner[0]; ?>"
-									media="(max-width: 1180px)" />
-								<source
-									srcset="<?php echo $retina_page_banner[0]; ?>"
-									media="(min-width: 1181px)" />
-								<!--[if IE 9]></video><![endif]-->
-								<img srcset="<?php echo $image[0]; ?>">
-							</picture>
+								<?php $mobile_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'product-banner-mobile'); ?>
+								<?php $tablet_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'product-banner-tablet'); ?>
+								<?php $desktop_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'product-banner-desktop'); ?>
+								<?php $retina_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'product-banner-retina'); ?>
 
-							<div class="slide-caption <?php if( get_sub_field( 'caption_position' ) == 'Top of image') : ?>top-caption <?php else: ?>bottom-caption <?php endif; ?>">
-								<a href="<?php echo the_sub_field('page_link'); ?>">
-									<?php the_sub_field('caption'); ?>
-								</a>
+								<picture class="picture">
+									<!--[if IE 9]><video style="display: none"><![endif]-->
+									<source
+										srcset="<?php echo $mobile_page_banner[0]; ?>"
+										media="(max-width: 500px)" />
+									<source
+										srcset="<?php echo $tablet_page_banner[0]; ?>"
+										media="(max-width: 860px)" />
+									<source
+										srcset="<?php echo $desktop_page_banner[0]; ?>"
+										media="(max-width: 1180px)" />
+									<source
+										srcset="<?php echo $retina_page_banner[0]; ?>"
+										media="(min-width: 1181px)" />
+									<!--[if IE 9]></video><![endif]-->
+									<img srcset="<?php echo $image[0]; ?>">
+								</picture>
+
+								<div class="slide-caption">
+									<?php if( get_sub_field('category_toggle') ) : ?>
+										<?php
+											$category_links = get_sub_field('category_link');
+											if( $category_links ) :
+										?>
+										<?php foreach( $category_links as $cat_link ) : ?>
+											<a href="<?php echo get_term_link( $cat_link ); ?>">
+											<?php endforeach; ?>
+										<?php endif; ?>
+
+									<?php elseif( get_sub_field('page_toggle') ) : ?>
+										<a href="<?php the_sub_field('page_link'); ?>">
+
+									<?php elseif( get_sub_field('blog_post_toggle') ) : ?>
+										<?php
+											$blog_post_links = get_sub_field('blog_post_link');
+											if( $blog_post_links ) :
+
+												$post = $blog_post_links;
+												setup_postdata( $post );
+										?>
+										<a href="<?php the_permalink(); ?>">
+
+											<?php wp_reset_postdata(); ?>
+
+											<?php endif; ?>
+
+									<?php endif; ?>
+
+										<?php the_sub_field('caption'); ?>
+									</a>
+								</div>
+
 							</div>
-
-						</div>
+						<?php endif; ?>
 
 				    <?php endwhile; ?>
 

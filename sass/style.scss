@@ -62,24 +62,20 @@ body {
 	position: relative;
 	.front-page {
 		.home-page-slider-container {
-			@include media( $large-screen ) {
-				overflow: hidden;
-				// position: absolute;
-			}
-			.slide {
-				text-align: center;
-				.picture {
-					img {
-						// height: 100%;
+			.slide-caption {
+				bottom: $fifty;
+				left: 50%;
+				position: relative;
+				@include transform(translateX(-50%));
+				a {
+					color: $white;
+					font: {
+						family: $orator;
+						size: 36px;
 					}
-				}
-				.slide-caption {
-					font-family: $orator;
-					height: auto;
-					// left: 0;
-					position: absolute;
-					top: 50%;
-					@include transform(translateY(-50%));
+					&:hover {
+						color: $pink;
+					}
 				}
 			}
 		}
