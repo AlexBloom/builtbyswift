@@ -1,140 +1,352 @@
+.breadcrumbs {
+	@include outer-container;
+	padding: $twentyfive;
+	@include media( $large-screen ) {
+		padding: $twentyfive 0;
+	}
+	a {
+		color: $orange;
+	}
+}
+
 .single-product {
 	.product-section {
 		@include outer-container;
-	}
-	.product-description {
+		margin-bottom: $fifty;
+		margin-top: $fifty;
 		@include media( $large-screen ) {
-			@include span-columns(10);
-			@include shift(1);
+			margin-bottom: $hundred;
+			margin-top: $hundred;
 		}
-	}
-	.product-specs {
-		@include media( $large-screen ) {
-			@include span-columns(5);
-			@include shift(1);
-		}
-	}
-	.product-features {
-		@include media( $large-screen ) {
-			@include span-columns(5);
+		h2 {
+			margin-bottom: $twentyfive;
+			text-align: center;
+			@include media( $large-screen ) {
+				text-align: left;
+			}
 		}
 	}
 	.product-gallery-container {
 		@include media( $large-screen ) {
-			@include span-columns(5);
-			@include shift(1);
+			@include span-columns(6);
+		}
+		.product-thumbs {
+			img {
+				padding: $ten $twentyfive $fifty;
+				@include media( $large-screen ) {
+					padding: $ten $fifty;
+				}
+			}
+		}
+	}
+	.product-description {
+		padding: $twentyfive;
+		h2 {
+			text-align: left;
+			.from {
+				display: none;
+			}
+		}
+		@include media( $large-screen ) {
+			@include span-columns(6);
+			h1 {
+				margin-bottom: $ten;
+			}
+			.content {
+				margin-top: $fifty;
+			}
 		}
 	}
 	.product-add-to-cart {
+		@include outer-container;
+		padding: 0 $twentyfive;
 		@include media( $large-screen ) {
-			@include span-columns(5);
+			padding: 0;
+			.purchase {
+				display: none;
+			}
 		}
-		.gform_wrapper {
-			.gform_body {
-				.ginput_container {
-					.gfield_radio {
-						li {
+		h3 {
+			margin-bottom: $twentyfive;
+		}
+		.bundle_form {
+			.product-add-ons {
+				margin-bottom: $twentyfive;
+				@include media( $large-screen ) {
+					@include span-columns(3);
+					margin-bottom: 0;
+				}
+				.bundled_product {
+					padding: 0;
+					h4, label {
+						text-transform: capitalize;
+					}
+					label {
+						font: {
+							size: 12px;
+							weight: 400;
+						}
+					}
+				}
+			}
+			.bundle_data {
+				@include media( $large-screen ) {
+					@include span-columns(9);
+				}
+				.bundle_wrap {
+					@include media( $large-screen ) {
+						@include span-columns(4);
+					}
+					.bundle_price {
+						.price {
+							font-weight: 700;
+							line-height: 1.25;
+						}
+					}
+					.bundle_button {
+						.quantity {
 							@include span-columns(2);
-							@include omega(6n);
-							text-align: center;
+							input {
+								padding: 8px 4px $five 7px;
+							}
+						}
+						.single_add_to_cart_button {
+							@include span-columns(8);
+							@include shift(2);
+						}
+					}
+				}
+				.gform_variation_wrapper {
+					@include media( $large-screen ) {
+						@include span-columns(8);
+					}
+					margin-top: 0;
+					.gform_wrapper {
+						margin-top: 0;
+						h3 {
+							font-weight: 700;
+						}
+					}
+					.gform_body {
+						.gfield {
+							@include row();
+							clear: none;
+							margin-bottom: $twentyfive;
+							&.gform_hidden {
+								display: none;
+							}
+						}
+						.gfield_label {
+							line-height: 1.25;
+							margin-top: 0;
+							padding-right: $fifteen;
+							background: {
+								image: url(../images/chevron_down.svg);
+								position: center right;
+								repeat: no-repeat;
+								size: 14px;
+							}
+							font: {
+								size: $h4-font-size;
+								weight: 400;
+							}
+							.gfield_required {
+								display: none;
+							}
+							&:hover {
+								cursor: pointer;
+							}
+						}
+						.ginput_container {
+							.gfield_radio {
+								li {
+									@include span-columns(2);
+									@include omega(6n);
+									margin-bottom: $twentyfive;
+									text-align: center;
+									input {
+										&:hover {
+											cursor: pointer;
+										}
+									}
+									label {
+										clear: both;
+										font-size: 14px;
+										font-weight: 400;
+										margin: 0;
+									}
+								}
+							}
+						}
+						input[type="radio"] {
+							// height: 65px;
+							margin: 0;
+							outline: 0;
+							width: 100% !important;
+							@include appearance(inherit);
+							background: {
+								color: transparent;
+								repeat: no-repeat;
+								size: 100%;
+							}
+							&:hover + label {
+								color: $orange;
+								cursor: pointer;
+							}
+							&.checked + label {
+								color: $pink;
+								font-weight: 700;
+							}
 							label {
-								clear: both;
-								margin: 0;
+								@include transition(all .2s ease-in-out);
+							}
+						}
+						input[value="Navy|0"] {
+							background: {
+								image: url( ../images/navy_color_swatch.jpg );
+							}
+						}
+						input[value="Steel|0"] {
+							background: {
+								image: url( ../images/steel_color_swatch.jpg );
+							}
+						}
+						input[value="Olive|0"] {
+							background: {
+								image: url( ../images/olive_color_swatch.jpg );
+							}
+						}
+						input[value="Teal|0"] {
+							background: {
+								image: url( ../images/teal_color_swatch.jpg );
+							}
+						}
+						input[value="Black|0"] {
+							background: {
+								image: url( ../images/black_color_swatch.jpg );
+							}
+						}
+						input[value="Rust|0"] {
+							background: {
+								image: url( ../images/rust_color_swatch.jpg );
+							}
+						}
+						input[value="Mandarin|0"] {
+							background: {
+								image: url( ../images/mandarin_color_swatch.jpg );
+							}
+						}
+						input[value="Neon Orange|0"] {
+							background: {
+								image: url( ../images/neon_orange_color_swatch.jpg );
+							}
+						}
+						input[value="Hot Pink|0"] {
+							background: {
+								image: url( ../images/hot_pink_color_swatch.jpg );
+							}
+						}
+						input[value="Burgundy|0"] {
+							background: {
+								image: url( ../images/burgundy_color_swatch.jpg );
+							}
+						}
+						input[value="Saffron|0"] {
+							background: {
+								image: url( ../images/saffron_color_swatch.jpg );
+							}
+						}
+						input[value="Mint Green|0"] {
+							background: {
+								image: url( ../images/mint_green_color_swatch.jpg );
+							}
+						}
+						input[value="Neon Green|0"] {
+							background: {
+								image: url( ../images/neon_green_color_swatch.jpg );
+							}
+						}
+						input[value="Turquoise|0"] {
+							background: {
+								image: url( ../images/turquoise_color_swatch.jpg );
+							}
+						}
+						input[value="Royal Blue|0"] {
+							background: {
+								image: url( ../images/royal_blue_color_swatch.jpg );
 							}
 						}
 					}
 				}
-				input[type="radio"] {
-					// height: 65px;
-					margin: 0;
-					outline: 0;
-					width: 100% !important;
-					@include appearance(inherit);
-					background: {
-						color: transparent;
-						repeat: no-repeat;
-						size: 100%;
-					}
-					&.checked + label {
-						color: $pink;
-					}
-					label {
-						@include transition(all .2s ease-in-out);
-					}
+			}
+		}
+	}
+	.product-specs-features {
+		margin-bottom: $fifty;
+		padding: 0 $twentyfive;
+		@include media( $large-screen ) {
+			@include span-columns(6);
+			margin-bottom: 0;
+			padding: 0;
+		}
+		p, ul {
+			font-size: 14px;
+			margin-bottom: $fifteen;
+		}
+	}
+	.product-testimonials {
+		margin-bottom: $fifty;
+		padding: 0 $twentyfive;
+		@include media( $large-screen ) {
+			@include span-columns(6);
+			margin-bottom: 0;
+			padding: 0;
+		}
+		.testimonial {
+			margin-bottom: $fifty;
+			.quote {
+				position: absolute;
+				svg {
+					height: $thirty;
+					fill: $light-gray;
 				}
-				input[value="Navy|0"] {
-					background: {
-						image: url( ../images/navy_color_swatch.jpg );
-					}
+			}
+			p {
+				text-indent: $forty;
+			}
+		}
+	}
+	.related-products {
+		@include row();
+		padding: 0 $twentyfive;
+		margin-bottom: 200px;
+		@include media( $large-screen ) {
+			padding: 0;
+		}
+	.products {
+			.product {
+				@include media( $large-screen ) {
+					@include span-columns(3);
 				}
-				input[value="Steel|0"] {
-					background: {
-						image: url( ../images/steel_color_swatch.jpg );
-					}
+				text-align: center;
+				.price,
+				.product_type_bundle,
+				.product_type_variable,
+				.add_to_cart_button {
+					display: none;
 				}
-				input[value="Olive|0"] {
-					background: {
-						image: url( ../images/olive_color_swatch.jpg );
-					}
+				img {
+					height: auto;
 				}
-				input[value="Teal|0"] {
-					background: {
-						image: url( ../images/teal_color_swatch.jpg );
-					}
+				h3 {
+					color: $gray;
+					font-size: $h4-font-size;
+					font-weight: 900;
+					text-transform: uppercase;
 				}
-				input[value="Black|0"] {
-					background: {
-						image: url( ../images/black_color_swatch.jpg );
-					}
-				}
-				input[value="Rust|0"] {
-					background: {
-						image: url( ../images/rust_color_swatch.jpg );
-					}
-				}
-				input[value="Mandarin|0"] {
-					background: {
-						image: url( ../images/mandarin_color_swatch.jpg );
-					}
-				}
-				input[value="Neon Orange|0"] {
-					background: {
-						image: url( ../images/neon_orange_color_swatch.jpg );
-					}
-				}
-				input[value="Hot Pink|0"] {
-					background: {
-						image: url( ../images/hot_pink_color_swatch.jpg );
-					}
-				}
-				input[value="Burgundy|0"] {
-					background: {
-						image: url( ../images/burgundy_color_swatch.jpg );
-					}
-				}
-				input[value="Saffron|0"] {
-					background: {
-						image: url( ../images/saffron_color_swatch.jpg );
-					}
-				}
-				input[value="Mint Green|0"] {
-					background: {
-						image: url( ../images/mint_green_color_swatch.jpg );
-					}
-				}
-				input[value="Neon Green|0"] {
-					background: {
-						image: url( ../images/neon_green_color_swatch.jpg );
-					}
-				}
-				input[value="Turquoise|0"] {
-					background: {
-						image: url( ../images/turquoise_color_swatch.jpg );
-					}
-				}
-				input[value="Royal Blue|0"] {
-					background: {
-						image: url( ../images/royal_blue_color_swatch.jpg );
+				&:hover {
+					h3 {
+						color: $orange;
 					}
 				}
 			}

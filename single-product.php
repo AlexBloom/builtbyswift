@@ -44,6 +44,10 @@ get_header(); ?>
 			jQuery(this).siblings('.ginput_container_radio').slideToggle('blind');
 		});
 
+		jQuery( ".bundle_form .bundled_product" ).wrapAll( "<div class='product-add-ons'></div>" );
+		jQuery( ".bundle_form .bundled_product:first-child" ).before( "<h3>Add Ons</h3>" );
+		jQuery( ".gform_wrapper .gform_fields" ).before( "<h3>Choose your Colors</h3>" );
+
 	});
 </script>
 
@@ -97,6 +101,10 @@ get_header(); ?>
 				<?php endif; ?>
 
 			</div>
+
+			<?php get_template_part('partials/breadcrumbs'); ?>
+
+			<?php do_action( 'woocommerce_before_single_product' ); ?>
 
 			<section class="product-section product-top">
 
@@ -181,59 +189,97 @@ get_header(); ?>
 
 				</div>
 
-				<div class="product-add-to-cart">
+
+				<div class="product-description">
 
 					<h1><?php the_title(); ?></h1>
 
-					<?php if( $product->is_type( 'simple' ) ) { ?>
+					<?php $price_html = $product->get_price_html(); ?>
+					<h2 class="price"><?php echo $price_html; ?></h2>
 
-						<?php if ( $price_html = $product->get_price_html() ) : ?>
-							<h3><span class="price"><?php echo $price_html; ?></span></h3>
-						<?php endif; ?>
-
-					<?php } ?>
-
-					<?php
-						/**
-						* woocommerce_single_product_summary hook
-						*
-						* @hooked woocommerce_template_single_title - 5
-						* @hooked woocommerce_template_single_rating - 10
-						* @hooked woocommerce_template_single_price - 10
-						* @hooked woocommerce_template_single_excerpt - 20
-						* @hooked woocommerce_template_single_add_to_cart - 30
-						* @hooked woocommerce_template_single_meta - 40
-						* @hooked woocommerce_template_single_sharing - 50
-						*/
-						remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
-						remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
-						remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-						remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
-						do_action( 'woocommerce_single_product_summary' );
-					?>
+					<div class="content">
+						<?php the_content(); ?>
+					</div>
 
 				</div>
+
 
 			</section>
 
 			<section class="product-section product-middle">
 
-				<div class="product-description">
-					<?php the_content(); ?>
-				</div>
+				<div class="product-add-to-cart">
+
+				<h2 class="purchase">Purchase</h2>
+				<?php
+					/**
+					* woocommerce_single_product_summary hook
+					*
+					* @hooked woocommerce_template_single_title - 5
+					* @hooked woocommerce_template_single_rating - 10
+					* @hooked woocommerce_template_single_price - 10
+					* @hooked woocommerce_template_single_excerpt - 20
+					* @hooked woocommerce_template_single_add_to_cart - 30
+					* @hooked woocommerce_template_single_meta - 40
+					* @hooked woocommerce_template_single_sharing - 50
+					*/
+					remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+					remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+					remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+					remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+					do_action( 'woocommerce_single_product_summary' );
+				?>
+			</div>
 
 			</section>
 
 			<section class="product-section product-bottom">
-				<div class="product-specs">
+
+				<div class="product-specs-features">
+					<h2>Specifications</h2>
+
 					<?php the_field('specs'); ?>
-				</div>
-				<div class="product-features">
 					<?php the_field('features'); ?>
 				</div>
+
+				<div class="product-testimonials">
+					<?php if( have_rows('product_testimonials') ) : ?>
+
+						<h2>Testimonials</h2>
+
+					    <?php while ( have_rows('product_testimonials') ) : ?>
+
+					        <?php the_row(); ?>
+
+					        <?php if( get_row_layout() == 'testimonial_entry' ) : ?>
+
+								<div class="testimonial">
+
+									<div class="quote">
+										<svg version="1.1" id="Quote" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+											 viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+										<path d="M5.315,3.401c-1.61,0-2.916,1.343-2.916,3c0,1.656,1.306,3,2.916,3c2.915,0,0.972,5.799-2.916,5.799v1.4
+											C9.338,16.601,12.057,3.401,5.315,3.401z M13.715,3.401c-1.609,0-2.915,1.343-2.915,3c0,1.656,1.306,3,2.915,3
+											c2.916,0,0.973,5.799-2.915,5.799v1.4C17.738,16.601,20.457,3.401,13.715,3.401z"/>
+										</svg>
+									</div>
+									<?php the_sub_field('testimonial'); ?>
+									<span class="attribution"><em>&mdash;&nbsp;<?php the_sub_field('attribution'); ?></em></span>
+
+								</div>
+
+					        <?php endif; ?>
+
+					    <?php endwhile; ?>
+
+					<?php endif; ?>
+				</div>
+
 			</section>
 
 			<section class="product-section related-products">
+
+				<!-- <h2>Related Products</h2> -->
 				<?php
 					remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
 					remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );

@@ -50,13 +50,35 @@ body {
 	}
 	.button,
 	.wc-proceed-to-checkout a {
-		background: $gray;
+		background: $orange;
 		border-radius: 0;
 		color: $white;
-		font-weight: 900;
+		font-size: 14px;
+		font-weight: 400;
 		padding: $ten $fifteen;
 		text-transform: uppercase;
+		@include transition(background .2s ease-in-out);
+		&:hover {
+			background: $dark-orange;
+		}
 	}
+	.woocommerce-message {
+	background: $green;
+	color: $white;
+	.inner-container {
+		@include outer-container;
+		font-size: $h4-font-size;
+		font-weight: 400;
+		padding: $ten 0;
+		text-align: center;
+		.button {
+			background: transparent;
+			color: $white;
+			font-size: $h3-font-size;
+			font-weight: 700;
+		}
+	}
+}
 }
 
 .site-content {
