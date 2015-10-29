@@ -194,8 +194,13 @@ get_header(); ?>
 
 					<h1><?php the_title(); ?></h1>
 
-					<?php $price_html = $product->get_price_html(); ?>
-					<h2 class="price"><?php echo $price_html; ?></h2>
+					<?php if( $product->is_type( 'simple' ) ) { ?>
+
+						<?php if ( $price_html = $product->get_price_html() ) : ?>
+							<h2 class="price"><?php echo $price_html; ?></h2>
+						<?php endif; ?>
+
+					<?php } ?>
 
 					<div class="content">
 						<?php the_content(); ?>

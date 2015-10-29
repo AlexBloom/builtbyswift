@@ -69,6 +69,168 @@
 		h3 {
 			margin-bottom: $twentyfive;
 		}
+		.gform_variation_wrapper {
+			@include media( $large-screen ) {
+				@include span-columns(8);
+			}
+			margin-top: 0;
+			.gform_wrapper {
+				margin-top: 0;
+				h3 {
+					font-weight: 700;
+				}
+			}
+			.gform_body {
+				.gfield {
+					@include row();
+					clear: none;
+					margin-bottom: $twentyfive;
+					&.gform_hidden {
+						display: none;
+					}
+				}
+				.gfield_label {
+					line-height: 1.25;
+					margin-top: 0;
+					padding-right: $fifteen;
+					background: {
+						image: url(../images/chevron_down.svg);
+						position: center right;
+						repeat: no-repeat;
+						size: 14px;
+					}
+					font: {
+						size: $h4-font-size;
+						weight: 400;
+					}
+					.gfield_required {
+						display: none;
+					}
+					&:hover {
+						cursor: pointer;
+					}
+				}
+				.ginput_container {
+					.gfield_radio {
+						li {
+							@include span-columns(2);
+							@include omega(6n);
+							margin-bottom: $twentyfive;
+							text-align: center;
+							input {
+								&:hover {
+									cursor: pointer;
+								}
+							}
+							label {
+								clear: both;
+								font-size: 14px;
+								font-weight: 400;
+								margin: 0;
+							}
+						}
+					}
+				}
+				input[type="radio"] {
+					// height: 65px;
+					margin: 0;
+					outline: 0;
+					width: 100% !important;
+					@include appearance(inherit);
+					background: {
+						color: transparent;
+						repeat: no-repeat;
+						size: 100%;
+					}
+					&:hover + label {
+						color: $orange;
+						cursor: pointer;
+					}
+					&.checked + label {
+						color: $pink;
+						font-weight: 700;
+					}
+					label {
+						@include transition(all .2s ease-in-out);
+					}
+				}
+				input[value="Navy|0"] {
+					background: {
+						image: url( ../images/navy_color_swatch.jpg );
+					}
+				}
+				input[value="Steel|0"] {
+					background: {
+						image: url( ../images/steel_color_swatch.jpg );
+					}
+				}
+				input[value="Olive|0"] {
+					background: {
+						image: url( ../images/olive_color_swatch.jpg );
+					}
+				}
+				input[value="Teal|0"] {
+					background: {
+						image: url( ../images/teal_color_swatch.jpg );
+					}
+				}
+				input[value="Black|0"] {
+					background: {
+						image: url( ../images/black_color_swatch.jpg );
+					}
+				}
+				input[value="Rust|0"] {
+					background: {
+						image: url( ../images/rust_color_swatch.jpg );
+					}
+				}
+				input[value="Mandarin|0"] {
+					background: {
+						image: url( ../images/mandarin_color_swatch.jpg );
+					}
+				}
+				input[value="Neon Orange|0"] {
+					background: {
+						image: url( ../images/neon_orange_color_swatch.jpg );
+					}
+				}
+				input[value="Hot Pink|0"] {
+					background: {
+						image: url( ../images/hot_pink_color_swatch.jpg );
+					}
+				}
+				input[value="Burgundy|0"] {
+					background: {
+						image: url( ../images/burgundy_color_swatch.jpg );
+					}
+				}
+				input[value="Saffron|0"] {
+					background: {
+						image: url( ../images/saffron_color_swatch.jpg );
+					}
+				}
+				input[value="Mint Green|0"] {
+					background: {
+						image: url( ../images/mint_green_color_swatch.jpg );
+					}
+				}
+				input[value="Neon Green|0"] {
+					background: {
+						image: url( ../images/neon_green_color_swatch.jpg );
+					}
+				}
+				input[value="Turquoise|0"] {
+					background: {
+						image: url( ../images/turquoise_color_swatch.jpg );
+					}
+				}
+				input[value="Royal Blue|0"] {
+					background: {
+						image: url( ../images/royal_blue_color_swatch.jpg );
+					}
+				}
+			}
+		}
 		.bundle_form {
 			.product-add-ons {
 				margin-bottom: $twentyfive;
@@ -86,6 +248,9 @@
 							size: 12px;
 							weight: 400;
 						}
+					}
+					.single_variation_wrap {
+						display: none !important;
 					}
 				}
 			}
@@ -113,168 +278,6 @@
 						.single_add_to_cart_button {
 							@include span-columns(8);
 							@include shift(2);
-						}
-					}
-				}
-				.gform_variation_wrapper {
-					@include media( $large-screen ) {
-						@include span-columns(8);
-					}
-					margin-top: 0;
-					.gform_wrapper {
-						margin-top: 0;
-						h3 {
-							font-weight: 700;
-						}
-					}
-					.gform_body {
-						.gfield {
-							@include row();
-							clear: none;
-							margin-bottom: $twentyfive;
-							&.gform_hidden {
-								display: none;
-							}
-						}
-						.gfield_label {
-							line-height: 1.25;
-							margin-top: 0;
-							padding-right: $fifteen;
-							background: {
-								image: url(../images/chevron_down.svg);
-								position: center right;
-								repeat: no-repeat;
-								size: 14px;
-							}
-							font: {
-								size: $h4-font-size;
-								weight: 400;
-							}
-							.gfield_required {
-								display: none;
-							}
-							&:hover {
-								cursor: pointer;
-							}
-						}
-						.ginput_container {
-							.gfield_radio {
-								li {
-									@include span-columns(2);
-									@include omega(6n);
-									margin-bottom: $twentyfive;
-									text-align: center;
-									input {
-										&:hover {
-											cursor: pointer;
-										}
-									}
-									label {
-										clear: both;
-										font-size: 14px;
-										font-weight: 400;
-										margin: 0;
-									}
-								}
-							}
-						}
-						input[type="radio"] {
-							// height: 65px;
-							margin: 0;
-							outline: 0;
-							width: 100% !important;
-							@include appearance(inherit);
-							background: {
-								color: transparent;
-								repeat: no-repeat;
-								size: 100%;
-							}
-							&:hover + label {
-								color: $orange;
-								cursor: pointer;
-							}
-							&.checked + label {
-								color: $pink;
-								font-weight: 700;
-							}
-							label {
-								@include transition(all .2s ease-in-out);
-							}
-						}
-						input[value="Navy|0"] {
-							background: {
-								image: url( ../images/navy_color_swatch.jpg );
-							}
-						}
-						input[value="Steel|0"] {
-							background: {
-								image: url( ../images/steel_color_swatch.jpg );
-							}
-						}
-						input[value="Olive|0"] {
-							background: {
-								image: url( ../images/olive_color_swatch.jpg );
-							}
-						}
-						input[value="Teal|0"] {
-							background: {
-								image: url( ../images/teal_color_swatch.jpg );
-							}
-						}
-						input[value="Black|0"] {
-							background: {
-								image: url( ../images/black_color_swatch.jpg );
-							}
-						}
-						input[value="Rust|0"] {
-							background: {
-								image: url( ../images/rust_color_swatch.jpg );
-							}
-						}
-						input[value="Mandarin|0"] {
-							background: {
-								image: url( ../images/mandarin_color_swatch.jpg );
-							}
-						}
-						input[value="Neon Orange|0"] {
-							background: {
-								image: url( ../images/neon_orange_color_swatch.jpg );
-							}
-						}
-						input[value="Hot Pink|0"] {
-							background: {
-								image: url( ../images/hot_pink_color_swatch.jpg );
-							}
-						}
-						input[value="Burgundy|0"] {
-							background: {
-								image: url( ../images/burgundy_color_swatch.jpg );
-							}
-						}
-						input[value="Saffron|0"] {
-							background: {
-								image: url( ../images/saffron_color_swatch.jpg );
-							}
-						}
-						input[value="Mint Green|0"] {
-							background: {
-								image: url( ../images/mint_green_color_swatch.jpg );
-							}
-						}
-						input[value="Neon Green|0"] {
-							background: {
-								image: url( ../images/neon_green_color_swatch.jpg );
-							}
-						}
-						input[value="Turquoise|0"] {
-							background: {
-								image: url( ../images/turquoise_color_swatch.jpg );
-							}
-						}
-						input[value="Royal Blue|0"] {
-							background: {
-								image: url( ../images/royal_blue_color_swatch.jpg );
-							}
 						}
 					}
 				}
