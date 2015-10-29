@@ -21,7 +21,7 @@ get_header(); ?>
 			<?php $desktop = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'product-banner-desktop' ); ?>
 			<?php $retina = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'product-banner-retina' ); ?>
 
-			<picture>
+			<picture class="document-header-image">
 				<!--[if IE 9]><video style="display: none;"><![endif]-->
 				<source
 					srcset="<?php echo $mobile[0]; ?>"

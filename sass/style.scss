@@ -84,6 +84,11 @@ body {
 
 .site-content {
 	position: relative;
+	&.no-document-header-image {
+		.content-area {
+			padding-top: $hundred;
+		}
+	}
 	.front-page {
 		.home-page-slider-container {
 			.slick-track {
@@ -202,5 +207,15 @@ body {
 				}
 			}
 		}
+	}
+}
+
+.blog-container {
+	@include outer-container;
+}
+
+.page-template-default {
+	.page-content-container {
+		@include outer-container;
 	}
 }

@@ -1,21 +1,23 @@
 jQuery(document).ready(function(){
 
-	if (jQuery(window).width() > 375) {
-
-		// var answer = jQuery(window).height();
-		// jQuery( '.home-page-slider-container' ).css('height', answer);
-		// jQuery( '.page-content' ).css('top', answer);
-		// jQuery( '.home-page-slider-container img' ).css('overflow', 'hidden');
-		//
-		// var width_answer = jQuery(window).width();
-		// jQuery( '.home-page-slider-container img' ).css('width', width_answer);
-
-	}
-
 	jQuery('.menu .sub-menu').css('display', 'none');
 	jQuery('.menu-item-has-children').hover(function(){
 		jQuery(this).children('.sub-menu').slideToggle('blind');
 	});
+
+
+	if ( jQuery('.document-header-image').length ) {
+	// do nothing
+	} else {
+		desktop_header_height = jQuery('.desktop-header').height();
+		jQuery('.site-content').css('padding-top', desktop_header_height);
+		jQuery('.site-content').addClass('no-document-header-image');
+	}
+
+	if ( jQuery('.no-document-header-image').length > 0 ) {
+		jQuery('.desktop-header').addClass('transparent-header');
+	}
+
 
 	if (jQuery(window).width() < 860) {
 

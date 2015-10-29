@@ -140,9 +140,12 @@
 	@include media( $large-screen) {
 		@include row();
 	}
+	&.transparent-header {
+		background: transparent;
+	}
 	.utility-header {
 		display: none;
-		margin-bottom: $fifty;
+		margin-bottom: $twentyfive;
 		padding-top: $five;
 		@include media( $large-screen ) {
 			@include row();
@@ -219,15 +222,9 @@
 							size: 18px;
 						}
 					}
-					&:first-child:hover {
-					 .sub-menu {
-							// display: block;
-						}
-					}
 				}
 				.sub-menu {
-					// @include transition(all .2s ease-in-out);
-					// display: none;
+					display: none;
 					a {
 						color: $gray;
 						text-transform: none;

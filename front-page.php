@@ -81,7 +81,7 @@ get_header(); ?>
 								<?php $desktop_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'product-banner-desktop'); ?>
 								<?php $retina_page_banner = wp_get_attachment_image_src(get_sub_field('slider_image'), 'product-banner-retina'); ?>
 
-								<picture class="picture">
+								<picture class="picture document-header-image">
 									<!--[if IE 9]><video style="display: none"><![endif]-->
 									<source
 										srcset="<?php echo $mobile_page_banner[0]; ?>"
