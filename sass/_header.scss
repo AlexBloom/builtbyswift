@@ -132,7 +132,9 @@
 }
 
 .desktop-header {
-	background: $white-overlay;
+	// background: $white-overlay;
+	@include linear-gradient(to bottom, $white-overlay 50%, $white-overlay-half 70%, $transparent 95%);
+	background-color: $transparent;
 	display: none;
 	position: absolute;
 	width: 100%;
@@ -226,7 +228,7 @@
 				.sub-menu {
 					display: none;
 					a {
-						color: $gray;
+						color: $white;
 						text-transform: none;
 						&:hover {
 							color: $pink;
