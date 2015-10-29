@@ -39,8 +39,10 @@ get_header(); ?>
 				<img srcset="<?php echo $image[0]; ?>">
 			</picture>
 
-			<div class="story-content">
-				<?php the_content(); ?>
+			<div class="story-content-container">
+				<div class="story-content">
+					<?php the_content(); ?>
+				</div>
 			</div>
 
 		<?php endwhile; // end of the loop. ?>
