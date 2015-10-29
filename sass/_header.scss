@@ -132,6 +132,7 @@
 }
 
 .desktop-header {
+	background: $white-overlay;
 	display: none;
 	position: absolute;
 	width: 100%;
@@ -220,12 +221,13 @@
 					}
 					&:first-child:hover {
 					 .sub-menu {
-							display: block;
+							// display: block;
 						}
 					}
 				}
 				.sub-menu {
-					display: none;
+					// @include transition(all .2s ease-in-out);
+					// display: none;
 					a {
 						color: $gray;
 						text-transform: none;

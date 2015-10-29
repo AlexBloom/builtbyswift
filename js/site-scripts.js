@@ -12,6 +12,11 @@ jQuery(document).ready(function(){
 
 	}
 
+	jQuery('.menu .sub-menu').css('display', 'none');
+	jQuery('.menu-item-has-children').hover(function(){
+		jQuery(this).children('.sub-menu').slideToggle('blind');
+	});
+
 	if (jQuery(window).width() < 860) {
 
 		// Mobile menu toggle
