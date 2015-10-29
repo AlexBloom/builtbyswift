@@ -133,6 +133,7 @@
 
 .desktop-header {
 	// background: $white-overlay;
+	// @include linear-gradient(to top, $transparent, $white-overlay 20%, $white-overlay-half);
 	@include linear-gradient(to bottom, $white-overlay 50%, $white-overlay-half 70%, $transparent 95%);
 	background-color: $transparent;
 	display: none;
@@ -246,6 +247,9 @@
 		}
 		.site-branding {
 			@include span-columns(2);
+			@include media( $large-screen ) {
+				margin-bottom: 150px;
+			}
 			svg {
 				width: 100%
 			}

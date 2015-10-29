@@ -91,6 +91,25 @@ body {
 	}
 	.front-page {
 		.home-page-slider-container {
+			.slick-arrow {
+				height: 60px;
+				width: 60px;
+				svg {
+					@include transition(all .2s ease-in-out);
+					fill: $white;
+					&:hover {
+						fill: $white-overlay-half;
+					}
+				}
+			}
+			.slick-prev {
+				left: 35px;
+				z-index: 1;
+			}
+			.slick-next {
+				right: 35px;
+				z-index: 1;
+			}
 			.slick-track {
 				height: 315px;
 				@include media( $medium-screen ) {

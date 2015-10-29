@@ -16,7 +16,7 @@ get_header(); ?>
 	jQuery(document).ready(function(){
 
 		jQuery('.home-page-slider').slick({
-			arrows: false,
+			arrows: true,
 			dots: false,
 			// autoplay: true,
 			// autoplaySpeed: 3000,
