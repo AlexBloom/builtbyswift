@@ -98,7 +98,7 @@ body {
 					@include transition(all .2s ease-in-out);
 					fill: $white;
 					&:hover {
-						fill: $white-overlay-half;
+						fill: $gray-overlay-half;
 					}
 				}
 			}
@@ -144,8 +144,10 @@ body {
 .page-content {
 	@include row();
 	position: relative;
-	.product-row-descriptor {
+	padding: 0 $twentyfive;
+	.product-row-description {
 		margin-bottom: $twentyfive;
+		padding: 0;
 	}
 	.collection-title {
 		font-family: $orator;
@@ -168,15 +170,21 @@ body {
 				text-align: left;
 			}
 		}
-		.product-portal {
-			a {
-				color: $medium-gray;
-				&:hover {
-					color: $pink;
-				}
+		a {
+			color: $medium-gray;
+			&:hover {
+				color: $pink;
 			}
+		}
+		.product-portal {
 			img {
 				margin: 0 auto;
+				height: 100%;
+			}
+		}
+		&+.swift-designs {
+			img {
+				height: auto;
 			}
 		}
 	}
@@ -208,7 +216,7 @@ body {
 				color: $gray;
 			}
 			.portal-content {
-				background: $white-overlay;
+				background: $gray-overlay;
 				left: 0;
 				padding: $twentyfive 0;
 				position: absolute;

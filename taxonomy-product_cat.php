@@ -9,6 +9,13 @@
 
 get_header(); ?>
 
+<script>
+
+	jQuery(document).ready(function(){
+	});
+
+</script>
+
 	<div id="primary" class="content-area">
 
 		<div class="taxonomy-banner-image">
@@ -16,6 +23,7 @@ get_header(); ?>
 			<?php
 				$current_term = get_query_var( 'term' );
 			?>
+
 
 			<?php $mobile = wp_get_attachment_image_src( get_field( $current_term, 3223 ), 'product-banner-mobile' ); ?>
 			<?php $tablet = wp_get_attachment_image_src( get_field( $current_term, 3223 ), 'product-banner-tablet' ); ?>
@@ -42,133 +50,233 @@ get_header(); ?>
 
 		</div>
 
+		<?php get_template_part('partials/breadcrumbs'); ?>
+
+		<?php do_action( 'woocommerce_before_single_product' ); ?>
+
 		<section class="product-taxonomies">
 
 			<div class="taxonomy-title">
 
-				<h1><?php echo $term; ?></h1>
+				<h1><?php single_term_title(); ?></h1>
 
 			</div>
 
-			<div class="readymade-products products-column">
-				<?php
+			<?php if(has_term('porteur-bags', 'product_cat') ) : ?>
 
-				    $args = array(
-				        'post_type' => 'product',
-						'tax_query' => array(
-							array(
-								'taxonomy' => 'product_cat',
-								'field' => 'slug',
-								'terms' => array(
-									$term,
-									'readymade'
+				<div class="porteur-bags">
+					<?php
+
+						$args = array(
+							'post_type' => 'product',
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										$term,
+										'custom'
+									),
+									operator => 'AND',
 								),
-								operator => 'AND',
-							),
-							array(
-								'taxonomy' => 'product_cat',
-								'field' => 'slug',
-								'terms' => array(
-									'bundled-simple',
-									'bundled-variable',
-									'add-on'
-								),
-								'operator' => 'NOT IN'
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										'bundled-simple',
+										'bundled-variable',
+										'add-on'
+									),
+									'operator' => 'NOT IN'
+								)
 							)
-						)
-				    );
-				    $query = new WP_Query($args);
+						);
+						$query = new WP_Query($args);
 
-				    if($query->have_posts()) : ?>
+						if($query->have_posts()) : ?>
 
-					<div class="taxonomy-title">
+						<?php while($query->have_posts()) : ?>
 
-						<h2>ReadyMade</h2>
-						<?php the_field('readymade_description', 3223); ?>
+							<?php $query->the_post(); ?>
 
-					</div>
-
-				    <?php while($query->have_posts()) : ?>
-
-				        <?php $query->the_post(); ?>
-
-						<div class="product-portal">
-							<a href="<?php the_permalink(); ?>">
-								<div class="image">
+							<div class="product-portal">
+								<a href="<?php the_permalink(); ?>">
 									<?php the_post_thumbnail('portal-mobile'); ?>
-								</div>
-								<div class="product-title">
-									<h3><?php the_title() ?></h3>
-								</div>
-							</a>
-						</div>
+									<h3><?php the_title(); ?></h3>
+								</a>
+							</div>
 
-				    <?php endwhile; ?>
+						<?php endwhile; ?>
 
-				<?php endif; ?>
+					<?php endif; ?>
 
-			</div>
+				</div>
 
-			<div class="custom-products products-column">
-				<?php
+			<?php elseif(has_term('general-store', 'product_cat') ) : ?>
 
-				    $args = array(
-				        'post_type' => 'product',
-						'tax_query' => array(
-							array(
-								'taxonomy' => 'product_cat',
-								'field' => 'slug',
-								'terms' => array(
-									$term,
-									'custom'
+				<div class="general-store">
+
+					<?php
+
+						$args = array(
+							'post_type' => 'product',
+							'posts_per_page' => -1,
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										$term,
+									),
 								),
-								operator => 'AND',
-							),
-							array(
-								'taxonomy' => 'product_cat',
-								'field' => 'slug',
-								'terms' => array(
-									'bundled-simple',
-									'bundled-variable',
-									'add-on'
-								),
-								'operator' => 'NOT IN'
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										'bundled-simple',
+										'bundled-variable',
+										'add-on'
+									),
+									'operator' => 'NOT IN'
+								)
 							)
-						)
-				    );
-				    $query = new WP_Query($args);
+						);
+						$query = new WP_Query($args);
 
-				    if($query->have_posts()) : ?>
+						if($query->have_posts()) : ?>
 
-					<div class="taxonomy-title">
+						<?php while($query->have_posts()) : ?>
 
-						<h2>Custom</h2>
-						<div class="description">
-							<?php the_field('custom_description', 3223); ?>
-						</div>
+							<?php $query->the_post(); ?>
 
-					</div>
-
-				    <?php while($query->have_posts()) : ?>
-
-				        <?php $query->the_post(); ?>
-
-						<div class="product-portal">
-							<a href="<?php the_permalink(); ?>">
-								<div class="image">
+							<div class="product-portal">
+								<a href="<?php the_permalink(); ?>">
 									<?php the_post_thumbnail('portal-mobile'); ?>
-								</div>
-								<div class="product-title">
-									<h3><?php the_title() ?></h3>
-								</div>
-							</a>
+									<h3><?php the_title(); ?></h3>
+								</a>
+							</div>
+
+						<?php endwhile; ?>
+
+					<?php endif; ?>
+
+				</div>
+
+			<?php else : ?>
+
+				<div class="readymade-products products-column">
+					<?php
+
+					    $args = array(
+					        'post_type' => 'product',
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										$term,
+										'readymade'
+									),
+									operator => 'AND',
+								),
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										'bundled-simple',
+										'bundled-variable',
+										'add-on'
+									),
+									'operator' => 'NOT IN'
+								)
+							)
+					    );
+					    $query = new WP_Query($args);
+
+					    if($query->have_posts()) : ?>
+
+						<div class="taxonomy-title">
+
+							<h2>ReadyMade</h2>
+							<?php the_field('readymade_description', 3223); ?>
+
 						</div>
 
-				    <?php endwhile; ?>
+					    <?php while($query->have_posts()) : ?>
 
-				<?php endif; ?>
+					        <?php $query->the_post(); ?>
 
-			</div>
+							<div class="product-portal">
+								<a href="<?php the_permalink(); ?>">
+									<?php the_post_thumbnail('portal-mobile'); ?>
+									<h3><?php the_title(); ?></h3>
+								</a>
+							</div>
+
+					    <?php endwhile; ?>
+
+					<?php endif; ?>
+
+				</div>
+
+				<div class="custom-products products-column">
+					<?php
+
+					    $args = array(
+					        'post_type' => 'product',
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										$term,
+										'custom'
+									),
+									operator => 'AND',
+								),
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										'bundled-simple',
+										'bundled-variable',
+										'add-on'
+									),
+									'operator' => 'NOT IN'
+								)
+							)
+					    );
+					    $query = new WP_Query($args);
+
+					    if($query->have_posts()) : ?>
+
+						<div class="taxonomy-title">
+
+							<h2>Custom</h2>
+							<div class="description">
+								<?php the_field('custom_description', 3223); ?>
+							</div>
+
+						</div>
+
+					    <?php while($query->have_posts()) : ?>
+
+					        <?php $query->the_post(); ?>
+
+							<div class="product-portal">
+								<a href="<?php the_permalink(); ?>">
+									<?php the_post_thumbnail('portal-mobile'); ?>
+									<h3><?php the_title(); ?></h3>
+								</a>
+							</div>
+
+					    <?php endwhile; ?>
+
+					<?php endif; ?>
+
+				</div>
+
+			<?php endif; ?>
 
 		</section>
 

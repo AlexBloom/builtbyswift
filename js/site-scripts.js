@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
 
-	jQuery('.menu .sub-menu').css('display', 'none');
-	jQuery('.menu-item-has-children').hover(function(){
+	jQuery('.desktop-header .menu .sub-menu').css('display', 'none');
+	jQuery('.desktop-header .menu-item-has-children').hover(function(){
 		jQuery(this).children('.sub-menu').slideToggle('blind');
 	});
 

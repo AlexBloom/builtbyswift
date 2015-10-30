@@ -1,38 +1,86 @@
 .product-taxonomies {
 	@include outer-container;
+	margin-bottom: ($hundred * 2);
+	.collection-title {
+		h1 {
+			font-family: $orator;
+			margin-bottom: $twentyfive;
+			text-align: center;
+		}
+	}
+	.collection {
+		.product-portal {
+			@include span-columns(3);
+			@include omega(4n);
+			img {
+				height: 100%;
+			}
+		}
+	}
 	.taxonomy-title {
-		margin: $hundred 0;
+		margin: $fifty 0;
+		padding: 0 $twentyfive;
 		text-align: center;
-		text-transform: capitalize;
+		text-transform: uppercase;
+		@include media( $large-screen ) {
+			padding: 0;
+		}
 	}
 	.products-column {
-		@include span-columns(6);
+		@include media( $large-screen ) {
+			@include span-columns(6);
+		}
 		text-align: center;
 		img {
 			margin: 0 auto;
 		}
 	}
 	.product-portal {
-		margin-bottom: $fifty;
-		position: relative;
+		padding: 0 $twentyfive;
+		@include media( $large-screen ) {
+			padding: 0;
+		}
+		margin-bottom: $hundred;
+		img {
+			height: auto;
+		}
 		a {
-			color: $gray;
-		}
-		.image {
-
-		}
-		.product-title {
-			background: $white-overlay;
-			left: 50%;
-			padding: $twentyfive 0;
-			position: absolute;
-			top: 50%;
-			@include transform(translate(-50%,-50%));
-			width: 100%;
-		}
-		&:hover {
-			a {
+			color: $medium-gray;
+			&:hover {
 				color: $pink;
+			}
+		}
+		h3 {
+			margin: 0 auto;
+			text-align: center;
+			width: 75%;
+		}
+	}
+	&.swift-designs {
+		margin-bottom: $hundred;
+		margin-top: $hundred;
+		text-align: center;
+		.product-portal {
+			@include media( $large-screen ) {
+				@include span-columns(3);
+			}
+		}
+	}
+	.porteur-bags {
+		.product-portal {
+			@include media( $large-screen ) {
+				@include span-columns(3);
+				&:first-child {
+					@include shift(3);
+				}
+			}
+		}
+	}
+	.general-store {
+		.product-portal {
+			@include media( $large-screen ) {
+				@include span-columns(3);
+				@include omega(4n);
 			}
 		}
 	}
