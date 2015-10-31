@@ -9,276 +9,142 @@
 
 get_header(); ?>
 
-<script>
-
-	jQuery(document).ready(function(){
-	});
-
-</script>
-
 	<div id="primary" class="content-area">
 
-		<div class="taxonomy-banner-image">
+		<?php
 
-			<?php
-				$current_term = get_query_var( 'term' );
-			?>
+		$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ); // get current term
+		$parent = get_term($term->parent, get_query_var('taxonomy') ); // get parent term
+		$children = get_term_children($term->term_id, get_query_var('taxonomy')); // get children
+		if(($parent->term_id!="" && sizeof($children)>0)) : ?>
 
+			echo 'has parent and child';
 
-			<?php $mobile = wp_get_attachment_image_src( get_field( $current_term, 3223 ), 'product-banner-mobile' ); ?>
-			<?php $tablet = wp_get_attachment_image_src( get_field( $current_term, 3223 ), 'product-banner-tablet' ); ?>
-			<?php $desktop = wp_get_attachment_image_src( get_field( $current_term, 3223 ), 'product-banner-desktop' ); ?>
-			<?php $retina = wp_get_attachment_image_src( get_field( $current_term, 3223 ), 'product-banner-retina' ); ?>
+		<?php elseif(($parent->term_id!="") && (sizeof($children)==0)) : ?>
 
-			<picture class="document-header-image">
-				<!--[if IE 9]><video style="display: none"><![endif]-->
-				<source
-					srcset="<?php echo $mobile[0]; ?>"
-					media="(max-width: 500px)" />
-				<source
-					srcset="<?php echo $tablet[0]; ?>"
-					media="(max-width: 860px)" />
-				<source
-					srcset="<?php echo $desktop[0]; ?>"
-					media="(max-width: 1180px)" />
-				<source
-					srcset="<?php echo $retina[0]; ?>"
-					media="(min-width: 1181px)" />
-				<!--[if IE 9]></video><![endif]-->
-				<img srcset="<?php echo $image[0]; ?>">
-			</picture>
+			echo 'has parent, no child';
 
-		</div>
+			<div class="taxonomy-banner-image">
 
-		<?php get_template_part('partials/breadcrumbs'); ?>
+				<?php $mobile = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-mobile' ); ?>
+				<?php $tablet = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-tablet' ); ?>
+				<?php $desktop = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-desktop' ); ?>
+				<?php $retina = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-retina' ); ?>
 
-		<?php do_action( 'woocommerce_before_single_product' ); ?>
-
-		<section class="product-taxonomies">
-
-			<div class="taxonomy-title">
-
-				<h1><?php single_term_title(); ?></h1>
+				<picture class="document-header-image">
+					<!--[if IE 9]><video style="display: none;"><![endif]-->
+					<source
+						srcset="<?php echo $mobile[0]; ?>"
+						media="(max-width: 500px)" />
+					<source
+						srcset="<?php echo $tablet[0]; ?>"
+						media="(max-width: 860px)" />
+					<source
+						srcset="<?php echo $desktop[0]; ?>"
+						media="(max-width: 1180px)" />
+					<source
+						srcset="<?php echo $retina[0]; ?>"
+						media="(min-width: 1181px)" />
+					<!--[if IE 9]></video><![endif]-->
+					<img srcset="<?php echo $image[0]; ?>">
+				</picture>
 
 			</div>
 
-			<?php if(has_term('porteur-bags', 'product_cat') ) : ?>
+			<?php get_template_part('partials/breadcrumbs'); ?>
 
-				<div class="porteur-bags">
-					<?php
+			<?php do_action( 'woocommerce_before_single_product' ); ?>
 
-						$args = array(
-							'post_type' => 'product',
-							'tax_query' => array(
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										$term,
-										'custom'
-									),
-									operator => 'AND',
-								),
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										'bundled-simple',
-										'bundled-variable',
-										'add-on'
-									),
-									'operator' => 'NOT IN'
-								)
-							)
-						);
-						$query = new WP_Query($args);
+			<div class="product-taxonomies">
 
-						if($query->have_posts()) : ?>
+				<div class="taxonomy-product-portal-row">
 
-						<?php while($query->have_posts()) : ?>
+				<?php if( $term = 'hinterland' ) : ?>
+					<div class="collection-title">
+						<h1><?php echo $term; ?></h1>
+					</div>
+				<?php endif; ?>
 
-							<?php $query->the_post(); ?>
+				<?php while ( have_posts() ) : ?>
 
-							<div class="product-portal">
-								<a href="<?php the_permalink(); ?>">
-									<?php the_post_thumbnail('portal-mobile'); ?>
-									<h3><?php the_title(); ?></h3>
-								</a>
-							</div>
+					<?php the_post(); ?>
 
-						<?php endwhile; ?>
+					<div class="product-portal">
+						<a href="<?php the_permalink(); ?>">
+							<?php the_post_thumbnail('portal-mobile'); ?>
+							<h3><?php the_title(); ?></h3>
+						</a>
+					</div>
 
-					<?php endif; ?>
+				<?php endwhile; ?>
 
 				</div>
 
-			<?php elseif(has_term('general-store', 'product_cat') ) : ?>
+			</div>
 
-				<div class="general-store">
+		<?php elseif(($parent->term_id=="") && (sizeof($children)>0)) : ?>
+
+			echo 'no parent, has child';
+
+			<div class="taxonomy-banner-image">
+
+				<?php $mobile = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-mobile' ); ?>
+				<?php $tablet = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-tablet' ); ?>
+				<?php $desktop = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-desktop' ); ?>
+				<?php $retina = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-retina' ); ?>
+
+				<picture class="document-header-image">
+					<!--[if IE 9]><video style="display: none;"><![endif]-->
+					<source
+						srcset="<?php echo $mobile[0]; ?>"
+						media="(max-width: 500px)" />
+					<source
+						srcset="<?php echo $tablet[0]; ?>"
+						media="(max-width: 860px)" />
+					<source
+						srcset="<?php echo $desktop[0]; ?>"
+						media="(max-width: 1180px)" />
+					<source
+						srcset="<?php echo $retina[0]; ?>"
+						media="(min-width: 1181px)" />
+					<!--[if IE 9]></video><![endif]-->
+					<img srcset="<?php echo $image[0]; ?>">
+				</picture>
+
+			</div>
+
+			<?php get_template_part('partials/breadcrumbs'); ?>
+
+			<?php do_action( 'woocommerce_before_single_product' ); ?>
+
+			<div class="product-taxonomies">
 
 					<?php
+		   	 			$prod_categories = get_terms( 'product_cat', array(
+		   	 				'orderby' => 'name',
+		   	 				'order' => 'ASC',
+		   	 				'parent' => $term->term_id,
+		   	 				'hide_empty' => 1
+		   	 			)); ?>
 
-						$args = array(
-							'post_type' => 'product',
-							'posts_per_page' => -1,
-							'tax_query' => array(
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										$term,
-									),
-								),
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										'bundled-simple',
-										'bundled-variable',
-										'add-on'
-									),
-									'operator' => 'NOT IN'
-								)
-							)
-						);
-						$query = new WP_Query($args);
+		   	 			<?php foreach( $prod_categories as $prod_cat ) :
+		   	 				$cat_thumb_id = get_woocommerce_term_meta( $prod_cat->term_id, 'thumbnail_id', true );
+		   	 				$cat_thumb_url = wp_get_attachment_thumb_url( $cat_thumb_id );
+		   	 				$term_link = get_term_link( $prod_cat, 'product_cat' );
+		   	 			?>
 
-						if($query->have_posts()) : ?>
+						<div class="taxonomy-product-portal-row">
 
-						<?php while($query->have_posts()) : ?>
-
-							<?php $query->the_post(); ?>
-
-							<div class="product-portal">
-								<a href="<?php the_permalink(); ?>">
-									<?php the_post_thumbnail('portal-mobile'); ?>
-									<h3><?php the_title(); ?></h3>
-								</a>
-							</div>
-
-						<?php endwhile; ?>
-
-					<?php endif; ?>
-
-				</div>
-
-			<?php else : ?>
-
-				<div class="readymade-products products-column">
-					<?php
-
-					    $args = array(
-					        'post_type' => 'product',
-							'tax_query' => array(
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										$term,
-										'readymade'
-									),
-									operator => 'AND',
-								),
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										'bundled-simple',
-										'bundled-variable',
-										'add-on'
-									),
-									'operator' => 'NOT IN'
-								)
-							)
-					    );
-					    $query = new WP_Query($args);
-
-					    if($query->have_posts()) : ?>
-
-						<div class="taxonomy-title">
-
-							<h2>ReadyMade</h2>
-							<?php the_field('readymade_description', 3223); ?>
+							<h2><?php echo $prod_cat->name; ?></h2>
+							<?php echo do_shortcode('[product_category category="' . $prod_cat->name . '"]'); ?>
 
 						</div>
 
-					    <?php while($query->have_posts()) : ?>
+		   	 		<?php endforeach; wp_reset_query(); ?>
 
-					        <?php $query->the_post(); ?>
+			</div>
 
-							<div class="product-portal">
-								<a href="<?php the_permalink(); ?>">
-									<?php the_post_thumbnail('portal-mobile'); ?>
-									<h3><?php the_title(); ?></h3>
-								</a>
-							</div>
-
-					    <?php endwhile; ?>
-
-					<?php endif; ?>
-
-				</div>
-
-				<div class="custom-products products-column">
-					<?php
-
-					    $args = array(
-					        'post_type' => 'product',
-							'tax_query' => array(
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										$term,
-										'custom'
-									),
-									operator => 'AND',
-								),
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										'bundled-simple',
-										'bundled-variable',
-										'add-on'
-									),
-									'operator' => 'NOT IN'
-								)
-							)
-					    );
-					    $query = new WP_Query($args);
-
-					    if($query->have_posts()) : ?>
-
-						<div class="taxonomy-title">
-
-							<h2>Custom</h2>
-							<div class="description">
-								<?php the_field('custom_description', 3223); ?>
-							</div>
-
-						</div>
-
-					    <?php while($query->have_posts()) : ?>
-
-					        <?php $query->the_post(); ?>
-
-							<div class="product-portal">
-								<a href="<?php the_permalink(); ?>">
-									<?php the_post_thumbnail('portal-mobile'); ?>
-									<h3><?php the_title(); ?></h3>
-								</a>
-							</div>
-
-					    <?php endwhile; ?>
-
-					<?php endif; ?>
-
-				</div>
-
-			<?php endif; ?>
-
-		</section>
+		<?php endif; ?>
 
 	</div><!-- #primary -->
 

@@ -145,6 +145,17 @@
 	}
 	&.transparent-header {
 		background: transparent;
+		.main-navigation {
+			.navigation {
+				.menu {
+					.sub-menu {
+						a {
+							color: $gray;
+						}
+					}
+				}
+			}
+		}
 	}
 	.utility-header {
 		display: none;

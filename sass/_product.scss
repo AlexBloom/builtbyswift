@@ -26,6 +26,17 @@
 			}
 		}
 	}
+	.product-bottom {
+		@include row();
+		.product-content {
+			padding: 0 $twentyfive;
+			@include media( $large-screen ) {
+				@include span-columns(8);
+				@include shift(2);
+				padding: 0;
+			}
+		}
+	}
 	.product-gallery-container {
 		@include media( $large-screen ) {
 			@include span-columns(6);
@@ -34,8 +45,14 @@
 			img {
 				padding: $ten $twentyfive $fifty;
 				@include media( $large-screen ) {
-					padding: $ten $fifty;
+					padding: $ten $thirty;
 				}
+			}
+		}
+		.single-image {
+			margin-bottom: $fifty;
+			@include media( $large-screen ) {
+				margin-bottom: 0;
 			}
 		}
 	}
@@ -57,7 +74,8 @@
 			}
 		}
 	}
-	.product-add-to-cart {
+	.product-add-to-cart,
+	.product-description {
 		@include outer-container;
 		padding: 0 $twentyfive;
 		@include media( $large-screen ) {
@@ -70,12 +88,14 @@
 			margin-bottom: $twentyfive;
 		}
 		.gform_variation_wrapper {
+			max-width: 100%;
+			margin-top: 0;
 			@include media( $large-screen ) {
 				@include span-columns(8);
 			}
-			margin-top: 0;
 			.gform_wrapper {
 				margin-top: 0;
+				max-width: 100%;
 				h3 {
 					font-weight: 700;
 				}
@@ -113,10 +133,14 @@
 				.ginput_container {
 					.gfield_radio {
 						li {
-							@include span-columns(2);
-							@include omega(6n);
+							@include span-columns(3);
+							@include omega(4n);
 							margin-bottom: $twentyfive;
 							text-align: center;
+							@include media( $large-screen ) {
+								@include span-columns(2);
+								@include omega(6n);
+							}
 							input {
 								&:hover {
 									cursor: pointer;
@@ -170,6 +194,11 @@
 					}
 				}
 				input[value="Teal|0"] {
+					background: {
+						image: url( ../images/teal_color_swatch.jpg );
+					}
+				}
+				input[value="Fuschia|0"] {
 					background: {
 						image: url( ../images/teal_color_swatch.jpg );
 					}
@@ -259,9 +288,6 @@
 					@include span-columns(9);
 				}
 				.bundle_wrap {
-					@include media( $large-screen ) {
-						@include span-columns(4);
-					}
 					.bundle_price {
 						.price {
 							font-weight: 700;
@@ -279,6 +305,27 @@
 							@include span-columns(8);
 							@include shift(2);
 						}
+					}
+				}
+			}
+			&.gform-exists {
+				.bundle_wrap {
+					@include media( $large-screen ) {
+						@include span-columns(4);
+					}
+				}
+			}
+			&.no-gform {
+				@include row();
+				.product-add-ons {
+					@include media( $large-screen ) {
+						@include span-columns(4);
+						@include shift(2);
+					}
+				}
+				.bundle_data {
+					@include media( $large-screen ) {
+						@include span-columns(4);
 					}
 				}
 			}
@@ -319,6 +366,15 @@
 			}
 		}
 	}
+	.product-story {
+		margin-bottom: $fifty;
+		padding: 0 $twentyfive;
+		@include media( $large-screen ) {
+			@include span-columns(6);
+			margin-bottom: 0;
+			padding: 0;
+		}
+	}
 	.related-products {
 		@include row();
 		padding: 0 $twentyfive;
@@ -328,8 +384,10 @@
 		}
 	.products {
 			.product {
+				margin-bottom: $fifty;
 				@include media( $large-screen ) {
 					@include span-columns(3);
+					margin-bottom: 0;
 				}
 				text-align: center;
 				.price,
@@ -351,6 +409,85 @@
 					h3 {
 						color: $orange;
 					}
+				}
+			}
+		}
+	}
+	.simple-product {
+		.cart {
+			@include row();
+			.gform_variation_wrapper {
+				@include media( $large-screen ) {
+					@include span-columns(6);
+				}
+				.gform_body {
+					.ginput_container {
+						.gfield_radio {
+							li {
+								@include span-columns(4);
+								@include omega(3n);
+							}
+						}
+
+					}
+				}
+			}
+			.quantity {
+				@include span-columns(3);
+				@include media( $large-screen ) {
+					@include span-columns(2);
+					@include shift(1);
+				}
+				input {
+					padding: 7px 4px $five 7px;
+					width: 60%;
+				}
+			}
+			.single_add_to_cart_button {
+				@include span-columns(6);
+				@include omega;
+				@include media( $large-screen ) {
+					@include span-columns(3);
+				}
+			}
+		}
+		&.no-gform {
+			.quantity {
+				margin-left: 0;
+			}
+		}
+	}
+	.variations_form {
+		td {
+			vertical-align: top;
+		}
+		select {
+			margin-bottom: $ten;
+		}
+		.reset_variations {
+			color: $medium-gray;
+		}
+		.single_variation {
+			@include span-columns(3);
+			font-weight: 700;
+		}
+		.variations_button {
+			@include span-columns(9);
+			.quantity {
+				@include span-columns(2);
+				@include shift(1);
+				@include media( $large-screen ) {
+					margin-left: 0;
+				}
+				input {
+					padding: 7px 4px $five 7px;
+				}
+			}
+			.single_add_to_cart_button {
+				@include omega;
+				@include shift(2);
+				@include media( $large-screen ) {
+					@include span-columns(4);
 				}
 			}
 		}

@@ -42,16 +42,27 @@ get_header(); ?>
 
 			<div class="blog-container">
 
-				<h1>Blog</h1>
+				<h1 class="page-title">Blog</h1>
 
-				<?php while ( have_posts() ) : ?>
+				<div class="blog-content">
+					<?php while ( have_posts() ) : ?>
 
-					<?php the_post(); ?>
+						<?php the_post(); ?>
 
-					<?php the_title(); ?>
-					<?php the_content(); ?>
+						<article class="post">
 
-				<?php endwhile; ?>
+							<div class="post-meta">
+								<h2><?php the_title(); ?></h2>
+								<span class="post-author">by <?php the_author_posts_link(); ?> </span>
+							</div>
+							<div class="entry-content">
+								<?php the_content(); ?>
+							</div>
+							
+						</article>
+
+					<?php endwhile; ?>
+				</div>
 
 			</div>
 

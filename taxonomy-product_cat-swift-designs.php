@@ -54,9 +54,11 @@ get_header(); ?>
 
 			<h2 class="product-row-description"><?php the_field('swift_designs', 3223); ?></h2>
 
+
+
 			<?php $taxonomyName = "product_cat";
 			//This gets top layer terms only.  This is done by setting parent to 0.
-			  $parent_terms = get_terms($taxonomyName, array('parent' => 220, 'orderby' => 'slug', 'hide_empty' => false));
+			  $parent_terms = get_terms($taxonomyName, array('exclude' => 170,'parent' => 220, 'orderby' => 'slug', 'hide_empty' => false));
 
 			  foreach ($parent_terms as $pterm) {
 

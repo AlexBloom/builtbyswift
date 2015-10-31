@@ -46,6 +46,15 @@ body {
 		position: absolute;
 		text-indent: -9999px;
 	}
+	a {
+		color: $medium-gray;
+		&:hover {
+			color: $pink;
+		}
+		&:visited {
+			color: $medium-gray;
+		}
+	}
 	button {
 		font-size: 20px;
 	}
@@ -64,31 +73,34 @@ body {
 		}
 	}
 	.woocommerce-message {
-	background: $green;
-	color: $white;
-	.inner-container {
-		@include outer-container;
-		font-size: $h4-font-size;
-		font-weight: 400;
-		padding: $ten 0;
-		text-align: center;
-		.button {
-			background: transparent;
-			color: $white;
-			font-size: $h3-font-size;
-			font-weight: 700;
+		background: $green;
+		color: $white;
+		.inner-container {
+			@include outer-container;
+			font-size: $h4-font-size;
+			font-weight: 400;
+			padding: $ten 0;
+			text-align: center;
+			.button {
+				background: transparent;
+				color: $white;
+				font-size: $h3-font-size;
+				font-weight: 700;
+			}
 		}
 	}
-}
+	.no-document-header-image {
+		.content-area {
+			padding-top: $hundred;
+			@include media( $large-screen ) {
+				padding-top: 0;
+			}
+		}
+	}
 }
 
 .site-content {
 	position: relative;
-	&.no-document-header-image {
-		.content-area {
-			padding-top: $hundred;
-		}
-	}
 	.front-page {
 		.home-page-slider-container {
 			.slick-arrow {
@@ -239,6 +251,27 @@ body {
 
 .blog-container {
 	@include outer-container;
+	.blog-content {
+		@include span-columns(10);
+		@include shift(1);
+		.post {
+			margin-bottom: $hundred;
+			h2 {
+				margin-bottom: $twentyfive;
+			}
+			.post-author {
+				float: left;
+				margin-right: $fifteen;
+			}
+			.entry-content {
+				clear: both;
+			}
+		}
+	}
+	.page-title {
+		margin-top: $hundred;
+		text-align: center;
+	}
 }
 
 .page-template-default {

@@ -55,13 +55,13 @@
 
 <div class="product-portal-row swift-designs">
 
-	<h2 class="product-row-description"><a href="/swift-designs"><?php the_field('design_title', 886); ?></a></h2>
+	<h2 class="product-row-description"><a href="/product-category/swift-designs/"><?php the_field('design_title', 886); ?></a></h2>
 
 	<div class="product-slider">
 
 		<?php $taxonomyName = "product_cat";
 		//This gets top layer terms only.  This is done by setting parent to 0.
-		  $parent_terms = get_terms($taxonomyName, array('parent' => 220, 'orderby' => 'slug', 'hide_empty' => false));
+		  $parent_terms = get_terms($taxonomyName, array('exclude' => 170,'parent' => 220, 'orderby' => 'slug', 'hide_empty' => false));
 
 		  foreach ($parent_terms as $pterm) {
 

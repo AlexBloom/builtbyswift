@@ -1,6 +1,7 @@
 .product-taxonomies {
 	@include outer-container;
 	margin-bottom: ($hundred * 2);
+	margin-top: $hundred;
 	.collection-title {
 		h1 {
 			font-family: $orator;
@@ -35,34 +36,89 @@
 			margin: 0 auto;
 		}
 	}
-	.product-portal {
-		padding: 0 $twentyfive;
-		@include media( $large-screen ) {
-			padding: 0;
-		}
-		margin-bottom: $hundred;
-		img {
-			height: auto;
-		}
-		a {
-			color: $medium-gray;
-			&:hover {
-				color: $pink;
+	.taxonomy-product-portal-row {
+		h2 {
+			margin-bottom: $twentyfive;
+			padding: 0 $twentyfive;
+			@include media( $large-screen ) {
+				padding: 0;
 			}
 		}
-		h3 {
-			margin: 0 auto;
+		.product-portal {
+			margin-bottom: $fifty;
 			text-align: center;
-			width: 75%;
+			@include media( $large-screen ) {
+				@include span-columns(3);
+				@include omega(4);
+				padding: 0;
+			}
+			img {
+				height: auto;
+			}
+		}
+		.products {
+			margin-bottom: $hundred;
+			@include row();
+			li {
+				padding: 0 $twentyfive;
+				margin-bottom: $fifty;
+				@include media( $large-screen ) {
+					@include span-columns(3);
+					@include omega(4n);
+					padding: 0;
+				}
+				.price,
+				.add_to_cart_button {
+					display: none;
+				}
+			}
+			img {
+				height: auto;
+			}
+			a {
+				color: $medium-gray;
+				&:hover {
+					color: $pink;
+				}
+			}
+			h3 {
+				margin: 0 auto;
+				text-align: center;
+				width: 75%;
+			}
 		}
 	}
-	&.swift-designs {
-		margin-bottom: $hundred;
-		margin-top: $hundred;
+	&.swift-designs,
+	&.readymade {
 		text-align: center;
 		.product-portal {
 			@include media( $large-screen ) {
 				@include span-columns(3);
+				@include omega(5n);
+			}
+			h3 {
+				margin: 0 auto;
+				text-align: center;
+				width: 75%;
+			}
+			img {
+				height: auto;
+			}
+			&:nth-child(4) {
+				// clear: both;
+			}
+		}
+	}
+	.readymade-products,
+	.custom-products {
+		.product-portal {
+			float: left;
+			@include media( $large-screen ) {
+				@include span-columns(6);
+				@include omega(2);
+			}
+			&:nth-child(2n) {
+				clear: both;
 			}
 		}
 	}
