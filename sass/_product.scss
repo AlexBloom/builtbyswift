@@ -281,6 +281,11 @@
 					.single_variation_wrap {
 						display: none !important;
 					}
+					.bundled_item_wrap {
+						.quantity {
+							@include span-columns(5);
+						}
+					}
 				}
 			}
 			.bundle_data {

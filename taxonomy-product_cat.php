@@ -22,14 +22,15 @@ get_header(); ?>
 
 		<?php elseif(($parent->term_id!="") && (sizeof($children)==0)) : ?>
 
-			echo 'has parent, no child';
+			<!-- echo 'has parent, no child'; -->
 
+			<?php $term_slug = $term->slug; ?>
 			<div class="taxonomy-banner-image">
 
-				<?php $mobile = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-mobile' ); ?>
-				<?php $tablet = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-tablet' ); ?>
-				<?php $desktop = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-desktop' ); ?>
-				<?php $retina = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-retina' ); ?>
+				<?php $mobile = wp_get_attachment_image_src( get_field( $term_slug, 3223 ), 'product-banner-mobile' ); ?>
+				<?php $tablet = wp_get_attachment_image_src( get_field( $term_slug, 3223 ), 'product-banner-tablet' ); ?>
+				<?php $desktop = wp_get_attachment_image_src( get_field( $term_slug, 3223 ), 'product-banner-desktop' ); ?>
+				<?php $retina = wp_get_attachment_image_src( get_field( $term_slug, 3223 ), 'product-banner-retina' ); ?>
 
 				<picture class="document-header-image">
 					<!--[if IE 9]><video style="display: none;"><![endif]-->
@@ -57,28 +58,122 @@ get_header(); ?>
 
 			<div class="product-taxonomies">
 
-				<div class="taxonomy-product-portal-row">
+				<h2 class="taxonomy-title"><?php echo $term->name; ?></h2>
 
-				<?php if( $term = 'hinterland' ) : ?>
-					<div class="collection-title">
-						<h1><?php echo $term; ?></h1>
+				<?php if( term_exists( 'readymade', 'product_cat') ) : ?>
+
+					<div class="readymade-products">
+
+						<?php
+
+						    $args = array(
+						        'post_type' => 'product',
+								'tax_query' => array(
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											$term->slug,
+											'readymade',
+										),
+										'operator' => 'AND'
+									),
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											'bundled-simple',
+											'bundled-variable',
+											'add-on'
+										),
+										'operator' => 'NOT IN'
+									)
+								)
+						    );
+						    $query = new WP_Query($args);
+
+						    if($query->have_posts()) : ?>
+
+							<div class="readymade-description description">
+								<h3>ReadyMade Bags</h3>
+								<?php the_field('readymade_description', 3223); ?>
+							</div>
+
+						    <?php while($query->have_posts()) : ?>
+
+						        <?php $query->the_post(); ?>
+
+								<div class="product-portal">
+									<a href="<?php the_permalink(); ?>">
+										<?php the_post_thumbnail('portal-mobile'); ?>
+										<h3><?php the_title(); ?></h3>
+									</a>
+								</div>
+
+						    <?php endwhile; ?>
+
+						<?php endif; ?>
+
 					</div>
+
 				<?php endif; ?>
 
-				<?php while ( have_posts() ) : ?>
+				<?php if( term_exists( 'custom', 'product_cat') ) : ?>
 
-					<?php the_post(); ?>
+					<div class="custom-products <?php echo $term->slug; ?>">
+						<?php
 
-					<div class="product-portal">
-						<a href="<?php the_permalink(); ?>">
-							<?php the_post_thumbnail('portal-mobile'); ?>
-							<h3><?php the_title(); ?></h3>
-						</a>
+					    $args = array(
+					        'post_type' => 'product',
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										$term->slug,
+										'custom',
+									),
+									'operator' => 'AND'
+								),
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										'bundled-simple',
+										'bundled-variable',
+										'add-on'
+									),
+									'operator' => 'NOT IN'
+								)
+							)
+					    );
+					    $query = new WP_Query($args);
+
+					    if($query->have_posts()) : ?>
+
+							<div class="custom-description description">
+								<h3>Custom Bags</h3>
+								<?php the_field('custom_description', 3223); ?>
+							</div>
+
+						    <?php while($query->have_posts()) : ?>
+
+						        <?php $query->the_post(); ?>
+
+								<div class="product-portal">
+									<a href="<?php the_permalink(); ?>">
+										<?php the_post_thumbnail('portal-mobile'); ?>
+										<h3><?php the_title(); ?></h3>
+									</a>
+								</div>
+
+						    <?php endwhile; ?>
+
+						<?php endif; ?>
+
 					</div>
 
-				<?php endwhile; ?>
-
-				</div>
+				<?php endif; ?>
 
 			</div>
 

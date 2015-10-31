@@ -22,7 +22,6 @@
 @import "slick";
 @import "product";
 @import "taxonomy";
-@import "story";
 @import "footer";
 
 * {
@@ -51,8 +50,10 @@ body {
 		&:hover {
 			color: $pink;
 		}
-		&:visited {
-			color: $medium-gray;
+		@include media( $large-screen ) {
+			&:visited {
+				color: $medium-gray;
+			}
 		}
 	}
 	button {
@@ -249,33 +250,115 @@ body {
 	}
 }
 
-.blog-container {
-	@include outer-container;
-	.blog-content {
-		@include span-columns(10);
-		@include shift(1);
-		.post {
-			margin-bottom: $hundred;
-			h2 {
-				margin-bottom: $twentyfive;
-			}
-			.post-author {
-				float: left;
-				margin-right: $fifteen;
-			}
-			.entry-content {
-				clear: both;
+.blog-page {
+	.blog-container {
+		@include outer-container;
+		.blog-content {
+			@include span-columns(8);
+			@include shift(2);
+			.post {
+				margin-bottom: $hundred;
+				h2 {
+					margin-bottom: $twentyfive;
+				}
+				.post-author {
+					float: left;
+					margin-right: $fifteen;
+				}
+				.entry-content {
+					clear: both;
+				}
 			}
 		}
 	}
-	.page-title {
-		margin-top: $hundred;
-		text-align: center;
+	.post-navigation {
+		@include outer-container;
+		margin-bottom: 200px;
+		@include media( $large-screen ) {
+			margin-bottom: $hundred;
+			.previous {
+				@include span-columns(4);
+				@include shift(2);
+			}
+			.next {
+				@include span-columns(4);
+				text-align: right;
+			}
+			.navigation-item {
+				svg {
+					fill: $medium-gray;
+					height: $twentyfive;
+					vertical-align: middle;
+					width: $twentyfive;
+					@include transition(all .2s ease-in-out);
+				}
+				&:hover {
+					svg {
+						fill: $pink;
+					}
+					a {
+						color: $pink;
+					}
+				}
+			}
+		}
 	}
 }
 
-.page-template-default {
-	.page-content-container {
+.page-title {
+	margin: $hundred 0;
+	text-align: center;
+}
+
+.page-content-container {
+	@include outer-container;
+	margin-bottom: $hundred;
+	margin-top: $hundred;
+	@include media( $large-screen ) {
+		margin-bottom: ($hundred * 2);
+	}
+	.page-content {
+		@include span-columns(8);
+		@include shift(2);
+		blockquote {
+			border-left: 0;
+			color: $medium-gray;
+			font-style: italic;
+		}
+		h2 {
+			margin-bottom: $twentyfive;
+		}
+		// ul {
+		// 	margin-left: $twentyfive;
+		// 	@include media( $large-screen ) {
+		// 		margin-left: $fifty;
+		// 	}
+		// }
+		.row {
+			@include row();
+			margin-bottom: $hundred;
+			.left {
+				@include span-columns(5);
+				img {
+					height: auto;
+				}
+			}
+			.right {
+				@include span-columns(7);
+			}
+		}
+	}
+	&.retail-hours {
+		.left,
+		.right {
+			text-align: center;
+		}
+	}
+	&.story-content-container {
 		@include outer-container;
+		.page-content {
+			@include span-columns(10);
+			@include shift(1);
+		}
 	}
 }

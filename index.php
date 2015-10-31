@@ -13,7 +13,7 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
+	<div id="primary" class="blog-page content-area">
 
 		<?php if ( have_posts() ) : ?>
 
@@ -58,12 +58,30 @@ get_header(); ?>
 							<div class="entry-content">
 								<?php the_content(); ?>
 							</div>
-							
+
 						</article>
 
 					<?php endwhile; ?>
 				</div>
 
+			</div>
+
+			<div class="post-navigation">
+				<div class="previous navigation-item">
+					<svg x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+					<path d="M12.141,13.418c0.268,0.271,0.268,0.709,0,0.978c-0.268,0.27-0.701,0.272-0.969,0l-3.83-3.908
+						c-0.268-0.27-0.268-0.707,0-0.979l3.83-3.908c0.267-0.27,0.701-0.27,0.969,0c0.268,0.271,0.268,0.709,0,0.978L9,10L12.141,13.418z"
+						/>
+					</svg>
+					<span class="link"><?php previous_post_link('%link', 'Newer Posts'); ?></span>
+				</div>
+				<div class="next navigation-item">
+					<span class="link"><?php next_post_link('%link', 'Older Posts'); ?></span>
+					<svg x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+					<path d="M11,10L7.859,6.58c-0.268-0.27-0.268-0.707,0-0.978c0.268-0.27,0.701-0.27,0.969,0l3.83,3.908
+						c0.268,0.271,0.268,0.709,0,0.979l-3.83,3.908c-0.267,0.272-0.701,0.27-0.969,0c-0.268-0.269-0.268-0.707,0-0.978L11,10z"/>
+					</svg>
+				</div>
 			</div>
 
 		<?php endif; ?>

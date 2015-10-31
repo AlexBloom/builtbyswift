@@ -27,13 +27,19 @@
 			padding: 0;
 		}
 	}
-	.products-column {
-		@include media( $large-screen ) {
-			@include span-columns(6);
-		}
+	.description {
+		text-align: center;
+		margin: $hundred 0;
+	}
+	.product-portal {
 		text-align: center;
 		img {
+			height: auto;
+		}
+		h3 {
 			margin: 0 auto;
+			text-align: center;
+			width: 75%;
 		}
 	}
 	.taxonomy-product-portal-row {
@@ -51,9 +57,6 @@
 				@include span-columns(3);
 				@include omega(4);
 				padding: 0;
-			}
-			img {
-				height: auto;
 			}
 		}
 		.products {
@@ -81,11 +84,6 @@
 					color: $pink;
 				}
 			}
-			h3 {
-				margin: 0 auto;
-				text-align: center;
-				width: 75%;
-			}
 		}
 	}
 	&.swift-designs,
@@ -111,8 +109,10 @@
 	}
 	.readymade-products,
 	.custom-products {
+		@include media( $large-screen ) {
+			@include span-columns(6);
+		}
 		.product-portal {
-			float: left;
 			@include media( $large-screen ) {
 				@include span-columns(6);
 				@include omega(2);
@@ -122,16 +122,16 @@
 			}
 		}
 	}
-	.porteur-bags {
-		.product-portal {
-			@include media( $large-screen ) {
-				@include span-columns(3);
-				&:first-child {
-					@include shift(3);
-				}
+	.custom-products.porteur-bags {
+		@include media( $large-screen ) {
+			@include span-columns(6);
+			@include shift(3);
+			.product-portal {
+				@include span-columns(6);
 			}
 		}
 	}
+	.hinterland,
 	.general-store {
 		.product-portal {
 			@include media( $large-screen ) {

@@ -207,6 +207,10 @@ get_header(); ?>
 
 					<h1><?php the_title(); ?></h1>
 
+					<?php if( has_term('custom', 'product_cat') ) : ?>
+						<em><?php the_field('custom_wait_time', 3223); ?></em>
+					<?php endif; ?>
+
 					<?php if( $product->is_type( array('simple') ) ) : ?>
 
 						<div class="simple-product">

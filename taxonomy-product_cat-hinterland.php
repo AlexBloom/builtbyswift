@@ -50,29 +50,54 @@ get_header(); ?>
 
 		<?php do_action( 'woocommerce_before_single_product' ); ?>
 
-		<section class="swift-designs product-taxonomies">
+		<section class="product-taxonomies">
 
-			<h2 class="product-row-description"><?php the_field('swift_designs', 3223); ?></h2>
+			<div class="hinterland">
 
+				<?php
 
+					$args = array(
+						'post_type' => 'product',
+						'tax_query' => array(
+							array(
+								'taxonomy' => 'product_cat',
+								'field' => 'slug',
+								'terms' => array(
+									'hinterland',
+								),
+							),
+							array(
+								'taxonomy' => 'product_cat',
+								'field' => 'slug',
+								'terms' => array(
+									'bundled-simple',
+									'bundled-variable',
+									'add-on'
+								),
+								'operator' => 'NOT IN'
+							)
+						)
+					);
+					$query = new WP_Query($args);
 
-			<?php $taxonomyName = "product_cat";
-			//This gets top layer terms only.  This is done by setting parent to 0.
-			  $parent_terms = get_terms($taxonomyName, array('exclude' => array(170, 167),'parent' => 220, 'orderby' => 'slug', 'hide_empty' => false));
+				if($query->have_posts()) : ?>
 
-			  foreach ($parent_terms as $pterm) {
+					<?php while($query->have_posts()) : ?>
 
-				  $thumbnail_id = get_woocommerce_term_meta($pterm->term_id, 'thumbnail_id', true);
-				  // get the image URL for parent category
-				  $image = wp_get_attachment_url($thumbnail_id);
-				  // print the IMG HTML for parent category
-				  echo "<div class='product-portal'>";
-				  echo '<a href="' . get_term_link($pterm->name, $taxonomyName) . '">';
-				  echo "<img src='{$image}' alt='' />";
-				  echo '<h3>'. $pterm->name . '</h3></a></div>';
+						<?php $query->the_post(); ?>
 
+						<div class="product-portal">
+							<a href="<?php the_permalink(); ?>">
+								<?php the_post_thumbnail('portal-mobile'); ?>
+								<h3><?php the_title(); ?></h3>
+							</a>
+						</div>
 
-			  } ?>
+					<?php endwhile; ?>
+
+				<?php endif; ?>
+
+			</div>
 
 		</section>
 

@@ -39,8 +39,8 @@ get_header(); ?>
 				<img srcset="<?php echo $image[0]; ?>">
 			</picture>
 
-			<div class="story-content-container">
-				<div class="story-content">
+			<div class="page-content-container story-content-container">
+				<div class="page-content">
 					<?php the_content(); ?>
 				</div>
 			</div>
