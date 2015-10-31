@@ -18,7 +18,7 @@ get_header(); ?>
 		$children = get_term_children($term->term_id, get_query_var('taxonomy')); // get children
 		if(($parent->term_id!="" && sizeof($children)>0)) : ?>
 
-			echo 'has parent and child';
+			<!-- echo 'has parent and child'; -->
 
 		<?php elseif(($parent->term_id!="") && (sizeof($children)==0)) : ?>
 
@@ -185,10 +185,10 @@ get_header(); ?>
 
 			<div class="taxonomy-banner-image">
 
-				<?php $mobile = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-mobile' ); ?>
-				<?php $tablet = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-tablet' ); ?>
-				<?php $desktop = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-desktop' ); ?>
-				<?php $retina = wp_get_attachment_image_src( get_field( 'general-store', 3223 ), 'product-banner-retina' ); ?>
+				<?php $mobile = wp_get_attachment_image_src( get_field( 'adventure-store', 3223 ), 'product-banner-mobile' ); ?>
+				<?php $tablet = wp_get_attachment_image_src( get_field( 'adventure-store', 3223 ), 'product-banner-tablet' ); ?>
+				<?php $desktop = wp_get_attachment_image_src( get_field( 'adventure-store', 3223 ), 'product-banner-desktop' ); ?>
+				<?php $retina = wp_get_attachment_image_src( get_field( 'adventure-store', 3223 ), 'product-banner-retina' ); ?>
 
 				<picture class="document-header-image">
 					<!--[if IE 9]><video style="display: none;"><![endif]-->

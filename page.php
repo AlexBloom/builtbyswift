@@ -41,8 +41,10 @@ get_header(); ?>
 				</picture>
 			<?php endif; ?>
 
-			<?php $post = get_post( $post_id );
-			$slug = $post->post_name; ?>
+			<?php
+				$post = get_post( $post_id );
+				$slug = $post->post_name;
+			?>
 			<div class="page-content-container <?php echo $slug; ?>">
 
 				<div class="page-content">

@@ -5,6 +5,7 @@ jQuery(document).ready(function(){
 		jQuery(this).children('.sub-menu').slideToggle('blind');
 	});
 
+	jQuery('.bundled_table_item .product-name .section-title').text('Add Ons');
 
 	if ( jQuery('.document-header-image').length ) {
 	// do nothing

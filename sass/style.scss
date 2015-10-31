@@ -21,6 +21,7 @@
 @import "header";
 @import "slick";
 @import "product";
+@import "woocommerce_pages";
 @import "taxonomy";
 @import "footer";
 
@@ -73,9 +74,16 @@ body {
 			background: $dark-orange;
 		}
 	}
+	.woocommerce-info {
+		background: $black;
+	}
 	.woocommerce-message {
 		background: $green;
+	}
+	.woocommerce-info,
+	.woocommerce-message {
 		color: $white;
+		text-align: center;
 		.inner-container {
 			@include outer-container;
 			font-size: $h4-font-size;

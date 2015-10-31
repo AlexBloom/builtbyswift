@@ -66,8 +66,8 @@
 				padding: 0 $twentyfive;
 				margin-bottom: $fifty;
 				@include media( $large-screen ) {
-					@include span-columns(3);
-					@include omega(4n);
+					@include span-columns(2);
+					@include omega(6n);
 					padding: 0;
 				}
 				.price,
@@ -132,7 +132,7 @@
 		}
 	}
 	.hinterland,
-	.general-store {
+	.adventure-store {
 		.product-portal {
 			@include media( $large-screen ) {
 				@include span-columns(3);

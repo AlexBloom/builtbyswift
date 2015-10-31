@@ -95,7 +95,7 @@ get_header(); ?>
 							array(
 								'taxonomy' => 'product_cat',
 								'field' => 'slug',
-								'terms' => 'general-store',
+								'terms' => 'adventure-store',
 							),
 							array(
 								'taxonomy' => 'product_cat',

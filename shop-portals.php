@@ -94,7 +94,7 @@
 				array(
 					'taxonomy' => 'product_cat',
 					'field' => 'slug',
-					'terms' => 'general-store',
+					'terms' => 'adventure-store',
 				),
 				array(
 					'taxonomy' => 'product_cat',
@@ -112,7 +112,7 @@
 
 		if($query->have_posts()) : ?>
 
-		<h2 class="product-row-description"><a href="/product-category/general-store"><?php the_field('adventure_title', 886); ?></a></h2>
+		<h2 class="product-row-description"><a href="/product-category/adventure-store"><?php the_field('adventure_title', 886); ?></a></h2>
 
 		<section class="product-slider">
 
