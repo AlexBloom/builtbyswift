@@ -211,7 +211,14 @@ get_header(); ?>
 
 						<div class="simple-product">
 							<?php if ( $price_html = $product->get_price_html() ) : ?>
-								<h2 class="price"><?php echo $price_html; ?></h2>
+								<h2 class="price"><?php echo $price_html; ?>
+									<?php $product_title = get_the_title( $post->ID );
+									if( has_term('panniers', 'product_cat') ) : ?>
+										<em>a set</em>
+									<?php elseif( $product_title = 'Roanoke Backpack Pannier') : ?>
+										<em>each</em>
+									<?php endif; ?>
+								</h2>
 							<?php endif; ?>
 
 								<?php the_excerpt(); ?>
@@ -240,7 +247,16 @@ get_header(); ?>
 
 						<div class="variable-product">
 							<?php if ( $price_html = $product->get_price_html() ) : ?>
-								<h2 class="price"><?php echo $price_html; ?></h2>
+								<?php $post = get_post( $post_id );
+								$slug = $post->post_name; ?>
+								<h2 class="price"><?php echo $price_html; ?>
+									<?php $product_title = get_the_title( $post->ID );
+									if( has_term('panniers', 'product_cat') ) : ?>
+										<em>a set</em>
+									<?php elseif( $product_title = 'Roanoke Backpack Pannier') : ?>
+										<em>each</em>
+									<?php endif; ?>
+								</h2>
 							<?php endif; ?>
 
 								<?php the_excerpt(); ?>
@@ -268,10 +284,18 @@ get_header(); ?>
 					<?php elseif( $product->is_type( 'bundle' ) ) : ?>
 
 						<?php $bundle_price_html = $product->get_price_html(); ?>
-						<h2 class="price"><?php echo $bundle_price_html; ?></h2>
+						<h2 class="price">
+							<?php echo $bundle_price_html; ?>
+							<?php $product_title = get_the_title( $post->ID );
+							if( has_term('panniers', 'product_cat') ) : ?>
+								<em>a set</em>
+							<?php elseif( $product_title = 'Roanoke Backpack Pannier') : ?>
+								<em>each</em>
+							<?php endif; ?>
+						</h2>
 
 						<div class="content">
-							<?php the_content(); ?>
+							<?php the_excerpt(); ?>
 						</div>
 
 					<?php endif; ?>

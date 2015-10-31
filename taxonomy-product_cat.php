@@ -68,6 +68,7 @@ get_header(); ?>
 
 						    $args = array(
 						        'post_type' => 'product',
+								'posts_per_page' => -1,
 								'tax_query' => array(
 									array(
 										'taxonomy' => 'product_cat',
@@ -120,11 +121,12 @@ get_header(); ?>
 
 				<?php if( term_exists( 'custom', 'product_cat') ) : ?>
 
-					<div class="custom-products <?php echo $term->slug; ?>">
+					<div class="custom-products <?php echo $term_slug; ?>">
 						<?php
 
 					    $args = array(
 					        'post_type' => 'product',
+							'posts_per_page' => -1,
 							'tax_query' => array(
 								array(
 									'taxonomy' => 'product_cat',

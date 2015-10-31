@@ -344,6 +344,12 @@
 			margin-bottom: 0;
 			padding: 0;
 		}
+		h6 {
+			margin-bottom: $fifteen;
+		}
+		ul {
+			padding-left: $twentyfive;
+		}
 		p, ul {
 			font-size: 14px;
 			margin-bottom: $fifteen;
@@ -366,18 +372,23 @@
 					fill: $light-gray;
 				}
 			}
-			p {
+			p:first-of-type {
 				text-indent: $forty;
 			}
 		}
 	}
 	.product-story {
+		font-size: 14px;
 		margin-bottom: $fifty;
 		padding: 0 $twentyfive;
 		@include media( $large-screen ) {
 			@include span-columns(6);
 			margin-bottom: 0;
 			padding: 0;
+		}
+		ol {
+			list-style-type: decimal;
+			padding: 0 0 .875em $fifty;
 		}
 	}
 	.related-products {

@@ -328,12 +328,6 @@ body {
 		h2 {
 			margin-bottom: $twentyfive;
 		}
-		// ul {
-		// 	margin-left: $twentyfive;
-		// 	@include media( $large-screen ) {
-		// 		margin-left: $fifty;
-		// 	}
-		// }
 		.row {
 			@include row();
 			margin-bottom: $hundred;
