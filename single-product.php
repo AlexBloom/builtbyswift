@@ -213,9 +213,9 @@ get_header(); ?>
 							<?php if ( $price_html = $product->get_price_html() ) : ?>
 								<h2 class="price"><?php echo $price_html; ?>
 									<?php $product_title = get_the_title( $post->ID );
-									if( has_term('panniers', 'product_cat') ) : ?>
+									if( has_term(array('set'), 'product_cat') ) : ?>
 										<em>a set</em>
-									<?php elseif( $product_title = 'Roanoke Backpack Pannier') : ?>
+									<?php elseif( has_term( array('each'), 'product_cat') ) : ?>
 										<em>each</em>
 									<?php endif; ?>
 								</h2>
@@ -251,9 +251,9 @@ get_header(); ?>
 								$slug = $post->post_name; ?>
 								<h2 class="price"><?php echo $price_html; ?>
 									<?php $product_title = get_the_title( $post->ID );
-									if( has_term('panniers', 'product_cat') ) : ?>
+									if( has_term(array('set'), 'product_cat') ) : ?>
 										<em>a set</em>
-									<?php elseif( $product_title = 'Roanoke Backpack Pannier') : ?>
+									<?php elseif( has_term( array('each'), 'product_cat') ) : ?>
 										<em>each</em>
 									<?php endif; ?>
 								</h2>
@@ -287,9 +287,9 @@ get_header(); ?>
 						<h2 class="price">
 							<?php echo $bundle_price_html; ?>
 							<?php $product_title = get_the_title( $post->ID );
-							if( has_term('panniers', 'product_cat') ) : ?>
+							if( has_term(array('set'), 'product_cat') ) : ?>
 								<em>a set</em>
-							<?php elseif( $product_title = 'Roanoke Backpack Pannier') : ?>
+							<?php elseif( has_term( array('each'), 'product_cat') ) : ?>
 								<em>each</em>
 							<?php endif; ?>
 						</h2>

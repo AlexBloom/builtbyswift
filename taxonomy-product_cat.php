@@ -9,6 +9,14 @@
 
 get_header(); ?>
 
+<script>
+
+	jQuery(document).ready(function(){
+		jQuery('.product img').matchHeight();
+	});
+
+</script>
+
 	<div id="primary" class="content-area">
 
 		<?php

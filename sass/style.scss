@@ -112,48 +112,56 @@ body {
 	position: relative;
 	.front-page {
 		.home-page-slider-container {
-			.slick-arrow {
-				height: 60px;
-				width: 60px;
-				svg {
-					@include transition(all .2s ease-in-out);
-					fill: $white;
-					&:hover {
-						fill: $gray-overlay-half;
-					}
-				}
-			}
-			.slick-prev {
-				left: 35px;
-				z-index: 1;
-			}
-			.slick-next {
-				right: 35px;
-				z-index: 1;
-			}
-			.slick-track {
-				height: 315px;
-				@include media( $medium-screen ) {
-					height: auto;
-				}
-				.slide-caption {
-					bottom: $hundred;
-					left: 50%;
-					position: relative;
-					@include transform(translateX(-50%));
-					a {
-						color: $white;
-						font: {
-							family: $orator;
-							size: 24px;
-						}
-						@include media( $large-screen ) {
-							font: {
-								size: 36px;
+			.home-page-slider {
+				.slick-arrow {
+					@include media( $large-screen ) {
+						height: 60px;
+						width: 60px;
+						svg {
+							@include transition(all .2s ease-in-out);
+							fill: $white;
+							&:hover {
+								fill: $gray-overlay-half;
 							}
 						}
-						&:hover {
-							color: $pink;
+					}
+				}
+				.slick-prev {
+					@include media( $large-screen ) {
+						left: 35px;
+						z-index: 1;
+					}
+				}
+				.slick-next {
+					@include media( $large-screen ) {
+						right: 35px;
+						z-index: 1;
+					}
+				}
+				.slick-track {
+					height: 315px;
+					@include media( $medium-screen ) {
+						height: auto;
+					}
+					.slide-caption {
+						bottom: $hundred;
+						left: 50%;
+						position: relative;
+						@include transform(translateX(-50%));
+						a {
+							color: $white;
+							font: {
+								family: $orator;
+								size: 18px;
+							}
+							@include media( $large-screen ) {
+								font: {
+									size: 36px;
+								}
+							}
+							&:hover {
+								color: $pink;
+							}
 						}
 					}
 				}
@@ -361,6 +369,23 @@ body {
 		.page-content {
 			@include span-columns(10);
 			@include shift(1);
+		}
+	}
+}
+
+.maintenance-container {
+	height: 100%;
+	position: relative;
+	text-align: center;
+	width: 100%;
+	.maintenance-message {
+		left: 50%;
+		position: absolute;
+		top: 50%;
+		@include transform(translate(-50%,-50%));
+		svg {
+			margin-bottom: $twentyfive;
+			width: 250px;
 		}
 	}
 }

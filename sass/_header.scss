@@ -186,6 +186,7 @@
 				}
 			}
 			.search-form {
+				visibility: hidden;
 				@include span-columns(2);
 				color: $medium-gray;
 				font-size: 16px;

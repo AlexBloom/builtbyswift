@@ -134,7 +134,6 @@
 					.gfield_radio {
 						li {
 							@include span-columns(3);
-							@include omega(4n);
 							margin-bottom: $twentyfive;
 							text-align: center;
 							@include media( $large-screen ) {
@@ -188,17 +187,17 @@
 						image: url( ../images/steel_color_swatch.jpg );
 					}
 				}
+				input[value="Fuschia|0"] {
+					background: {
+						image: url( ../images/fuschia_color_swatch.jpg );
+					}
+				}
 				input[value="Olive|0"] {
 					background: {
 						image: url( ../images/olive_color_swatch.jpg );
 					}
 				}
 				input[value="Teal|0"] {
-					background: {
-						image: url( ../images/teal_color_swatch.jpg );
-					}
-				}
-				input[value="Fuschia|0"] {
 					background: {
 						image: url( ../images/teal_color_swatch.jpg );
 					}
@@ -406,6 +405,9 @@
 					margin-bottom: 0;
 				}
 				text-align: center;
+				.button {
+					display: none;
+				}
 				.price,
 				.product_type_bundle,
 				.product_type_variable,
