@@ -7,6 +7,8 @@
 
 get_header(); ?>
 
+<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/product-scripts.js'></script>
+
 <script>
 	jQuery(document).ready(function(){
 
@@ -34,7 +36,7 @@ get_header(); ?>
 		  focusOnSelect: true
 		});
 
-		var radio_input_width = jQuery('.gfield_radio input').width()
+		var radio_input_width = jQuery('.gfield_radio input').width();
 		jQuery('.gfield_radio input').css('height', radio_input_width);
 
 		// Color accordions

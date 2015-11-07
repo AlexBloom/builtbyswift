@@ -1,3 +1,105 @@
+.color-selection-container {
+	clear: both;
+	.color-selection {
+		@include span-columns(4);
+		font: {
+			size: $h4-font-size;
+			weight: 400;
+		}
+	}
+	.color {
+		background-size: 100%;
+		position: relative;
+		width: 100%;
+		h6 {
+			bottom: -20px;
+			font-size: 14px;
+			font-weight: 400;
+			position: absolute;
+		}
+	}
+	.Navy {
+		background: {
+			image: url( ../images/navy_color_swatch.jpg );
+		}
+	}
+	 .Steel {
+		background: {
+			image: url( ../images/steel_color_swatch.jpg );
+		}
+	}
+	 .Fuschia {
+		background: {
+			image: url( ../images/fuschia_color_swatch.jpg );
+		}
+	}
+	.Olive {
+		background: {
+			image: url( ../images/olive_color_swatch.jpg );
+		}
+	}
+	.Teal {
+		background: {
+			image: url( ../images/teal_color_swatch.jpg );
+		}
+	}
+	.Black {
+		background: {
+			image: url( ../images/black_color_swatch.jpg );
+		}
+	}
+	.Rust {
+		background: {
+			image: url( ../images/rust_color_swatch.jpg );
+		}
+	}
+	.Mandarin {
+		background: {
+			image: url( ../images/mandarin_color_swatch.jpg );
+		}
+	}
+	.Neon.Orange {
+		background: {
+			image: url( ../images/neon_orange_color_swatch.jpg );
+		}
+	}
+	.Hot.Pink {
+		background: {
+			image: url( ../images/hot_pink_color_swatch.jpg );
+		}
+	}
+	.Burgundy {
+		background: {
+			image: url( ../images/burgundy_color_swatch.jpg );
+		}
+	}
+	.Saffron {
+		background: {
+			image: url( ../images/saffron_color_swatch.jpg );
+		}
+	}
+	.Mint.Green {
+		background: {
+			image: url( ../images/mint_green_color_swatch.jpg );
+		}
+	}
+	.Neon.Green {
+		background: {
+			image: url( ../images/neon_green_color_swatch.jpg );
+		}
+	}
+	.Turquoise {
+		background: {
+			image: url( ../images/turquoise_color_swatch.jpg );
+		}
+	}
+	.Royal.Blue {
+		background: {
+			image: url( ../images/royal_blue_color_swatch.jpg );
+		}
+	}
+}
+
 .breadcrumbs {
 	@include outer-container;
 	padding: $twentyfive;
@@ -134,6 +236,7 @@
 					.gfield_radio {
 						li {
 							@include span-columns(3);
+							@include omega(4n);
 							margin-bottom: $twentyfive;
 							text-align: center;
 							@include media( $large-screen ) {
