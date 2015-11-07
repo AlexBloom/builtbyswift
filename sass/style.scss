@@ -75,7 +75,10 @@ body {
 		}
 	}
 	.woocommerce-info {
-		background: $black;
+		background: $medium-gray;
+		a {
+			color: $white;
+		}
 	}
 	.woocommerce-message {
 		background: $green;
@@ -110,6 +113,10 @@ body {
 
 .site-content {
 	position: relative;
+	.breadcrumbs-container {
+		@include outer-container;
+		padding: 0 $twentyfive;
+	}
 	.front-page {
 		.home-page-slider-container {
 			.home-page-slider {
@@ -277,6 +284,9 @@ body {
 				h2 {
 					margin-bottom: $twentyfive;
 				}
+				img {
+					height: auto;
+				}
 				.post-author {
 					float: left;
 					margin-right: $fifteen;
@@ -290,16 +300,9 @@ body {
 	.post-navigation {
 		@include outer-container;
 		margin-bottom: 200px;
+		text-align: center;
 		@include media( $large-screen ) {
 			margin-bottom: $hundred;
-			.previous {
-				@include span-columns(4);
-				@include shift(2);
-			}
-			.next {
-				@include span-columns(4);
-				text-align: right;
-			}
 			.navigation-item {
 				svg {
 					fill: $medium-gray;

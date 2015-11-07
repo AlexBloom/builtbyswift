@@ -132,16 +132,14 @@
 }
 
 .desktop-header {
-	// background: $gray-overlay;
-	// @include linear-gradient(to top, $transparent, $gray-overlay 20%, $gray-overlay-half);
-	@include linear-gradient(to bottom, $gray-overlay 50%, $gray-overlay-half 70%, $transparent 95%);
-	background-color: $transparent;
 	display: none;
 	position: absolute;
 	width: 100%;
 	z-index: 1;
 	@include media( $large-screen) {
 		@include row();
+		@include linear-gradient(to bottom, $gray-overlay 50%, $gray-overlay-half 70%, $transparent 95%);
+		background-color: $transparent;
 	}
 	&.transparent-header {
 		background: transparent;

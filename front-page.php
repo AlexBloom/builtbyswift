@@ -148,6 +148,18 @@ get_header(); ?>
 
 		<section class="page-content">
 
+			<picture class="holiday-banner">
+				<!--[if IE 9]><video style="display: none"><![endif]-->
+				<source
+					srcset="http://builtbyswift.com/wp-content/uploads/2015/11/swift_holiday_banner.jpg"
+					media="(max-width: 1180px)" />
+				<source
+					srcset="http://builtbyswift.com/wp-content/uploads/2015/11/swift_holiday_banner_wide.jpg"
+					media="(min-width: 1181px)" />
+				<!--[if IE 9]></video><![endif]-->
+				<img srcset="<?php echo $image[0]; ?>">
+			</picture>
+
 			<?php get_template_part('shop-portals'); ?>
 
 			<?php get_template_part('double-portals'); ?>

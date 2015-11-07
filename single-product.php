@@ -117,6 +117,22 @@ get_header(); ?>
 
 			<?php get_template_part('partials/breadcrumbs'); ?>
 
+			<?php if( has_term('custom', 'product_cat') ): ?>
+				<section class="product-section">
+					<picture class="holiday-banner">
+						<!--[if IE 9]><video style="display: none"><![endif]-->
+						<source
+							srcset="http://builtbyswift.com/wp-content/uploads/2015/11/swift_holiday_banner.jpg"
+							media="(max-width: 1180px)" />
+						<source
+							srcset="http://builtbyswift.com/wp-content/uploads/2015/11/swift_holiday_banner_wide.jpg"
+							media="(min-width: 1181px)" />
+						<!--[if IE 9]></video><![endif]-->
+						<img srcset="<?php echo $image[0]; ?>">
+					</picture>
+				</section>
+			<?php endif; ?>
+
 			<?php do_action( 'woocommerce_before_single_product' ); ?>
 
 			<section class="product-section product-top">

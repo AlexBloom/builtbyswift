@@ -12,7 +12,7 @@ get_header(); ?>
 <script>
 
 	jQuery(document).ready(function(){
-		jQuery('.product img').matchHeight();
+		jQuery('.product').matchHeight();
 	});
 
 </script>
@@ -185,11 +185,115 @@ get_header(); ?>
 
 				<?php endif; ?>
 
+				<?php if( has_term( 'apparel', 'product_cat') ) : ?>
+
+					<div class="<?php echo $term_slug; ?>">
+						<?php
+
+					    $args = array(
+					        'post_type' => 'product',
+							'posts_per_page' => -1,
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										'apparel',
+									),
+								),
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										'bundled-simple',
+										'bundled-variable',
+										'add-on'
+									),
+									'operator' => 'NOT IN'
+								)
+							)
+					    );
+					    $query = new WP_Query($args);
+
+					    if($query->have_posts()) : ?>
+
+							<div class="taxonomy-product-portal-row">
+							    <?php while($query->have_posts()) : ?>
+
+							        <?php $query->the_post(); ?>
+
+									<div class="product-portal">
+										<a href="<?php the_permalink(); ?>">
+											<?php the_post_thumbnail('portal-mobile'); ?>
+											<h3><?php the_title(); ?></h3>
+										</a>
+									</div>
+
+							    <?php endwhile; ?>
+							</div>
+
+						<?php endif; ?>
+
+					</div>
+
+				<?php elseif( has_term( 'guidebooks-and-maps', 'product_cat') ) : ?>
+
+					<div class="<?php echo $term_slug; ?>">
+						<?php
+
+					    $args = array(
+					        'post_type' => 'product',
+							'posts_per_page' => -1,
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										'guidebooks-and-maps',
+									),
+								),
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										'bundled-simple',
+										'bundled-variable',
+										'add-on'
+									),
+									'operator' => 'NOT IN'
+								)
+							)
+					    );
+					    $query = new WP_Query($args);
+
+					    if($query->have_posts()) : ?>
+
+							<div class="taxonomy-product-portal-row">
+							    <?php while($query->have_posts()) : ?>
+
+							        <?php $query->the_post(); ?>
+
+									<div class="product-portal">
+										<a href="<?php the_permalink(); ?>">
+											<?php the_post_thumbnail('portal-mobile'); ?>
+											<h3><?php the_title(); ?></h3>
+										</a>
+									</div>
+
+							    <?php endwhile; ?>
+							</div>
+
+						<?php endif; ?>
+
+					</div>
+
+				<?php endif; ?>
+
 			</div>
 
 		<?php elseif(($parent->term_id=="") && (sizeof($children)>0)) : ?>
 
-			echo 'no parent, has child';
+			<!-- echo 'no parent, has child'; -->
 
 			<div class="taxonomy-banner-image">
 

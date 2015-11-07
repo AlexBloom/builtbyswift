@@ -211,3 +211,78 @@ add_filter( 'woocommerce_bundles_optional_bundled_item_suffix', 'wc_pb_remove_op
 function wc_pb_remove_optional_suffix( $suffix, $bundled_item, $bundle ) {
 	return '';
 }
+
+/**
+ * Add custom status to order list
+ */
+add_action( 'init', 'register_custom_post_status', 10 );
+function register_custom_post_status() {
+	register_post_status( 'wc-backorder', array(
+		'label'                     => _x( 'Back Order', 'Order status', 'woocommerce' ),
+		'public'                    => true,
+		'exclude_from_search'       => false,
+		'show_in_admin_all_list'    => true,
+		'show_in_admin_status_list' => true,
+		'label_count'               => _n_noop( 'Back Order <span class="count">(%s)</span>', 'Back Order <span class="count">(%s)</span>', 'woocommerce' )
+	) );
+
+}
+
+/**
+ * Add custom status to order page drop down
+ */
+add_filter( 'wc_order_statuses', 'custom_wc_order_statuses' );
+function custom_wc_order_statuses( $order_statuses ) {
+	$order_statuses['wc-backorder'] = _x( 'Back Order', 'Order status', 'woocommerce' );
+	return $order_statuses;
+}
+
+/**
+ * Add order status icon CSS
+ */
+add_action('admin_head', 'backorder_font_icon');
+
+function backorder_font_icon() {
+  echo '<style>
+			.widefat .column-order_status mark.backorder:after{
+				font-family:WooCommerce;
+				speak:none;
+				font-weight:400;
+				font-variant:normal;
+				text-transform:none;
+				line-height:1;
+				-webkit-font-smoothing:antialiased;
+				margin:0;
+				text-indent:0;
+				position:absolute;
+				top:0;
+				left:0;
+				width:100%;
+				height:100%;
+				text-align:center;
+			}
+
+			.widefat .column-order_status mark.backorder:after{
+				content:"\e012";
+				color:#ff0000;
+			}
+  </style>';
+}
+
+add_action('admin_menu', 'add_custom_post_menu');
+
+function add_custom_post_menu(){
+     add_submenu_page( 'edit.php?post_type=shop_order', 'test', $menu_title, $capability, $menu_slug, $function);
+}
+
+/**
+ * Apply a different tax rate based on the user role.
+ */
+function wc_diff_rate_for_user( $tax_class, $product ) {
+	if ( is_user_logged_in() && current_user_can( 'dealer' ) ) {
+		$tax_class = 'Zero Rate';
+	}
+
+	return $tax_class;
+}
+add_filter( 'woocommerce_product_tax_class', 'wc_diff_rate_for_user', 1, 2 );

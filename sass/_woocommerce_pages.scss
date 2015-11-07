@@ -1,8 +1,16 @@
+.single-product {
+	.holiday-banner {
+		@include media( $large-screen ) {
+			@include span-columns(10);
+			@include shift(1);
+		}
+	}
+}
+
 .page.woocommerce-cart {
 	.content-area {
 		padding-top: 0;
 		.page-content-container {
-			margin-top: 0;
 			.page-content{
 				@include span-columns(10);
 				@include shift(1);
@@ -26,6 +34,9 @@
 						.product-thumbnail {
 							@include media( $large-screen ) {
 								@include span-columns(2);
+							}
+							img {
+								height: auto;
 							}
 						}
 						.product-name {
@@ -53,6 +64,9 @@
 							@include media( $large-screen ) {
 								@include span-columns(2);
 							}
+							input {
+								width: 50%;
+							}
 						}
 						.product-subtotal {
 							@include span-columns(6);
@@ -63,6 +77,11 @@
 							@include media( $large-screen ) {
 								@include span-columns(2);
 							}
+						}
+					}
+					.bundle_table_item {
+						.product-total {
+							vertical-align: top;
 						}
 					}
 					.bundled_table_item {
@@ -117,7 +136,6 @@
 .page.woocommerce-checkout {
 	.content-area {
 		.page-content-container {
-			margin-top: 0;
 			.page-content {
 				@include span-columns(12);
 				margin-left: 0;
@@ -144,6 +162,7 @@
 					.review-order {
 						@include media( $large-screen ) {
 							@include span-columns(6);
+							@include omega;
 						}
 						label[for="payment_method_intuit_qbms"] {
 							@include row();
@@ -169,7 +188,36 @@
 						}
 					}
 				}
+				.terms {
+					margin-top: $ten;
+					label {
+						display: inline;
+					}
+				}
 			}
+		}
+	}
+}
+
+.woocommerce-page {
+	.page-content-container {
+		margin-top: 0;
+		@include media( $large-screen ) {
+			.col-1 {
+				@include span-columns(5);
+			}
+			.col-2 {
+				@include span-columns(5);
+				@include shift(2);
+			}
+		}
+		#customer_login {
+			label[for="rememberme"] {
+				float: right;
+			}
+		}
+		.lost_password {
+			font-size: 12px;
 		}
 	}
 }

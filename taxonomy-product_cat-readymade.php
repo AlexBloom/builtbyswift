@@ -12,7 +12,7 @@ get_header(); ?>
 <script>
 
 	jQuery(document).ready(function(){
-		jQuery('.product-portal img').matchHeight();
+		jQuery('.product-portal').matchHeight();
 	});
 
 </script>
