@@ -10,7 +10,7 @@
 	.color {
 		background-size: 100%;
 		position: relative;
-		width: 100%;
+		// width: 100px;
 		h6 {
 			bottom: -20px;
 			font-size: 14px;
@@ -106,7 +106,8 @@
 	@include media( $large-screen ) {
 		padding: $twentyfive 0;
 	}
-	a {
+	a,
+	a:visited {
 		color: $orange;
 	}
 }

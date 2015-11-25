@@ -5,6 +5,7 @@
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package Swift Industries
+ * @version 2.0.0
  */
 
 get_header(); ?>

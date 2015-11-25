@@ -159,6 +159,14 @@
 							@include span-columns(6);
 						}
 					}
+					.gift-certificate {
+						.show_hide_list {
+							label {
+								display: inline;
+							}
+						}
+					}
+					.gift-certificate,
 					.review-order {
 						@include media( $large-screen ) {
 							@include span-columns(6);

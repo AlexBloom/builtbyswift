@@ -276,6 +276,34 @@ function add_custom_post_menu(){
 }
 
 /**
+* Change the test for "In Stock / Quantity Left / Out of Stock".
+*/
+
+add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
+function wcs_custom_get_availability( $availability, $_product ) {
+	if( ! current_user_can('customer') ) {
+		global $product;
+
+			// Change In Stock Text
+		if ( $_product->is_in_stock() ) {
+		    $availability['availability'] = __('In stock', 'woocommerce');
+		}
+
+		// Change in Stock Text to only 1 or 2 left
+		if ( $_product->is_in_stock() && $product->get_stock_quantity() <= 5 ) {
+			$availability['availability'] = sprintf( __('Stock low', 'woocommerce'), $product->get_stock_quantity());
+		}
+
+		// Change Out of Stock Text
+		if ( ! $_product->is_in_stock() ) {
+			$availability['availability'] = __('Out of stock', 'woocommerce');
+		}
+
+		return $availability;
+	}
+}
+
+/**
  * Apply a different tax rate based on the user role.
  */
 function wc_diff_rate_for_user( $tax_class, $product ) {
@@ -286,3 +314,18 @@ function wc_diff_rate_for_user( $tax_class, $product ) {
 	return $tax_class;
 }
 add_filter( 'woocommerce_product_tax_class', 'wc_diff_rate_for_user', 1, 2 );
+
+// Add Google Analytics
+add_action('wp_footer', 'google_analytics_script');
+function google_analytics_script() { ?>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-21808495-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+<?php } ?>

@@ -15,6 +15,9 @@ get_header(); ?>
 		jQuery('.product-lifestyle-slider').slick({
 			arrows: false,
 			dots: false,
+			autoplay: true,
+			autoplaySpeed: 3000,
+			pauseOnHover: true,
 			centered: true,
 			mobileFirst: true,
 		    lazyLoad: 'ondemand',
@@ -117,6 +120,8 @@ get_header(); ?>
 
 			</div>
 
+			<?php do_action( 'woocommerce_before_single_product' ); ?>
+
 			<?php get_template_part('partials/breadcrumbs'); ?>
 
 			<?php if( has_term('custom', 'product_cat') ): ?>
@@ -134,8 +139,6 @@ get_header(); ?>
 					</picture>
 				</section>
 			<?php endif; ?>
-
-			<?php do_action( 'woocommerce_before_single_product' ); ?>
 
 			<section class="product-section product-top">
 

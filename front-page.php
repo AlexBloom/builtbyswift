@@ -18,9 +18,9 @@ get_header(); ?>
 		jQuery('.home-page-slider').slick({
 			arrows: true,
 			dots: false,
-			// autoplay: true,
-			// autoplaySpeed: 3000,
-			// pauseOnHover: true,
+			autoplay: true,
+			autoplaySpeed: 3000,
+			pauseOnHover: true,
 			// centered: true,
 			mobileFirst: true,
 		    lazyLoad: 'ondemand',
@@ -29,6 +29,7 @@ get_header(); ?>
 		jQuery('.product-slider').slick({
 			arrows: true,
 			dots: false,
+			autoplay: false,
 			mobileFirst: true,
 		    lazyLoad: 'ondemand',
 			responsive: [
