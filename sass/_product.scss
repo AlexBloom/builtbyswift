@@ -177,6 +177,12 @@
 			}
 		}
 	}
+	.custom-wait-time {
+		padding: $twentyfive;
+		@include media( $large-screen ) {
+			padding: 0;
+		}
+	}
 	.product-add-to-cart,
 	.product-description {
 		@include outer-container;
@@ -235,14 +241,15 @@
 				}
 				.ginput_container {
 					.gfield_radio {
+						@include row();
 						li {
 							@include span-columns(3);
 							@include omega(4n);
 							margin-bottom: $twentyfive;
 							text-align: center;
 							@include media( $large-screen ) {
-								@include span-columns(2);
-								@include omega(6n);
+								@include span-columns(3);
+								padding: $ten !important;
 							}
 							input {
 								&:hover {
