@@ -7,23 +7,65 @@
 
 get_header(); ?>
 
-	<div id="primary" class="content-area">
+<div id="primary" class="blog-page content-area">
 
-		<?php while ( have_posts() ) : the_post(); ?>
+	<?php if ( have_posts() ) : ?>
 
-			<?php get_template_part( 'content', 'single' ); ?>
+		<?php $mobile = wp_get_attachment_image_src( get_post_thumbnail_id( 890 ), 'product-banner-mobile' ); ?>
+		<?php $tablet = wp_get_attachment_image_src( get_post_thumbnail_id( 890 ), 'product-banner-tablet' ); ?>
+		<?php $desktop = wp_get_attachment_image_src( get_post_thumbnail_id( 890 ), 'product-banner-desktop' ); ?>
+		<?php $retina = wp_get_attachment_image_src( get_post_thumbnail_id( 890 ), 'product-banner-retina' ); ?>
 
-			<?php basis_post_nav(); ?>
+		<picture class="document-header-image">
+			<!--[if IE 9]><video style="display: none;"><![endif]-->
+			<source
+				srcset="<?php echo $mobile[0]; ?>"
+				media="(max-width: 500px)" />
+			<source
+				srcset="<?php echo $tablet[0]; ?>"
+				media="(max-width: 860px)" />
+			<source
+				srcset="<?php echo $desktop[0]; ?>"
+				media="(max-width: 1180px)" />
+			<source
+				srcset="<?php echo $retina[0]; ?>"
+				media="(min-width: 1181px)" />
+			<!--[if IE 9]></video><![endif]-->
+			<img srcset="<?php echo $image[0]; ?>">
+		</picture>
 
-			<?php
-				// If comments are open or we have at least one comment, load up the comment template
-				if ( comments_open() || get_comments_number() ) :
-					comments_template();
-				endif;
-			?>
+		<div class="blog-container">
 
-		<?php endwhile; // end of the loop. ?>
+			<h1 class="page-title">Blog</h1>
 
-	</div><!-- #primary -->
+			<div class="blog-content">
+				<?php while ( have_posts() ) : ?>
+
+					<?php the_post(); ?>
+
+					<article class="post">
+
+						<div class="post-meta">
+							<h2><?php the_title(); ?></h2>
+							<span class="post-author">by <?php the_author_posts_link(); ?> </span>
+						</div>
+						<div class="entry-content">
+							<?php the_content(); ?>
+						</div>
+
+					</article>
+
+				<?php endwhile; ?>
+			</div>
+
+		</div>
+
+		<div class="post-navigation">
+			<?php posts_nav_link( ' &#183; ', '&laquo; Newer Posts', 'Older Posts &raquo;' ); ?>
+		</div>
+
+	<?php endif; ?>
+
+</div><!-- #primary -->
 
 <?php get_footer(); ?>

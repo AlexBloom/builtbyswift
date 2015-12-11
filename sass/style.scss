@@ -61,6 +61,7 @@ body {
 		font-size: 20px;
 	}
 	.button,
+	.search-submit,
 	.wc-proceed-to-checkout a {
 		background: $orange;
 		border-radius: 0;
@@ -398,6 +399,42 @@ body {
 		text-align: center;
 		@include media( $large-screen ) {
 			@include span-columns(4);
+		}
+	}
+}
+
+.search-results {
+	.search-container {
+		@include outer-container;
+		margin-bottom: $hundred;
+		.individual-search-results {
+			padding: $twentyfive;
+			@include media( $large-screen ) {
+				@include span-columns(6);
+				padding: 0;
+			}
+			h2, h3 {
+				margin-bottom: $twentyfive;
+			}
+			a:hover {
+				color: $pink;
+			}
+			.search-form {
+				label {
+					@include span-columns(8);
+					.search-field {
+						padding: 8px;
+						width: 100%;
+					}
+					.screen-reader-text {
+						position: absolute;
+						text-indent: -99999px;
+					}
+				}
+				input {
+					@include span-columns(4);
+				}
+			}
 		}
 	}
 }

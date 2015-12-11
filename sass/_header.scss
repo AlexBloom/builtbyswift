@@ -185,7 +185,6 @@
 			}
 			.search-form {
 				@include span-columns(2);
-				visibility: hidden;
 				color: $medium-gray;
 				label {
 					margin-right: $ten;
