@@ -281,7 +281,7 @@ function add_custom_post_menu(){
 
 add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
 function wcs_custom_get_availability( $availability, $_product ) {
-	if( ! current_user_can('customer') ) {
+	if( ! current_user_can('customer') && has_term('readymade','product_cat') ) {
 		global $product;
 
 			// Change In Stock Text
@@ -314,6 +314,9 @@ function wc_diff_rate_for_user( $tax_class, $product ) {
 	return $tax_class;
 }
 add_filter( 'woocommerce_product_tax_class', 'wc_diff_rate_for_user', 1, 2 );
+
+// Charge Tax for Local Pickup
+add_filter( 'woocommerce_apply_base_tax_for_local_pickup', '__return_false' );
 
 // Add Google Analytics
 add_action('wp_footer', 'google_analytics_script');

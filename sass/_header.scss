@@ -184,16 +184,17 @@
 				}
 			}
 			.search-form {
-				visibility: hidden;
 				@include span-columns(2);
+				visibility: hidden;
 				color: $medium-gray;
-				font-size: 16px;
 				label {
 					margin-right: $ten;
 				}
 				input[type="search"] {
 					padding: $five $five $five $twentyfive;
 					border: 1px solid $light-gray;
+					font-size: 14px;
+					margin-top: 3px;
 					background: {
 						image: url('../images/magnifying_glass.svg');
 						position: $five;
