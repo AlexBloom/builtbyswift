@@ -1,3 +1,33 @@
+.adventure-store {
+	@include outer-container;
+	margin-top: $hundred;
+	h2 {
+		margin-bottom: $twentyfive;
+		text-align: center;
+	}
+	.product-portal-row {
+		@include row();
+		margin-bottom: $hundred;
+		.product-portal {
+			margin-bottom: $twentyfive;
+			text-align: center;
+			@include span-columns(6);
+			@include omega(even);
+			@include media( $large-screen ) {
+				@include span-columns(3);
+				@include omega(4n);
+			}
+			img {
+				height: auto;
+			}
+			h3 {
+				margin: 0 auto;
+				text-align: center;
+				width: 75%;
+			}
+		}
+	}
+}
 .product-taxonomies {
 	@include outer-container;
 	margin-bottom: ($hundred * 2);
@@ -64,7 +94,7 @@
 		.products {
 			margin-bottom: $hundred;
 			@include row();
-			li {
+			.product-portal {
 				padding: 0 $twentyfive;
 				margin-bottom: $fifty;
 				@include media( $large-screen ) {
