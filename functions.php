@@ -162,6 +162,14 @@ $value['price_html'] = '<span class="price">' . $variation->get_price_html() . '
 return $value;
 }, 10, 3);
 
+// allow SVG
+function custom_mime_types( $mimes=array() ) {
+	$mimes['svg'] = 'image/svg+xml';
+	$mimes['ai'] = 'application/postscript';
+	return $mimes;
+}
+add_filter('upload_mimes', 'custom_mime_types');
+
 /**
  * TypeKit Fonts
  */
