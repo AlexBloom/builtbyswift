@@ -28,6 +28,7 @@
 		}
 	}
 }
+
 .product-taxonomies {
 	@include outer-container;
 	margin-bottom: ($hundred * 2);
@@ -85,9 +86,11 @@
 		.product-portal {
 			margin-bottom: $fifty;
 			text-align: center;
+			@include span-columns(6);
+			@include omega(even);
 			@include media( $large-screen ) {
 				@include span-columns(3);
-				@include omega(4);
+				@include omega(4n);
 				padding: 0;
 			}
 		}
@@ -142,16 +145,17 @@
 	}
 	.readymade-products,
 	.custom-products {
+		text-align: center;
 		@include media( $large-screen ) {
 			@include span-columns(6);
 		}
 		.product-portal {
 			@include media( $large-screen ) {
 				@include span-columns(6);
-				@include omega(2);
+				// @include omega(2n);
 			}
 			&:nth-child(2n) {
-				clear: both;
+				// clear: both;
 			}
 		}
 	}

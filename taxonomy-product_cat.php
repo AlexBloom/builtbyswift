@@ -27,18 +27,13 @@ get_header(); ?>
 		if(($parent->term_id!="" && sizeof($children)>0)) : ?>
 
 			<!-- echo 'has parent and child'; -->
-
-		<?php elseif(($parent->term_id!="") && (sizeof($children)==0)) : ?>
-
-			<!-- echo 'has parent, no child'; -->
-
-			<?php $term_slug = $term->slug; ?>
 			<div class="taxonomy-banner-image">
 
-				<?php $mobile = wp_get_attachment_image_src( get_field( $term_slug, 3223 ), 'product-banner-mobile' ); ?>
-				<?php $tablet = wp_get_attachment_image_src( get_field( $term_slug, 3223 ), 'product-banner-tablet' ); ?>
-				<?php $desktop = wp_get_attachment_image_src( get_field( $term_slug, 3223 ), 'product-banner-desktop' ); ?>
-				<?php $retina = wp_get_attachment_image_src( get_field( $term_slug, 3223 ), 'product-banner-retina' ); ?>
+				<?php $term_slug = $term->slug; ?>
+				<?php $mobile = wp_get_attachment_image_src( get_field( 'readymade', 3223 ), 'product-banner-mobile' ); ?>
+				<?php $tablet = wp_get_attachment_image_src( get_field( 'readymade', 3223 ), 'product-banner-tablet' ); ?>
+				<?php $desktop = wp_get_attachment_image_src( get_field( 'readymade', 3223 ), 'product-banner-desktop' ); ?>
+				<?php $retina = wp_get_attachment_image_src( get_field( 'readymade', 3223 ), 'product-banner-retina' ); ?>
 
 				<picture class="document-header-image">
 					<!--[if IE 9]><video style="display: none;"><![endif]-->
@@ -66,26 +61,398 @@ get_header(); ?>
 
 			<div class="product-taxonomies">
 
-				<h2 class="taxonomy-title"><?php echo $term->name; ?></h2>
+				<?php
+					$term_slug = $term->slug;
+					$term_parent = $term->parent;
+				?>
 
-				<?php if( term_exists( 'readymade', 'product_cat') ) : ?>
+				<?php if( $term_parent = 'camp-and-adventure-gear' ) : ?>
 
-					<div class="readymade-products">
+					<h2 class="taxonomy-title"><?php echo $term->name; ?></h2>
 
+					<div class="<?php echo $term_slug; ?>">
 						<?php
 
-						    $args = array(
-						        'post_type' => 'product',
+						$args = array(
+							'post_type' => 'product',
+							'posts_per_page' => -1,
+							'tax_query' => array(
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										'camp-and-adventure-gear',
+									),
+								),
+								array(
+									'taxonomy' => 'product_cat',
+									'field' => 'slug',
+									'terms' => array(
+										'bundled-simple',
+										'bundled-variable',
+										'add-on'
+									),
+									'operator' => 'NOT IN'
+								)
+							)
+						);
+						$query = new WP_Query($args);
+
+						if($query->have_posts()) : ?>
+
+							<div class="taxonomy-product-portal-row">
+								<?php while($query->have_posts()) : ?>
+
+									<?php $query->the_post(); ?>
+
+									<div class="product-portal">
+										<a href="<?php the_permalink(); ?>">
+											<?php the_post_thumbnail('portal-mobile'); ?>
+											<h3><?php the_title(); ?></h3>
+										</a>
+									</div>
+
+								<?php endwhile; ?>
+							</div>
+
+						<?php endif; ?>
+
+					</div>
+
+				<?php endif; ?>
+
+			</div>
+
+		<?php elseif(($parent->term_id!="") && (sizeof($children)==0)) : ?>
+
+			<!-- echo 'has parent, no child'; -->
+
+			<div class="taxonomy-banner-image">
+
+				<?php
+					$term_slug = $term->slug;
+					if( $term_slug = array('bike-racks-and-hardware', 'guidebooks-and-maps', 'swift-picks')) : ?>
+						<?php $mobile = wp_get_attachment_image_src( get_field( 'readymade', 3223 ), 'product-banner-mobile' ); ?>
+						<?php $tablet = wp_get_attachment_image_src( get_field( 'readymade', 3223 ), 'product-banner-tablet' ); ?>
+						<?php $desktop = wp_get_attachment_image_src( get_field( 'readymade', 3223 ), 'product-banner-desktop' ); ?>
+						<?php $retina = wp_get_attachment_image_src( get_field( 'readymade', 3223 ), 'product-banner-retina' ); ?>
+					<?php else : ?>
+						<?php $mobile = wp_get_attachment_image_src( get_field( $term_slug, 3223 ), 'product-banner-mobile' ); ?>
+						<?php $tablet = wp_get_attachment_image_src( get_field( $term_slug, 3223 ), 'product-banner-tablet' ); ?>
+						<?php $desktop = wp_get_attachment_image_src( get_field( $term_slug, 3223 ), 'product-banner-desktop' ); ?>
+						<?php $retina = wp_get_attachment_image_src( get_field( $term_slug, 3223 ), 'product-banner-retina' ); ?>
+					<?php endif; ?>
+
+				<picture class="document-header-image">
+					<!--[if IE 9]><video style="display: none;"><![endif]-->
+					<source
+						srcset="<?php echo $mobile[0]; ?>"
+						media="(max-width: 500px)" />
+					<source
+						srcset="<?php echo $tablet[0]; ?>"
+						media="(max-width: 860px)" />
+					<source
+						srcset="<?php echo $desktop[0]; ?>"
+						media="(max-width: 1180px)" />
+					<source
+						srcset="<?php echo $retina[0]; ?>"
+						media="(min-width: 1181px)" />
+					<!--[if IE 9]></video><![endif]-->
+					<img srcset="<?php echo $image[0]; ?>">
+				</picture>
+
+			</div>
+
+			<?php get_template_part('partials/breadcrumbs'); ?>
+
+			<?php do_action( 'woocommerce_before_single_product' ); ?>
+
+			<div class="product-taxonomies">
+
+				<?php
+					$term_slug = $term->slug;
+					$term_parent = $term->parent;
+				?>
+
+				<?php if( $term_parent = 'adventure-store' ) : ?>
+
+					<div class="adventure-store">
+
+						<?php if( has_term('swift-picks', 'product_cat') ) : ?>
+
+							<?php
+
+							    $args = array(
+							        'post_type' => 'product',
+									'posts_per_page' => -1,
+									'tax_query' => array(
+										array(
+											'taxonomy' => 'product_cat',
+											'field' => 'slug',
+											'terms' => array(
+												'swift-picks',
+											),
+										),
+									),
+							    );
+							    $query = new WP_Query($args);
+
+							    if($query->have_posts()) : ?>
+
+								<h2>Swift Picks</h2>
+								<div class="product-portal-row">
+
+									<?php while($query->have_posts()) : ?>
+
+										<?php $query->the_post(); ?>
+
+										<div class="product-portal">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail('portal-mobile'); ?>
+												<h3><?php the_title(); ?></h3>
+											</a>
+										</div>
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+							<?php wp_reset_postdata(); ?>
+
+						<?php endif; ?>
+
+						<?php if( has_term('apparel', 'product_cat') ) : ?>
+
+							<?php
+
+							    $args = array(
+							        'post_type' => 'product',
+									'posts_per_page' => -1,
+									'tax_query' => array(
+										array(
+											'taxonomy' => 'product_cat',
+											'field' => 'slug',
+											'terms' => array(
+												'apparel',
+											),
+										),
+										array(
+											'taxonomy' => 'product_cat',
+											'field' => 'slug',
+											'terms' => array(
+												'bundled-simple',
+												'bundled-variable',
+												'add-on'
+											),
+											'operator' => 'NOT IN'
+										)
+									)
+							    );
+							    $query = new WP_Query($args);
+
+							    if($query->have_posts()) : ?>
+
+								<h2>Apparel</h2>
+								<div class="product-portal-row">
+									<?php while($query->have_posts()) : ?>
+
+										<?php $query->the_post(); ?>
+
+										<div class="product-portal">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail('portal-mobile'); ?>
+												<h3><?php the_title(); ?></h3>
+											</a>
+										</div>
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+						<?php endif; ?>
+
+						<?php if( has_term('bike-racks-and-hardware', 'product_cat') ) : ?>
+
+							<?php
+
+							    $args = array(
+							        'post_type' => 'product',
+									'posts_per_page' => -1,
+									'tax_query' => array(
+										array(
+											'taxonomy' => 'product_cat',
+											'field' => 'slug',
+											'terms' => array(
+												'bike-racks-and-hardware',
+											),
+										),
+										array(
+											'taxonomy' => 'product_cat',
+											'field' => 'slug',
+											'terms' => array(
+												'bundled-simple',
+												'bundled-variable',
+												'add-on'
+											),
+											'operator' => 'NOT IN'
+										)
+									)
+							    );
+							    $query = new WP_Query($args);
+
+							    if($query->have_posts()) : ?>
+
+								<h2>Bike Racks and Hardware</h2>
+								<div class="product-portal-row">
+									<?php while($query->have_posts()) : ?>
+
+										<?php $query->the_post(); ?>
+
+										<div class="product-portal">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail('portal-mobile'); ?>
+												<h3><?php the_title(); ?></h3>
+											</a>
+										</div>
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+						<?php endif; ?>
+
+						<?php if( has_term('camp-and-adventure-gear', 'product_cat') ) : ?>
+
+							<?php
+
+							    $args = array(
+							        'post_type' => 'product',
+									'posts_per_page' => -1,
+									'tax_query' => array(
+										array(
+											'taxonomy' => 'product_cat',
+											'field' => 'slug',
+											'terms' => array(
+												'camp-and-adventure-gear',
+											),
+										),
+										array(
+											'taxonomy' => 'product_cat',
+											'field' => 'slug',
+											'terms' => array(
+												'bundled-simple',
+												'bundled-variable',
+												'add-on'
+											),
+											'operator' => 'NOT IN'
+										)
+									)
+							    );
+							    $query = new WP_Query($args);
+
+							    if($query->have_posts()) : ?>
+
+								<h2>Camp and Adventure Gear</h2>
+								<div class="product-portal-row">
+									<?php while($query->have_posts()) : ?>
+
+										<?php $query->the_post(); ?>
+
+										<div class="product-portal">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail('portal-mobile'); ?>
+												<h3><?php the_title(); ?></h3>
+											</a>
+										</div>
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+						<?php endif; ?>
+
+						<?php if( has_term('guidebooks-and-maps', 'product_cat') ) : ?>
+
+							<?php
+
+							    $args = array(
+							        'post_type' => 'product',
+									'posts_per_page' => -1,
+									'tax_query' => array(
+										array(
+											'taxonomy' => 'product_cat',
+											'field' => 'slug',
+											'terms' => array(
+												'guidebooks-and-maps',
+											),
+										),
+										array(
+											'taxonomy' => 'product_cat',
+											'field' => 'slug',
+											'terms' => array(
+												'bundled-simple',
+												'bundled-variable',
+												'add-on'
+											),
+											'operator' => 'NOT IN'
+										)
+									)
+							    );
+							    $query = new WP_Query($args);
+
+							    if($query->have_posts()) : ?>
+
+								<h2>Guidebooks and Maps</h2>
+								<div class="product-portal-row">
+									<?php while($query->have_posts()) : ?>
+
+										<?php $query->the_post(); ?>
+
+										<div class="product-portal">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail('portal-mobile'); ?>
+												<h3><?php the_title(); ?></h3>
+											</a>
+										</div>
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+						<?php endif; ?>
+
+					</div>
+
+				<?php endif; ?>
+
+				<?php if( $term_parent = 'swift-designs' ) : ?>
+
+					<?php if( has_term('saddle-bags', 'product_cat') ) : ?>
+
+						<div class="readymade-products <?php echo $term_slug; ?>">
+
+							<h3>ReadyMade</h3>
+							<?php the_field('readymade_description', 3223); ?>
+							<?php
+
+							$args = array(
+								'post_type' => 'product',
 								'posts_per_page' => -1,
 								'tax_query' => array(
+									'relation' => 'AND',
 									array(
 										'taxonomy' => 'product_cat',
 										'field' => 'slug',
 										'terms' => array(
-											$term->slug,
+											$term_slug,
 											'readymade',
 										),
-										'operator' => 'AND'
+										'operator' => 'AND',
 									),
 									array(
 										'taxonomy' => 'product_cat',
@@ -98,194 +465,370 @@ get_header(); ?>
 										'operator' => 'NOT IN'
 									)
 								)
-						    );
-						    $query = new WP_Query($args);
+							);
+							$query = new WP_Query($args);
 
-						    if($query->have_posts()) : ?>
+							if($query->have_posts()) : ?>
 
-							<div class="readymade-description description">
-								<h3>ReadyMade Bags</h3>
-								<?php the_field('readymade_description', 3223); ?>
-							</div>
+								<div class="taxonomy-product-portal-row">
+									<?php while($query->have_posts()) : ?>
 
-						    <?php while($query->have_posts()) : ?>
+										<?php $query->the_post(); ?>
 
-						        <?php $query->the_post(); ?>
+										<div class="product-portal">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail('portal-mobile'); ?>
+												<h3><?php the_title(); ?></h3>
+											</a>
+										</div>
 
-								<div class="product-portal">
-									<a href="<?php the_permalink(); ?>">
-										<?php the_post_thumbnail('portal-mobile'); ?>
-										<h3><?php the_title(); ?></h3>
-									</a>
+									<?php endwhile; ?>
 								</div>
 
-						    <?php endwhile; ?>
+							<?php endif; ?>
 
-						<?php endif; ?>
+						</div>
 
-					</div>
+						<div class="custom-products <?php echo $term_slug; ?>">
 
-				<?php endif; ?>
+							<h3>Custom</h3>
+							<?php the_field('custom_description', 3223); ?>
+							<?php
 
-				<?php if( term_exists( 'custom', 'product_cat') ) : ?>
-
-					<div class="custom-products <?php echo $term_slug; ?>">
-						<?php
-
-					    $args = array(
-					        'post_type' => 'product',
-							'posts_per_page' => -1,
-							'tax_query' => array(
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										$term->slug,
-										'custom',
+							$args = array(
+								'post_type' => 'product',
+								'posts_per_page' => -1,
+								'tax_query' => array(
+									'relation' => 'AND',
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											$term_slug,
+											'custom',
+										),
+										'operator' => 'AND',
 									),
-									'operator' => 'AND'
-								),
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										'bundled-simple',
-										'bundled-variable',
-										'add-on'
-									),
-									'operator' => 'NOT IN'
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											'bundled-simple',
+											'bundled-variable',
+											'add-on'
+										),
+										'operator' => 'NOT IN'
+									)
 								)
-							)
-					    );
-					    $query = new WP_Query($args);
+							);
+							$query = new WP_Query($args);
 
-					    if($query->have_posts()) : ?>
+							if($query->have_posts()) : ?>
 
-							<div class="custom-description description">
-								<h3>Custom Bags</h3>
-								<?php the_field('custom_description', 3223); ?>
-							</div>
+								<div class="taxonomy-product-portal-row">
+									<?php while($query->have_posts()) : ?>
 
-						    <?php while($query->have_posts()) : ?>
+										<?php $query->the_post(); ?>
 
-						        <?php $query->the_post(); ?>
+										<div class="product-portal">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail('portal-mobile'); ?>
+												<h3><?php the_title(); ?></h3>
+											</a>
+										</div>
 
-								<div class="product-portal">
-									<a href="<?php the_permalink(); ?>">
-										<?php the_post_thumbnail('portal-mobile'); ?>
-										<h3><?php the_title(); ?></h3>
-									</a>
+									<?php endwhile; ?>
 								</div>
 
-						    <?php endwhile; ?>
+							<?php endif; ?>
 
-						<?php endif; ?>
+						</div>
 
-					</div>
+					<?php elseif( has_term('randonneur-bags', 'product_cat') ) : ?>
 
-				<?php endif; ?>
+						<div class="readymade-products <?php echo $term_slug; ?>">
 
-				<?php if( has_term( 'apparel', 'product_cat') ) : ?>
+							<h3>ReadyMade</h3>
+							<?php the_field('readymade_description', 3223); ?>
+							<?php
 
-					<div class="<?php echo $term_slug; ?>">
-						<?php
-
-					    $args = array(
-					        'post_type' => 'product',
-							'posts_per_page' => -1,
-							'tax_query' => array(
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										'apparel',
+							$args = array(
+								'post_type' => 'product',
+								'posts_per_page' => -1,
+								'tax_query' => array(
+									'relation' => 'AND',
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											$term_slug,
+											'readymade',
+										),
+										'operator' => 'AND',
 									),
-								),
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										'bundled-simple',
-										'bundled-variable',
-										'add-on'
-									),
-									'operator' => 'NOT IN'
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											'bundled-simple',
+											'bundled-variable',
+											'add-on'
+										),
+										'operator' => 'NOT IN'
+									)
 								)
-							)
-					    );
-					    $query = new WP_Query($args);
+							);
+							$query = new WP_Query($args);
 
-					    if($query->have_posts()) : ?>
+							if($query->have_posts()) : ?>
 
-							<div class="taxonomy-product-portal-row">
-							    <?php while($query->have_posts()) : ?>
+								<div class="taxonomy-product-portal-row">
+									<?php while($query->have_posts()) : ?>
 
-							        <?php $query->the_post(); ?>
+										<?php $query->the_post(); ?>
 
-									<div class="product-portal">
-										<a href="<?php the_permalink(); ?>">
-											<?php the_post_thumbnail('portal-mobile'); ?>
-											<h3><?php the_title(); ?></h3>
-										</a>
-									</div>
+										<div class="product-portal">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail('portal-mobile'); ?>
+												<h3><?php the_title(); ?></h3>
+											</a>
+										</div>
 
-							    <?php endwhile; ?>
-							</div>
+									<?php endwhile; ?>
+								</div>
 
-						<?php endif; ?>
+							<?php endif; ?>
 
-					</div>
+						</div>
 
-				<?php elseif( has_term( 'guidebooks-and-maps', 'product_cat') ) : ?>
+						<div class="custom-products <?php echo $term_slug; ?>">
 
-					<div class="<?php echo $term_slug; ?>">
-						<?php
+							<h3>Custom</h3>
+							<?php the_field('custom_description', 3223); ?>
+							<?php
 
-					    $args = array(
-					        'post_type' => 'product',
-							'posts_per_page' => -1,
-							'tax_query' => array(
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										'guidebooks-and-maps',
+							$args = array(
+								'post_type' => 'product',
+								'posts_per_page' => -1,
+								'tax_query' => array(
+									'relation' => 'AND',
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											$term_slug,
+											'custom',
+										),
+										'operator' => 'AND',
 									),
-								),
-								array(
-									'taxonomy' => 'product_cat',
-									'field' => 'slug',
-									'terms' => array(
-										'bundled-simple',
-										'bundled-variable',
-										'add-on'
-									),
-									'operator' => 'NOT IN'
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											'bundled-simple',
+											'bundled-variable',
+											'add-on'
+										),
+										'operator' => 'NOT IN'
+									)
 								)
-							)
-					    );
-					    $query = new WP_Query($args);
+							);
+							$query = new WP_Query($args);
 
-					    if($query->have_posts()) : ?>
+							if($query->have_posts()) : ?>
 
-							<div class="taxonomy-product-portal-row">
-							    <?php while($query->have_posts()) : ?>
+								<div class="taxonomy-product-portal-row">
+									<?php while($query->have_posts()) : ?>
 
-							        <?php $query->the_post(); ?>
+										<?php $query->the_post(); ?>
 
-									<div class="product-portal">
-										<a href="<?php the_permalink(); ?>">
-											<?php the_post_thumbnail('portal-mobile'); ?>
-											<h3><?php the_title(); ?></h3>
-										</a>
-									</div>
+										<div class="product-portal">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail('portal-mobile'); ?>
+												<h3><?php the_title(); ?></h3>
+											</a>
+										</div>
 
-							    <?php endwhile; ?>
-							</div>
+									<?php endwhile; ?>
+								</div>
 
-						<?php endif; ?>
+							<?php endif; ?>
 
-					</div>
+						</div>
+
+					<?php elseif( has_term('panniers', 'product_cat') ) : ?>
+
+						<div class="readymade-products <?php echo $term_slug; ?>">
+
+							<h3>ReadyMade</h3>
+							<?php the_field('readymade_description', 3223); ?>
+							<?php
+
+							$args = array(
+								'post_type' => 'product',
+								'posts_per_page' => -1,
+								'tax_query' => array(
+									'relation' => 'AND',
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											$term_slug,
+											'readymade',
+										),
+										'operator' => 'AND',
+									),
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											'bundled-simple',
+											'bundled-variable',
+											'add-on'
+										),
+										'operator' => 'NOT IN'
+									)
+								)
+							);
+							$query = new WP_Query($args);
+
+							if($query->have_posts()) : ?>
+
+								<div class="taxonomy-product-portal-row">
+									<?php while($query->have_posts()) : ?>
+
+										<?php $query->the_post(); ?>
+
+										<div class="product-portal">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail('portal-mobile'); ?>
+												<h3><?php the_title(); ?></h3>
+											</a>
+										</div>
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+						</div>
+
+						<div class="custom-products <?php echo $term_slug; ?>">
+
+							<h3>Custom</h3>
+							<?php the_field('custom_description', 3223); ?>
+							<?php
+
+							$args = array(
+								'post_type' => 'product',
+								'posts_per_page' => -1,
+								'tax_query' => array(
+									'relation' => 'AND',
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											$term_slug,
+											'custom',
+										),
+										'operator' => 'AND',
+									),
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											'bundled-simple',
+											'bundled-variable',
+											'add-on'
+										),
+										'operator' => 'NOT IN'
+									)
+								)
+							);
+							$query = new WP_Query($args);
+
+							if($query->have_posts()) : ?>
+
+								<div class="taxonomy-product-portal-row">
+									<?php while($query->have_posts()) : ?>
+
+										<?php $query->the_post(); ?>
+
+										<div class="product-portal">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail('portal-mobile'); ?>
+												<h3><?php the_title(); ?></h3>
+											</a>
+										</div>
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+						</div>
+
+					<?php elseif( has_term('porteur-bags', 'product_cat') ) : ?>
+
+						<div class="custom-products <?php echo $term_slug; ?>">
+
+							<h3>Custom</h3>
+							<?php the_field('custom_description', 3223); ?>
+							<?php
+
+							$args = array(
+								'post_type' => 'product',
+								'posts_per_page' => -1,
+								'tax_query' => array(
+									'relation' => 'AND',
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											$term_slug,
+											'custom',
+										),
+										'operator' => 'AND',
+									),
+									array(
+										'taxonomy' => 'product_cat',
+										'field' => 'slug',
+										'terms' => array(
+											'bundled-simple',
+											'bundled-variable',
+											'add-on'
+										),
+										'operator' => 'NOT IN'
+									)
+								)
+							);
+							$query = new WP_Query($args);
+
+							if($query->have_posts()) : ?>
+
+								<div class="taxonomy-product-portal-row">
+									<?php while($query->have_posts()) : ?>
+
+										<?php $query->the_post(); ?>
+
+										<div class="product-portal">
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail('portal-mobile'); ?>
+												<h3><?php the_title(); ?></h3>
+											</a>
+										</div>
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+						</div>
+
+					<?php endif; ?>
+
+
+
 
 				<?php endif; ?>
 
