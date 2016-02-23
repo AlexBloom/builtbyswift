@@ -124,6 +124,26 @@ get_header(); ?>
 
 			<?php get_template_part('partials/breadcrumbs'); ?>
 
+			<?php if(is_product('polaris-porteur-bag') ) : ?>
+				<?php $mobile = wp_get_attachment_image_src(get_field('tall_banner', 2908), 'mobile'); ?>
+				<?php $desktop = wp_get_attachment_image_src(get_field('wide_banner', 2908), 'desktop'); ?>
+
+				<a href="/the-improved-polaris-porteur-bag/">
+					<picture class="holiday-banner">
+						<!--[if IE 9]><video style="display: none"><![endif]-->
+						<source
+							srcset="<?php echo $mobile[0]; ?>"
+							media="(max-width: 1180px)" />
+						<source
+							srcset="<?php echo $desktop[0]; ?>"
+							media="(min-width: 1181px)" />
+						<!--[if IE 9]></video><![endif]-->
+						<img srcset="<?php echo $image[0]; ?>">
+					</picture>
+				</a>
+
+			<?php endif; ?>
+
 			<section class="product-section product-top">
 
 				<div class="product-gallery-container">
