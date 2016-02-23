@@ -160,9 +160,20 @@
 					text-transform: uppercase;
 					padding-right: $fifteen;
 				}
+				&:hover {
+					.sub-menu {
+						// display: block;
+						opacity: 1;
+						visibility: visible;
+					}
+				}
 				.sub-menu {
-					display: block;
+					// display: none;
+					opacity: 0;
 					position: absolute;
+					top: $twentyfive;
+					visibility: hidden;
+					@include transition(opacity .3s ease-in-out);
 					li {
 						display: inline;
 						margin-right: 12px;

@@ -1,9 +1,9 @@
 jQuery(document).ready(function(){
 
-	jQuery('.desktop-header .menu .sub-menu').css('display', 'none');
-	jQuery('.desktop-header .menu-item-has-children').hover(function(){
-		jQuery(this).children('.sub-menu').slideToggle('blind');
-	});
+	// jQuery('.desktop-header .menu .sub-menu').css('display', 'none');
+	// jQuery('.desktop-header .menu-item-has-children').hover(function(){
+	// 	jQuery(this).children('.sub-menu').slideToggle('blind');
+	// });
 
 	jQuery('.bundled_table_item .product-name .section-title').text('Add Ons');
 
