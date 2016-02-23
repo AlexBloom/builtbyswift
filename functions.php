@@ -50,6 +50,7 @@ function swift_setup() {
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
+		'main' => __( 'Main Navigation', 'swiftindustries' ),
 		'left' => __( 'Left of logo', 'swiftindustries' ),
 		'right' => __( 'Right of logo', 'swiftindustries' ),
 		'shop-footer' => __( 'Footer Shop Navigation', 'swiftindustries'),
