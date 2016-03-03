@@ -62,7 +62,7 @@
 
 		<?php $taxonomyName = "product_cat";
 		//This gets top layer terms only.  This is done by setting parent to 0.
-		  $parent_terms = get_terms($taxonomyName, array('exclude' => array(170,167),'parent' => 220, 'orderby' => 'slug', 'hide_empty' => false));
+		  $parent_terms = get_terms($taxonomyName, array('exclude' => array(170,167,232),'parent' => 220, 'orderby' => 'slug', 'hide_empty' => false));
 
 		  foreach ($parent_terms as $pterm) {
 
