@@ -180,6 +180,7 @@
 		}
 	}
 	.custom-wait-time {
+		clear: both;
 		padding: $twentyfive;
 		@include media( $large-screen ) {
 			padding: 0;
@@ -191,9 +192,6 @@
 		padding: 0 $twentyfive;
 		@include media( $large-screen ) {
 			padding: 0;
-			.purchase {
-				display: none;
-			}
 		}
 		h3 {
 			margin-bottom: $twentyfive;
