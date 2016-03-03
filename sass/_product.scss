@@ -371,7 +371,13 @@
 				}
 			}
 		}
+		.bundle_wrap {
+			@include media( $large-screen ) {
+				@include span-columns(4);
+			}
+		}
 		.bundle_form {
+			@include row();
 			.product-add-ons {
 				margin-bottom: $twentyfive;
 				@include media( $large-screen ) {
@@ -406,6 +412,7 @@
 				.bundle_wrap {
 					.bundle_price {
 						.price {
+							font-size: $h2-font-size;
 							font-weight: 700;
 							line-height: 1.25;
 						}
