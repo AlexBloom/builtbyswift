@@ -21,6 +21,7 @@
 @import "header";
 @import "slick";
 @import "product";
+@import "color_picker";
 @import "woocommerce_pages";
 @import "taxonomy";
 @import "footer";
@@ -83,6 +84,20 @@ body {
 	}
 	.woocommerce-message {
 		background: $green;
+		a {
+			color: $white;
+			font-weight: 700;
+		}
+	}
+	.cart-empty {
+		margin-top: ($base-spacing / 2);
+		text-align: center;
+	}
+	.return-to-shop {
+		text-align: center;
+		.button {
+			color: $white;
+		}
 	}
 	.woocommerce-info,
 	.woocommerce-message {

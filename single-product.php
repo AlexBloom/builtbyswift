@@ -7,8 +7,6 @@
 
 get_header(); ?>
 
-<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/product-scripts.js'></script>
-
 <script>
 	jQuery(document).ready(function(){
 
@@ -17,6 +15,17 @@ get_header(); ?>
 			dots: false,
 			autoplay: true,
 			autoplaySpeed: 3000,
+			pauseOnHover: true,
+			centered: true,
+			mobileFirst: true,
+		    lazyLoad: 'ondemand',
+		});
+
+		jQuery('.composite-images').slick({
+			arrows: false,
+			dots: true,
+			autoplay: false,
+			fade: true,
 			pauseOnHover: true,
 			centered: true,
 			mobileFirst: true,
@@ -42,15 +51,6 @@ get_header(); ?>
 		var radio_input_width = jQuery('.gfield_radio input').width();
 		jQuery('.gfield_radio input').css('height', radio_input_width);
 
-		// Color accordions
-		jQuery('.ginput_container_radio').hide();
-		// Each color area should be closed except for the first one.
-		jQuery('.first-set .ginput_container_radio').show();
-		jQuery('.body-color .ginput_container_radio').css('display', 'block');
-		jQuery('.gfield_label').click(function() {
-			jQuery(this).siblings('.ginput_container_radio').slideToggle('blind');
-		});
-
 		if ( jQuery( '.bundle_form').length == 0 ) {
 			jQuery('.simple-product').addClass('no-gform');
 		}
@@ -62,87 +62,227 @@ get_header(); ?>
 
 		}
 
-		jQuery( ".bundle_form .bundled_product" ).wrapAll( "<div class='product-add-ons'></div>" );
-		jQuery( ".bundle_form .bundled_product:first-child" ).before( "<h3>Add Ons</h3>" );
-		jQuery( ".gform_wrapper .gform_fields" ).before( "<h3>Choose your Colors</h3>" );
-
 	});
 </script>
 
-	<div id="primary" class="content-area">
+<div id="primary" class="content-area">
 
-		<?php while ( have_posts() ) : the_post(); ?>
+	<?php while ( have_posts() ) : the_post(); ?>
 
-			<div class="product-lifestyle-slider">
+		<?php do_action( 'woocommerce_before_single_product' ); ?>
 
-				<?php if( have_rows('lifestyle_gallery') ) : ?>
+		<div class="product-lifestyle-slider">
 
-					<?php while ( have_rows('lifestyle_gallery') ) : ?>
+			<?php if( have_rows('lifestyle_gallery') ) : ?>
 
-						<?php the_row(); ?>
+				<?php while ( have_rows('lifestyle_gallery') ) : ?>
 
-						<div class="slide">
+					<?php the_row(); ?>
 
-							<?php $mobile_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-mobile'); ?>
-							<?php $tablet_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-tablet'); ?>
-							<?php $desktop_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-desktop'); ?>
-							<?php $retina_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-retina'); ?>
+					<div class="slide">
 
-							<picture class="picture document-header-image">
-								<!--[if IE 9]><video style="display: none"><![endif]-->
-								<source
-									srcset="<?php echo $mobile_page_banner[0]; ?>"
-									media="(max-width: 500px)" />
-								<source
-									srcset="<?php echo $tablet_page_banner[0]; ?>"
-									media="(max-width: 860px)" />
-								<source
-									srcset="<?php echo $desktop_page_banner[0]; ?>"
-									media="(max-width: 1180px)" />
-								<source
-									srcset="<?php echo $retina_page_banner[0]; ?>"
-									media="(min-width: 1181px)" />
-								<!--[if IE 9]></video><![endif]-->
-								<img srcset="<?php echo $image[0]; ?>">
-							</picture>
+						<?php $mobile_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-mobile'); ?>
+						<?php $tablet_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-tablet'); ?>
+						<?php $desktop_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-desktop'); ?>
+						<?php $retina_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-retina'); ?>
 
-							<div class="slide-caption <?php if( get_sub_field( 'caption_position' ) == 'Top of image') : ?>top-caption <?php else: ?>bottom-caption <?php endif; ?>">
-								<a href="<?php echo the_sub_field('page_link'); ?>">
-									<?php the_sub_field('caption'); ?>
-								</a>
-							</div>
+						<picture class="picture document-header-image">
+							<!--[if IE 9]><video style="display: none"><![endif]-->
+							<source
+								srcset="<?php echo $mobile_page_banner[0]; ?>"
+								media="(max-width: 500px)" />
+							<source
+								srcset="<?php echo $tablet_page_banner[0]; ?>"
+								media="(max-width: 860px)" />
+							<source
+								srcset="<?php echo $desktop_page_banner[0]; ?>"
+								media="(max-width: 1180px)" />
+							<source
+								srcset="<?php echo $retina_page_banner[0]; ?>"
+								media="(min-width: 1181px)" />
+							<!--[if IE 9]></video><![endif]-->
+							<img srcset="<?php echo $image[0]; ?>">
+						</picture>
+
+						<div class="slide-caption <?php if( get_sub_field( 'caption_position' ) == 'Top of image') : ?>top-caption <?php else: ?>bottom-caption <?php endif; ?>">
+							<a href="<?php echo the_sub_field('page_link'); ?>">
+								<?php the_sub_field('caption'); ?>
+							</a>
+						</div>
+
+					</div>
+
+				<?php endwhile; ?>
+
+			<?php endif; ?>
+
+		</div>
+
+		<?php get_template_part('partials/breadcrumbs'); ?>
+
+		<?php if( has_term('customizable-bag', 'product_cat') ) : ?>
+
+			<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/color-picker.js'></script>
+
+			<div class="color-picker-container">
+
+				<div class="composite-images">
+
+					<div class="slide first-slide">
+
+						<div class="color-parts">
+
+							<?php if( have_rows('first_front_images') ) : ?>
+
+								<div class="first-front-images images">
+									<?php while ( have_rows('first_front_images') ) : ?>
+
+										<?php the_row(); ?>
+
+										<img src="<?php the_sub_field('first_front_image'); ?>" class="<?php the_sub_field('first_front_color_slug'); ?>" />
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+							<?php if( have_rows('second_front_images') ) : ?>
+
+								<div class="second-front-images images">
+									<?php while ( have_rows('second_front_images') ) : ?>
+
+										<?php the_row(); ?>
+
+										<img src="<?php the_sub_field('second_front_image'); ?>" class="<?php the_sub_field('second_front_color_slug'); ?>" />
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+							<?php if( have_rows('third_front_images') ) : ?>
+
+								<div class="third-front-images images">
+									<?php while ( have_rows('third_front_images') ) : ?>
+
+										<?php the_row(); ?>
+
+										<img src="<?php the_sub_field('third_front_image'); ?>" class="<?php the_sub_field('third_front_color_slug'); ?>" />
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
 
 						</div>
 
-					<?php endwhile; ?>
+						<div class="main-image">
+							<img src="<?php the_field('main_front_image'); ?>" />
+						</div>
 
-				<?php endif; ?>
+					</div>
+
+					<div class="slide second-slide">
+
+						<div class="color-parts">
+
+							<?php if( have_rows('first_rear_images') ) : ?>
+
+								<div class="first-rear-images images">
+									<?php while ( have_rows('first_rear_images') ) : ?>
+
+										<?php the_row(); ?>
+
+										<img src="<?php the_sub_field('first_rear_image'); ?>" class="<?php the_sub_field('first_rear_color_slug'); ?>" />
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+							<?php if( have_rows('second_rear_images') ) : ?>
+
+								<div class="second-rear-images images">
+									<?php while ( have_rows('second_rear_images') ) : ?>
+
+										<?php the_row(); ?>
+
+										<img src="<?php the_sub_field('second_rear_image'); ?>" class="<?php the_sub_field('second_rear_color_slug'); ?>" />
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+							<?php if( have_rows('third_rear_images images') ) : ?>
+
+								<div class="third-rear-images">
+									<?php while ( have_rows('third_rear_images') ) : ?>
+
+										<?php the_row(); ?>
+
+										<img src="<?php the_sub_field('third_rear_image'); ?>" class="<?php the_sub_field('third_rear_color_slug'); ?>" />
+
+									<?php endwhile; ?>
+								</div>
+
+							<?php endif; ?>
+
+						</div>
+
+						<div class="main-image">
+							<img src="<?php the_field('main_rear_image'); ?>" />
+						</div>
+
+					</div>
+
+				</div>
+
+				<?php $selected = get_field('number_of_choices_available'); ?>
+				<div class="color-picker-controls <?php if( $selected == '1' ) { ?>one-choice<?php } elseif( $selected == '2') { ?>two-choices<?php } elseif( $selected == '3') { ?>three-choices<?php } elseif( $selected == '4') { ?>four-choices<?php } ?>">
+
+					<div class="product-add-to-cart">
+
+						<?php
+							/**
+							* woocommerce_single_product_summary hook
+							*
+							* @hooked woocommerce_template_single_title - 5
+							* @hooked woocommerce_template_single_rating - 10
+							* @hooked woocommerce_template_single_price - 10
+							* @hooked woocommerce_template_single_excerpt - 20
+							* @hooked woocommerce_template_single_add_to_cart - 30
+							* @hooked woocommerce_template_single_meta - 40
+							* @hooked woocommerce_template_single_sharing - 50
+							*/
+							remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+							remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+							remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+							remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+							do_action( 'woocommerce_single_product_summary' );
+						?>
+
+					</div>
+
+					<em class="custom-wait-message"><?php the_field('custom_wait_time', 3223); ?></em>
+
+				</div>
 
 			</div>
 
-			<?php do_action( 'woocommerce_before_single_product' ); ?>
+		<?php else: ?>
 
-			<?php get_template_part('partials/breadcrumbs'); ?>
+			<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/product-scripts.js'></script>
 
-			<?php if(is_product('polaris-porteur-bag') ) : ?>
-				<?php $mobile = wp_get_attachment_image_src(get_field('tall_banner', 2908), 'mobile'); ?>
-				<?php $desktop = wp_get_attachment_image_src(get_field('wide_banner', 2908), 'desktop'); ?>
+			<script>
+				jQuery(document).ready(function(){
 
-				<a href="/the-improved-polaris-porteur-bag/">
-					<picture class="holiday-banner">
-						<!--[if IE 9]><video style="display: none"><![endif]-->
-						<source
-							srcset="<?php echo $mobile[0]; ?>"
-							media="(max-width: 1180px)" />
-						<source
-							srcset="<?php echo $desktop[0]; ?>"
-							media="(min-width: 1181px)" />
-						<!--[if IE 9]></video><![endif]-->
-						<img srcset="<?php echo $image[0]; ?>">
-					</picture>
-				</a>
+					jQuery( ".bundle_form .bundled_product" ).wrapAll( "<div class='product-add-ons'></div>" );
+					jQuery( ".bundle_form .bundled_product:first-child" ).before( "<h3>Add Ons</h3>" );
+					jQuery( ".gform_wrapper .gform_fields" ).before( "<h3>Choose your Colors</h3>" );
 
-			<?php endif; ?>
+				});
+			</script>
 
 			<section class="product-section product-top">
 
@@ -364,89 +504,93 @@ get_header(); ?>
 				</section>
 			<?php endif; ?>
 
-			<section class="product-section product-middle">
+		<?php endif; ?>
 
-				<?php if(get_field('specs') ) : ?>
-					<div class="product-specs-features">
-						<h2>Specifications</h2>
+		<?php do_action( 'woocommerce_after_single_product' ); ?>
 
-						<?php the_field('specs'); ?>
-						<?php the_field('features'); ?>
-					</div>
-				<?php endif; ?>
+		<section class="product-section product-middle">
 
-				<?php if(get_field('product_testimonials') ) : ?>
+			<?php if(get_field('specs') ) : ?>
+				<div class="product-specs-features">
+					<h2>Specifications</h2>
 
-					<?php if( have_rows('product_testimonials') ) : ?>
+					<?php the_field('specs'); ?>
+					<?php the_field('features'); ?>
+				</div>
+			<?php endif; ?>
 
-						<div class="product-testimonials">
+			<?php if(get_field('product_testimonials') ) : ?>
 
-							<h2>Testimonials</h2>
+				<?php if( have_rows('product_testimonials') ) : ?>
 
-						    <?php while ( have_rows('product_testimonials') ) : ?>
+					<div class="product-testimonials">
 
-						        <?php the_row(); ?>
+						<h2>Testimonials</h2>
 
-						        <?php if( get_row_layout() == 'testimonial_entry' ) : ?>
+						<?php while ( have_rows('product_testimonials') ) : ?>
 
-									<div class="testimonial">
+							<?php the_row(); ?>
 
-										<div class="quote">
-											<svg version="1.1" id="Quote" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-												 viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
-											<path d="M5.315,3.401c-1.61,0-2.916,1.343-2.916,3c0,1.656,1.306,3,2.916,3c2.915,0,0.972,5.799-2.916,5.799v1.4
-												C9.338,16.601,12.057,3.401,5.315,3.401z M13.715,3.401c-1.609,0-2.915,1.343-2.915,3c0,1.656,1.306,3,2.915,3
-												c2.916,0,0.973,5.799-2.915,5.799v1.4C17.738,16.601,20.457,3.401,13.715,3.401z"/>
-											</svg>
-										</div>
-										<?php the_sub_field('testimonial'); ?>
-										<span class="attribution"><em>&mdash;&nbsp;<?php the_sub_field('attribution'); ?></em></span>
+							<?php if( get_row_layout() == 'testimonial_entry' ) : ?>
 
+								<div class="testimonial">
+
+									<div class="quote">
+										<svg version="1.1" id="Quote" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+											 viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+										<path d="M5.315,3.401c-1.61,0-2.916,1.343-2.916,3c0,1.656,1.306,3,2.916,3c2.915,0,0.972,5.799-2.916,5.799v1.4
+											C9.338,16.601,12.057,3.401,5.315,3.401z M13.715,3.401c-1.609,0-2.915,1.343-2.915,3c0,1.656,1.306,3,2.915,3
+											c2.916,0,0.973,5.799-2.915,5.799v1.4C17.738,16.601,20.457,3.401,13.715,3.401z"/>
+										</svg>
 									</div>
+									<?php the_sub_field('testimonial'); ?>
+									<span class="attribution"><em>&mdash;&nbsp;<?php the_sub_field('attribution'); ?></em></span>
 
-						        <?php endif; ?>
+								</div>
 
-						    <?php endwhile; ?>
+							<?php endif; ?>
 
-						</div>
+						<?php endwhile; ?>
 
-					<?php endif; ?>
-
-				<?php else: ?>
-
-					<?php $thecontent = get_the_content(); ?>
-					<!-- <?php if(!empty($thecontent)) : ?> -->
-						<div class="product-story">
-							<h2>A bit more...</h2>
-							<?php the_content(); ?>
-						</div>
-					<!-- <?php endif; ?> -->
+					</div>
 
 				<?php endif; ?>
 
-			</section>
+			<?php else: ?>
 
-			<?php if( have_rows('product_testimonials') ) : ?>
-				<section class="product-section product-bottom">
-					<div class="product-content">
+				<?php $thecontent = get_the_content(); ?>
+				<!-- <?php if(!empty($thecontent)) : ?> -->
+					<div class="product-story">
 						<h2>A bit more...</h2>
 						<?php the_content(); ?>
 					</div>
-				</section>
+				<!-- <?php endif; ?> -->
+
 			<?php endif; ?>
 
-			<section class="product-section related-products">
+		</section>
 
-				<!-- <h2>Related Products</h2> -->
-				<?php
-					remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
-					remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
-					do_action( 'woocommerce_after_single_product_summary' );
-				?>
+		<?php if( have_rows('product_testimonials') ) : ?>
+			<section class="product-section product-bottom">
+				<div class="product-content">
+					<h2>A bit more...</h2>
+					<?php the_content(); ?>
+				</div>
 			</section>
+		<?php endif; ?>
 
-		<?php endwhile; // end of the loop. ?>
+		<section class="product-section related-products">
 
-	</div><!-- #primary -->
+			<!-- <h2>Related Products</h2> -->
+			<?php
+				remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10 );
+				remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_upsell_display', 15 );
+				do_action( 'woocommerce_after_single_product_summary' );
+			?>
+		</section>
+
+	<?php endwhile; ?>
+
+</div>
 
 <?php get_footer(); ?>

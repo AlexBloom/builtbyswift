@@ -22,7 +22,7 @@ jQuery(document).ready(function() {
 		var ginput_container_radio = jQuery(this).parent().parent().parent().parent().next('.gfield_price').children('.ginput_container_radio');
 
 		// Slide up the current group after selection
-		jQuery(ginput_container).delay(500).slideUp();
+		// jQuery(ginput_container).delay(500).slideUp();
 
 		// Slide down the next group
 		jQuery(ginput_container_radio).delay(1000).slideDown();
@@ -64,6 +64,8 @@ jQuery(document).ready(function() {
 				}
 			}
 		}
+
+
 
 		var color_selection_width = jQuery('.color-selection .color').width();
 		jQuery('.color-selection .color').css('height', color_selection_width);

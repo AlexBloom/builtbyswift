@@ -1,0 +1,367 @@
+.single-product {
+	.content-area {
+		.color-picker-container {
+			@include outer-container;
+			padding: $hundred 0;
+			.composite-images {
+				position: relative;
+				@include media( $large-screen ) {
+					@include span-columns(6);
+				}
+				.color-parts {
+					.images {
+						position: relative;
+					}
+					img {
+						position: absolute;
+						opacity: 0;
+						@include transition(all .2s ease-in-out);
+					}
+				}
+				.slick-dots {
+					margin: 0 $twentyfive $twentyfive;
+					@include media( $large-screen ) {
+						margin: 0;
+					}
+					li {
+						display: inline-block;
+						margin-right: $five;
+						button {
+							background: $medium-gray;
+							border-radius: 0;
+							line-height: $five;
+							padding: $five;
+							text-indent: -9999px;
+							@include transition(all .2s ease-in-out);
+							@include transform(skew(-2deg));
+							&:hover {
+								background: $pink;
+							}
+						}
+						&.slick-active {
+							button {
+								background: $pink;
+							}
+						}
+					}
+				}
+			}
+			.color-picker-controls {
+				@include media( $large-screen ) {
+					@include span-columns(6);
+				}
+				&.two-choices {
+					.gform_fields {
+						.gfield {
+							@include span-columns(4);
+							// @include omega(3n);
+						}
+					}
+				}
+				&.three-choices {
+					.gform_fields {
+						.gfield {
+							@include media( $large-screen ) {
+								@include span-columns(4);
+								@include omega(4n);
+							}
+						}
+					}
+				}
+				.product-add-ons {
+					// Includes the add-ons like shoulder strap and accessories
+					@include span-columns(12);
+					.bundled_product {
+						@include span-columns(6);
+						@include omega(3n);
+						.in-stock,
+						.quantity {
+							display: none;
+						}
+						h4 {
+							display: block;
+							font-size: 14px;
+							text-transform: uppercase;
+						}
+					}
+				}
+				.bundle_data {
+					// Includes the gform (colors) and Add to cart
+					@include span-columns(12);
+					.validation_error {
+						border: none;
+						color: red;
+						font-size: 16px;
+						font-weight: 400;
+					}
+					.two-choices_wrapper {
+						margin-bottom: 0;
+						.gform_fields {
+							@include span-columns(8);
+							.gfield {
+								@include span-columns(6);
+								@include omega(3n);
+							}
+							.gfield_error {
+								background: transparent;
+								border: none;
+								margin: 0;
+								.gfield_label,
+								.validation_message {
+									color: red;
+								}
+							}
+						}
+						.product-add-ons {
+							@include span-columns(4);
+							@include omega;
+							margin-left: 2.35765%;
+							.bundled_product {
+								@include span-columns(12);
+								margin-bottom: $ten;
+								&:nth-child(3) {
+									border-top: 1px solid $medium-gray;
+									padding-top: $thirty;
+								}
+								&:last-child {
+									margin-bottom: 0;
+								}
+							}
+						}
+						.gform_footer {
+							margin: 0;
+							padding: 0;
+						}
+						.gfield {
+							.gfield_radio_list {
+								li {
+									@include span-columns(3);
+									@include omega(4n);
+								}
+							}
+						}
+					}
+					.three-choices_wrapper {
+						margin-bottom: 0;
+						.gfield {
+							.gfield_radio_list {
+								li {
+									@include span-columns(2);
+									// @include omega(4n);
+									@include media( $large-screen ) {
+										@include span-columns(3);
+										@include omega(4n);
+									}
+								}
+							}
+						}
+						.add-on-title {
+							@include row();
+							border-bottom: 1px solid $medium-gray;
+							clear: both;
+							margin-bottom: $twentyfive;
+						}
+						.product-add-ons {
+							@include row();
+							margin-bottom: 0;
+							.add-on-title {
+								border-bottom: 1px solid $medium-gray;
+							}
+							.bundled_product {
+								@include span-columns(12);
+								@include media( $large-screen ) {
+									@include span-columns(4);
+									@include omega();
+								}
+							}
+						}
+					}
+					.gform_wrapper {
+						@include span-columns(12);
+						.gfield_label {
+							background-image: none;
+							border-bottom: 1px solid $medium-gray;
+							display: block;
+							line-height: 1.25;
+							margin-top: 0;
+							padding-right: $fifteen;
+							font: {
+								size: $h4-font-size;
+								weight: 400;
+							}
+							.gfield_required {
+								display: none;
+							}
+							&:hover {
+								cursor: pointer;
+							}
+						}
+						.ginput_container {
+							margin-top: 0;
+							.current-color {
+								font-size: 12px;
+								text-align: center;
+								text-transform: uppercase;
+							}
+							.gfield_radio_list {
+								@include row();
+								li {
+									text-align: center;
+									margin-bottom: 2.35765%;
+									@include media( $large-screen ) {
+										margin: 0;
+										padding: $five;
+									}
+									input {
+										@include row();
+										opacity: 1;
+										@include transition(opacity .2s ease-in-out);
+										&:hover {
+											cursor: pointer;
+										}
+										&.input_checked {
+											opacity: .5;
+										}
+									}
+									label {
+										clear: both;
+										display: none;
+										font-size: 14px;
+										font-weight: 400;
+										margin: 0;
+									}
+								}
+							}
+						}
+						input[type="radio"] {
+							// height: 65px;
+							margin: 0;
+							outline: 0;
+							width: 100% !important;
+							@include appearance(inherit);
+							background: {
+								color: transparent;
+								repeat: no-repeat;
+								size: 100%;
+							}
+							&:hover + label {
+								color: $orange;
+								cursor: pointer;
+							}
+							&.checked + label {
+								color: $pink;
+								font-weight: 700;
+							}
+							label {
+								@include transition(all .2s ease-in-out);
+							}
+						}
+						input[value="Navy|0"] {
+							background: {
+								image: url( ../images/navy_color_swatch.jpg );
+							}
+						}
+						input[value="Steel|0"] {
+							background: {
+								image: url( ../images/steel_color_swatch.jpg );
+							}
+						}
+						input[value="Fuschia|0"] {
+							background: {
+								image: url( ../images/fuschia_color_swatch.jpg );
+							}
+						}
+						input[value="Olive|0"] {
+							background: {
+								image: url( ../images/olive_color_swatch.jpg );
+							}
+						}
+						input[value="Teal|0"] {
+							background: {
+								image: url( ../images/teal_color_swatch.jpg );
+							}
+						}
+						input[value="Black|0"] {
+							background: {
+								image: url( ../images/black_color_swatch.jpg );
+							}
+						}
+						input[value="Rust|0"] {
+							background: {
+								image: url( ../images/rust_color_swatch.jpg );
+							}
+						}
+						input[value="Mandarin|0"] {
+							background: {
+								image: url( ../images/mandarin_color_swatch.jpg );
+							}
+						}
+						input[value="Neon Orange|0"] {
+							background: {
+								image: url( ../images/neon_orange_color_swatch.jpg );
+							}
+						}
+						input[value="Hot Pink|0"] {
+							background: {
+								image: url( ../images/hot_pink_color_swatch.jpg );
+							}
+						}
+						input[value="Burgundy|0"] {
+							background: {
+								image: url( ../images/burgundy_color_swatch.jpg );
+							}
+						}
+						input[value="Saffron|0"] {
+							background: {
+								image: url( ../images/saffron_color_swatch.jpg );
+							}
+						}
+						input[value="Mint Green|0"] {
+							background: {
+								image: url( ../images/mint_green_color_swatch.jpg );
+							}
+						}
+						input[value="Neon Green|0"] {
+							background: {
+								image: url( ../images/neon_green_color_swatch.jpg );
+							}
+						}
+						input[value="Turquoise|0"] {
+							background: {
+								image: url( ../images/turquoise_color_swatch.jpg );
+							}
+						}
+						input[value="Royal Blue|0"] {
+							background: {
+								image: url( ../images/royal_blue_color_swatch.jpg );
+							}
+						}
+					}
+					.bundle_wrap {
+						@include media( $large-screen ) {
+							@include span-columns(6);
+						}
+						.quantity {
+							@include media( $large-screen ) {
+								@include span-columns(2);
+							}
+						}
+						.single_add_to_cart_button {
+							@include media( $large-screen ) {
+								@include shift(0);
+							}
+						}
+					}
+				}
+				.custom-wait-message {
+					@include row();
+					font-size: 14px;
+					padding: 0 $twentyfive;
+					@include media( $large-screen ) {
+						padding: 0;
+					}
+				}
+			}
+		}
+	}
+}
