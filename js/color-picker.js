@@ -118,7 +118,7 @@ jQuery(document).ready(function() {
 	jQuery('.product-add-ons').insertAfter('.product-add-to-cart .bundle_data .gform_body');
 	// Add a title to the add-ons
 	if ( jQuery('.product-add-ons').length ) {
-		jQuery( '.product-add-ons' ).before( '<div class="add-on-title">Add Ons</div>' );
+		jQuery( '.product-add-ons' ).prepend( '<div class="add-on-title">Add Ons</div>' );
 	}
 
 	if (jQuery(window).width() < 860) {

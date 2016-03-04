@@ -71,9 +71,15 @@
 				.product-add-ons {
 					// Includes the add-ons like shoulder strap and accessories
 					@include span-columns(12);
+					.add-on-title {
+						border-bottom: 1px solid $medium-gray;
+						margin-bottom: $twenty;
+					}
 					.bundled_product {
-						@include span-columns(6);
-						@include omega(3n);
+						@include media( $large-screen ) {
+							@include span-columns(6);
+							@include omega(3n);
+						}
 						.in-stock,
 						.quantity {
 							display: none;
@@ -97,10 +103,13 @@
 					.two-choices_wrapper {
 						margin-bottom: 0;
 						.gform_fields {
-							@include span-columns(8);
+							@include span-columns(12);
 							.gfield {
-								@include span-columns(6);
-								@include omega(3n);
+								@include span-columns(12);
+								@include media( $large-screen ) {
+									@include span-columns(6);
+									@include omega(3n);
+								}
 							}
 							.gfield_error {
 								background: transparent;
@@ -112,22 +121,6 @@
 								}
 							}
 						}
-						.product-add-ons {
-							@include span-columns(4);
-							@include omega;
-							margin-left: 2.35765%;
-							.bundled_product {
-								@include span-columns(12);
-								margin-bottom: $ten;
-								&:nth-child(3) {
-									border-top: 1px solid $medium-gray;
-									padding-top: $thirty;
-								}
-								&:last-child {
-									margin-bottom: 0;
-								}
-							}
-						}
 						.gform_footer {
 							margin: 0;
 							padding: 0;
@@ -135,8 +128,8 @@
 						.gfield {
 							.gfield_radio_list {
 								li {
-									@include span-columns(3);
-									@include omega(4n);
+									@include span-columns(2);
+									@include omega(6n);
 								}
 							}
 						}
