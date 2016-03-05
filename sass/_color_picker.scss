@@ -100,6 +100,20 @@
 						font-size: 16px;
 						font-weight: 400;
 					}
+					.one-choice_wrapper {
+						margin-bottom: 0;
+						.gform_fields {
+							@include span-columns(12);
+							.gfield {
+								.gfield_radio_list {
+									li {
+										@include span-columns(1);
+										@include omega(12);
+									}
+								}
+							}
+						}
+					}
 					.two-choices_wrapper {
 						margin-bottom: 0;
 						.gform_fields {
