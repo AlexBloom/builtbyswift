@@ -21,12 +21,20 @@
 				height: auto;
 			}
 			h3 {
+				font-weight: 400;
 				margin: 0 auto;
 				text-align: center;
 				width: 75%;
 			}
 		}
 	}
+}
+
+.page-title {
+	font-family: $orator;
+	margin-bottom: $twentyfive;
+	text-align: center;
+
 }
 
 .product-taxonomies {

@@ -13,7 +13,7 @@ get_header(); ?>
 		jQuery('.product-lifestyle-slider').slick({
 			arrows: false,
 			dots: false,
-			autoplay: true,
+			autoplay: false,
 			autoplaySpeed: 3000,
 			pauseOnHover: true,
 			centered: true,
@@ -62,10 +62,30 @@ get_header(); ?>
 
 		}
 
+		jQuery( '.color-disclaimer' ).appendTo( '.composite-images' );
+		jQuery( '.custom-wait-message' ).appendTo( '.color-picker-controls .product-add-to-cart form' );
+
 	});
 </script>
 
-<div id="primary" class="content-area">
+<?php if( current_user_can('have_wholesale_price') ) : ?>
+	<script>
+		jQuery(window).load(function(){
+			// First things first, get the wholesale price
+			wholesale_price = jQuery('.wholesale_customer .variations_form .wholesale_price_container ins .amount').html();
+			jQuery('.wholesale_customer .bundle_wrap .bundle_price').before('<h3>' + wholesale_price + '</h3>');
+
+			jQuery('.bundled_item_cart_content .attribute-options select').on('change', function() {
+				alert( this.value );
+				updated_wholesale_price = jQuery('.wholesale_customer .variations_form .wholesale_price_container ins .amount').html();
+				alert(updated_wholesale_price);
+			});
+
+		});
+	</script>
+<?php endif; ?>
+
+<div id="primary" class="single-product-content content-area">
 
 	<?php while ( have_posts() ) : the_post(); ?>
 
@@ -120,109 +140,56 @@ get_header(); ?>
 
 		<?php get_template_part('partials/breadcrumbs'); ?>
 
-		<?php if( has_term('customizable-bag', 'product_cat') ) : ?>
+		<?php if( has_term('customizable-baggage', 'product_cat') ) : ?>
 
 			<script type='text/javascript' src='<?php echo get_template_directory_uri(); ?>/js/color-picker.js'></script>
 
 			<div class="color-picker-container">
 
-				<div class="composite-images">
+				<div class="composite-images-container">
 
-					<div class="slide first-slide">
+					<div class="composite-images">
 
-						<div class="color-parts">
-
-							<?php if( have_rows('first_front_images') ) : ?>
-
-								<div class="first-front-images images">
-									<?php while ( have_rows('first_front_images') ) : ?>
-
-										<?php the_row(); ?>
-
-										<img src="<?php the_sub_field('first_front_image'); ?>" class="<?php the_sub_field('first_front_color_slug'); ?>" />
-
-									<?php endwhile; ?>
-								</div>
-
-							<?php endif; ?>
-
-							<?php if( have_rows('second_front_images') ) : ?>
-
-								<div class="second-front-images images">
-									<?php while ( have_rows('second_front_images') ) : ?>
-
-										<?php the_row(); ?>
-
-										<img src="<?php the_sub_field('second_front_image'); ?>" class="<?php the_sub_field('second_front_color_slug'); ?>" />
-
-									<?php endwhile; ?>
-								</div>
-
-							<?php endif; ?>
-
-							<?php if( have_rows('third_front_images') ) : ?>
-
-								<div class="third-front-images images">
-									<?php while ( have_rows('third_front_images') ) : ?>
-
-										<?php the_row(); ?>
-
-										<img src="<?php the_sub_field('third_front_image'); ?>" class="<?php the_sub_field('third_front_color_slug'); ?>" />
-
-									<?php endwhile; ?>
-								</div>
-
-							<?php endif; ?>
-
-						</div>
-
-						<div class="main-image">
-							<img src="<?php the_field('main_front_image'); ?>" />
-						</div>
-
-					</div>
-
-					<?php if( have_rows('first_rear_images') ) : ?>
-						<div class="slide second-slide">
+						<div class="slide first-slide">
 
 							<div class="color-parts">
 
-								<?php if( have_rows('first_rear_images') ) : ?>
+								<?php if( have_rows('first_front_images') ) : ?>
 
-									<div class="first-rear-images images">
-										<?php while ( have_rows('first_rear_images') ) : ?>
+									<div class="first-front-images images">
+										<?php while ( have_rows('first_front_images') ) : ?>
 
 											<?php the_row(); ?>
 
-											<img src="<?php the_sub_field('first_rear_image'); ?>" class="<?php the_sub_field('first_rear_color_slug'); ?>" />
+											<img src="<?php the_sub_field('first_front_image'); ?>" class="<?php the_sub_field('first_front_color_slug'); ?>" />
 
 										<?php endwhile; ?>
 									</div>
 
 								<?php endif; ?>
 
-								<?php if( have_rows('second_rear_images') ) : ?>
+								<?php if( have_rows('second_front_images') ) : ?>
 
-									<div class="second-rear-images images">
-										<?php while ( have_rows('second_rear_images') ) : ?>
+									<div class="second-front-images images">
+										<?php while ( have_rows('second_front_images') ) : ?>
 
 											<?php the_row(); ?>
 
-											<img src="<?php the_sub_field('second_rear_image'); ?>" class="<?php the_sub_field('second_rear_color_slug'); ?>" />
+											<img src="<?php the_sub_field('second_front_image'); ?>" class="<?php the_sub_field('second_front_color_slug'); ?>" />
 
 										<?php endwhile; ?>
 									</div>
 
 								<?php endif; ?>
 
-								<?php if( have_rows('third_rear_images images') ) : ?>
+								<?php if( have_rows('third_front_images') ) : ?>
 
-									<div class="third-rear-images">
-										<?php while ( have_rows('third_rear_images') ) : ?>
+									<div class="third-front-images">
+										<?php while ( have_rows('third_front_images') ) : ?>
 
 											<?php the_row(); ?>
 
-											<img src="<?php the_sub_field('third_rear_image'); ?>" class="<?php the_sub_field('third_rear_color_slug'); ?>" />
+											<img src="<?php the_sub_field('third_front_image'); ?>" class="<?php the_sub_field('third_front_color_slug'); ?>" />
 
 										<?php endwhile; ?>
 									</div>
@@ -232,18 +199,135 @@ get_header(); ?>
 							</div>
 
 							<div class="main-image">
-								<img src="<?php the_field('main_rear_image'); ?>" />
+								<img src="<?php the_field('main_front_image'); ?>" />
 							</div>
 
 						</div>
-					<?php endif; ?>
+
+						<?php if( have_rows('first_rear_images') ) : ?>
+							<div class="slide second-slide">
+
+								<div class="color-parts">
+
+									<?php if( have_rows('first_rear_images') ) : ?>
+
+										<div class="first-rear-images images">
+											<?php while ( have_rows('first_rear_images') ) : ?>
+
+												<?php the_row(); ?>
+
+												<img src="<?php the_sub_field('first_rear_image'); ?>" class="<?php the_sub_field('first_rear_color_slug'); ?>" />
+
+											<?php endwhile; ?>
+										</div>
+
+									<?php endif; ?>
+
+									<?php if( have_rows('second_rear_images') ) : ?>
+
+										<div class="second-rear-images images">
+											<?php while ( have_rows('second_rear_images') ) : ?>
+
+												<?php the_row(); ?>
+
+												<img src="<?php the_sub_field('second_rear_image'); ?>" class="<?php the_sub_field('second_rear_color_slug'); ?>" />
+
+											<?php endwhile; ?>
+										</div>
+
+									<?php endif; ?>
+
+									<?php if( have_rows('third_rear_images') ) : ?>
+
+										<div class="third-rear-images">
+											<?php while ( have_rows('third_rear_images') ) : ?>
+
+												<?php the_row(); ?>
+
+												<img src="<?php the_sub_field('third_rear_image'); ?>" class="<?php the_sub_field('third_rear_color_slug'); ?>" />
+
+											<?php endwhile; ?>
+										</div>
+
+									<?php endif; ?>
+
+								</div>
+
+								<div class="main-image">
+									<img src="<?php the_field('main_rear_image'); ?>" />
+								</div>
+
+							</div>
+						<?php endif; ?>
+
+						<?php if( have_rows('third_slide_first_pocket_images') ) : ?>
+							<div class="slide third-slide">
+
+								<div class="color-parts">
+
+									<?php if( have_rows('third_slide_first_pocket_images') ) : ?>
+
+										<div class="first-pocket-images images">
+											<?php while ( have_rows('third_slide_first_pocket_images') ) : ?>
+
+												<?php the_row(); ?>
+
+												<img src="<?php the_sub_field('first_pocket_image'); ?>" class="<?php the_sub_field('first_pocket_color_slug'); ?>" />
+
+											<?php endwhile; ?>
+										</div>
+
+									<?php endif; ?>
+
+									<?php if( have_rows('second_pocket_images') ) : ?>
+
+										<div class="second-pocket-images images">
+											<?php while ( have_rows('second_pocket_images') ) : ?>
+
+												<?php the_row(); ?>
+
+												<img src="<?php the_sub_field('second_pocket_image'); ?>" class="<?php the_sub_field('second_pocket_color_slug'); ?>" />
+
+											<?php endwhile; ?>
+										</div>
+
+									<?php endif; ?>
+
+									<?php if( have_rows('third_pocket_images') ) : ?>
+
+										<div class="third-pocket-images">
+											<?php while ( have_rows('third_pocket_images') ) : ?>
+
+												<?php the_row(); ?>
+
+												<img src="<?php the_sub_field('third_pocket_image'); ?>" class="<?php the_sub_field('second_pocket_color_slug'); ?>" />
+
+											<?php endwhile; ?>
+										</div>
+
+									<?php endif; ?>
+
+								</div>
+
+								<div class="main-image">
+									<img src="<?php the_field('main_pocket_image'); ?>" />
+								</div>
+
+							</div>
+						<?php endif; ?>
+
+					</div>
+
+					<div class="color-disclaimer">
+						<em><?php the_field('custom_color_disclaimer', 3223); ?></em>
+					</div>
 
 				</div>
 
 				<?php $selected = get_field('number_of_choices_available'); ?>
 				<div class="color-picker-controls <?php if( $selected == '1' ) { ?>one-choice<?php } elseif( $selected == '2') { ?>two-choices<?php } elseif( $selected == '3') { ?>three-choices<?php } elseif( $selected == '4') { ?>four-choices<?php } ?>">
 
-					<div class="product-add-to-cart">
+					<div class="product-add-to-cart <?php echo $post->post_name; ?>">
 
 						<?php
 							/**
@@ -280,7 +364,7 @@ get_header(); ?>
 				jQuery(document).ready(function(){
 
 					jQuery( ".bundle_form .bundled_product" ).wrapAll( "<div class='product-add-ons'></div>" );
-					jQuery( ".bundle_form .bundled_product:first-child" ).before( "<h3>Add Ons</h3>" );
+					// jQuery( ".bundle_form .bundled_product:first-child" ).before( "<h3>Additional Choices</h3>" );
 					jQuery( ".gform_wrapper .gform_fields" ).before( "<h3>Choose your Colors</h3>" );
 
 				});
@@ -370,141 +454,57 @@ get_header(); ?>
 				</div>
 
 
-				<div class="product-description">
+				<div class="product-description <?php if( $product->is_type( array('simple') ) ) : ?>simple-product <?php elseif( $product->is_type( array('variable') ) ) : ?>variable-product <?php elseif( $product->is_type( array('bundle') ) ) : ?>bundled-product<?php endif; ?>">
 
 					<h1><?php the_title(); ?></h1>
 
+					<?php the_excerpt(); ?>
+
 					<?php if( $product->is_type( array('simple') ) ) : ?>
+						<?php
+							/**
+							* woocommerce_single_product_summary hook
+							*
+							* @hooked woocommerce_template_single_title - 5
+							* @hooked woocommerce_template_single_rating - 10
+							* @hooked woocommerce_template_single_price - 10
+							* @hooked woocommerce_template_single_excerpt - 20
+							* @hooked woocommerce_template_single_add_to_cart - 30
+							* @hooked woocommerce_template_single_meta - 40
+							* @hooked woocommerce_template_single_sharing - 50
+							*/
+							remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+							// remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+							remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+							remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+							do_action( 'woocommerce_single_product_summary' );
+						?>
 
-						<div class="simple-product">
-							<?php if ( $price_html = $product->get_price_html() ) : ?>
-								<h2 class="price"><?php echo $price_html; ?>
-									<?php $product_title = get_the_title( $post->ID );
-									if( has_term(array('set'), 'product_cat') ) : ?>
-										<em>a set</em>
-									<?php elseif( has_term( array('each'), 'product_cat') ) : ?>
-										<em>each</em>
-									<?php endif; ?>
-								</h2>
-							<?php endif; ?>
+					<?php else : ?>
 
-								<?php the_excerpt(); ?>
-
-							<?php
-								/**
-								* woocommerce_single_product_summary hook
-								*
-								* @hooked woocommerce_template_single_title - 5
-								* @hooked woocommerce_template_single_rating - 10
-								* @hooked woocommerce_template_single_price - 10
-								* @hooked woocommerce_template_single_excerpt - 20
-								* @hooked woocommerce_template_single_add_to_cart - 30
-								* @hooked woocommerce_template_single_meta - 40
-								* @hooked woocommerce_template_single_sharing - 50
-								*/
-								remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
-								remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
-								remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-								remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
-								do_action( 'woocommerce_single_product_summary' );
-							?>
-						</div>
-
-					<?php elseif( $product->is_type( array('variable') ) ) : ?>
-
-						<div class="variable-product">
-							<?php if ( $price_html = $product->get_price_html() ) : ?>
-								<?php $post = get_post( $post_id );
-								$slug = $post->post_name; ?>
-								<h2 class="price"><?php echo $price_html; ?>
-									<?php $product_title = get_the_title( $post->ID );
-									if( has_term(array('set'), 'product_cat') ) : ?>
-										<em>a set</em>
-									<?php elseif( has_term( array('each'), 'product_cat') ) : ?>
-										<em>each</em>
-									<?php endif; ?>
-								</h2>
-							<?php endif; ?>
-
-								<?php the_excerpt(); ?>
-
-							<?php
-								/**
-								* woocommerce_single_product_summary hook
-								*
-								* @hooked woocommerce_template_single_title - 5
-								* @hooked woocommerce_template_single_rating - 10
-								* @hooked woocommerce_template_single_price - 10
-								* @hooked woocommerce_template_single_excerpt - 20
-								* @hooked woocommerce_template_single_add_to_cart - 30
-								* @hooked woocommerce_template_single_meta - 40
-								* @hooked woocommerce_template_single_sharing - 50
-								*/
-								remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
-								remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
-								remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-								remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
-								do_action( 'woocommerce_single_product_summary' );
-							?>
-						</div>
-
-					<?php elseif( $product->is_type( 'bundle' ) ) : ?>
-
-						<?php $bundle_price_html = $product->get_price_html(); ?>
-						<h2 class="price">
-							<?php echo $bundle_price_html; ?>
-							<?php $product_title = get_the_title( $post->ID );
-							if( has_term(array('set'), 'product_cat') ) : ?>
-								<em>a set</em>
-							<?php elseif( has_term( array('each'), 'product_cat') ) : ?>
-								<em>each</em>
-							<?php endif; ?>
-						</h2>
-
-						<div class="content">
-							<?php the_excerpt(); ?>
-						</div>
-
+						<?php
+							/**
+							* woocommerce_single_product_summary hook
+							*
+							* @hooked woocommerce_template_single_title - 5
+							* @hooked woocommerce_template_single_rating - 10
+							* @hooked woocommerce_template_single_price - 10
+							* @hooked woocommerce_template_single_excerpt - 20
+							* @hooked woocommerce_template_single_add_to_cart - 30
+							* @hooked woocommerce_template_single_meta - 40
+							* @hooked woocommerce_template_single_sharing - 50
+							*/
+							remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
+							remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+							remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
+							remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
+							do_action( 'woocommerce_single_product_summary' );
+						?>
 					<?php endif; ?>
 
 				</div>
 
-				<?php if( has_term('custom', 'product_cat') ) : ?>
-					<div class="custom-wait-time">
-						<em><?php the_field('custom_wait_time', 3223); ?></em>
-					</div>
-				<?php endif; ?>
-
 			</section>
-
-			<?php if( $product->is_type( 'bundle' ) ) : ?>
-				<section class="product-section product-middle">
-
-					<div class="product-add-to-cart">
-
-					<h2 class="purchase">Purchase</h2>
-					<?php
-						/**
-						* woocommerce_single_product_summary hook
-						*
-						* @hooked woocommerce_template_single_title - 5
-						* @hooked woocommerce_template_single_rating - 10
-						* @hooked woocommerce_template_single_price - 10
-						* @hooked woocommerce_template_single_excerpt - 20
-						* @hooked woocommerce_template_single_add_to_cart - 30
-						* @hooked woocommerce_template_single_meta - 40
-						* @hooked woocommerce_template_single_sharing - 50
-						*/
-						remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_title', 5 );
-						remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
-						remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_excerpt', 20 );
-						remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40 );
-						do_action( 'woocommerce_single_product_summary' );
-					?>
-				</div>
-
-				</section>
-			<?php endif; ?>
 
 		<?php endif; ?>
 

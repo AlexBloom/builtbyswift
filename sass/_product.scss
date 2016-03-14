@@ -395,9 +395,9 @@
 							weight: 400;
 						}
 					}
-					.single_variation_wrap {
-						display: none !important;
-					}
+					// .single_variation_wrap {
+					// 	display: none !important;
+					// }
 					.bundled_item_wrap {
 						.quantity {
 							@include span-columns(5);
@@ -539,12 +539,12 @@
 				h3 {
 					color: $gray;
 					font-size: $h4-font-size;
-					font-weight: 900;
+					font-weight: 400;
 					text-transform: uppercase;
 				}
 				&:hover {
 					h3 {
-						color: $orange;
+						color: $pink;
 					}
 				}
 			}

@@ -22,6 +22,7 @@
 @import "slick";
 @import "product";
 @import "color_picker";
+@import "collections";
 @import "woocommerce_pages";
 @import "taxonomy";
 @import "footer";
@@ -42,7 +43,8 @@ body {
 		height: $thirty;
 		width: 100%;
 	}
-	.skip-link {
+	.skip-link,
+	.screen-reader-text {
 		clip: rect(1px, 1px, 1px, 1px);
 		position: absolute;
 		text-indent: -9999px;
@@ -119,7 +121,7 @@ body {
 	}
 	.no-document-header-image {
 		.content-area {
-			padding-top: $hundred;
+			// padding-top: $hundred;
 			@include media( $large-screen ) {
 				padding-top: 0;
 			}
@@ -256,14 +258,20 @@ body {
 				margin-bottom: 2.35765%;
 			}
 		}
-		.story-portal {
+		.full-size-portal {
 			margin-bottom: $hundred;
 			@include media( $large-screen ) {
 				margin-bottom: ($hundred * 2);
 			}
+			&.adventure-store-portal {
+				margin-bottom: 2.35765%;
+			}
 		}
 		.portal {
 			position: relative;
+			h4 {
+				font-size: $h3-font-size;
+			}
 			a {
 				color: $gray;
 			}
@@ -422,6 +430,16 @@ body {
 	.search-container {
 		@include outer-container;
 		margin-bottom: $hundred;
+		.page-title {
+			margin-bottom: 0;
+		}
+		.search-form {
+			margin-bottom: $hundred;
+			@include media( $large-screen ) {
+				@include span-columns(6);
+				@include shift(3);
+			}
+		}
 		.individual-search-results {
 			padding: $twentyfive;
 			@include media( $large-screen ) {

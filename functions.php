@@ -142,7 +142,7 @@ add_image_size( 'story-portal-tablet', '768', '230', 'true' );
 add_image_size( 'story-portal-desktop', '2000', '600', 'true' );
 
 add_image_size( 'product-banner-mobile', '480', '315', 'true' );
-add_image_size( 'product-banner-tablet', '768', '307', 'true' );
+add_image_size( 'product-banner-tablet', '860', '344', 'true' );
 add_image_size( 'product-banner-desktop', '1280', '512', 'true' );
 add_image_size( 'product-banner-retina', '2000', '800', 'true' );
 
@@ -311,6 +311,9 @@ function wcs_custom_get_availability( $availability, $_product ) {
 		return $availability;
 	}
 }
+
+// This overrides the 2 blog posts per page setting. We want to see all products in a category in the store.
+add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 48;' ), 20 );
 
 /**
  * Apply a different tax rate based on the user role.

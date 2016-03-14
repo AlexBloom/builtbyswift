@@ -1,5 +1,5 @@
 <div class="content-portal-row story-portal">
-	<div class="story-portal portal">
+	<div class="full-size-portal portal">
 		<?php $mobile_page_banner = wp_get_attachment_image_src(get_field('story_portal_image', 886), 'story-portal-mobile'); ?>
 		<?php $tablet_page_banner = wp_get_attachment_image_src(get_field('story_portal_image', 886), 'story-portal-tablet'); ?>
 		<?php $desktop_page_banner = wp_get_attachment_image_src(get_field('story_portal_image', 886), 'story-portal-desktop'); ?>

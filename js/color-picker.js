@@ -88,6 +88,10 @@ jQuery(document).ready(function() {
 			jQuery('.first-rear-images img').css('z-index', '0');
 			jQuery('.first-rear-images .' + color_slug).css('opacity', '1');
 			jQuery('.first-rear-images .' + color_slug).css('z-index', '1');
+
+			jQuery('.first-pocket-images img').css('z-index', '0');
+			jQuery('.first-pocket-images .' + color_slug).css('opacity', '1');
+			jQuery('.first-pocket-images .' + color_slug).css('z-index', '1');
 		}
 
 		if ( jQuery(this).parents('.second-set').length ) {
@@ -99,6 +103,10 @@ jQuery(document).ready(function() {
 			jQuery('.second-rear-images img').css('z-index', '0');
 			jQuery('.second-rear-images .' + color_slug).css('opacity', '1');
 			jQuery('.second-rear-images .' + color_slug).css('z-index', '1');
+
+			jQuery('.second-pocket-images img').css('z-index', '0');
+			jQuery('.second-pocket-images .' + color_slug).css('opacity', '1');
+			jQuery('.second-pocket-images .' + color_slug).css('z-index', '1');
 		}
 
 		if ( jQuery(this).parents('.third-set').length ) {
@@ -110,6 +118,10 @@ jQuery(document).ready(function() {
 			jQuery('.third-rear-images img').css('z-index', '0');
 			jQuery('.third-rear-images .' + color_slug).css('opacity', '1');
 			jQuery('.third-rear-images .' + color_slug).css('z-index', '1');
+
+			jQuery('.third-pocket-images img').css('z-index', '0');
+			jQuery('.third-pocket-images .' + color_slug).css('opacity', '1');
+			jQuery('.third-pocket-images .' + color_slug).css('z-index', '1');
 		}
 
 	});
@@ -117,7 +129,9 @@ jQuery(document).ready(function() {
 	// Swap the position of the Add Ons and the Colors.
 	jQuery('.product-add-ons').insertAfter('.product-add-to-cart .bundle_data .gform_body');
 	// Add a title to the add-ons
-	if ( jQuery('.product-add-ons').length ) {
+	if ( jQuery('.custom-ozette-randonneur-bag').length ) {
+		jQuery('.product-add-ons').prepend( '<div class="add-on-title">Sizing and Add Ons</div>')
+	} else {
 		jQuery( '.product-add-ons' ).prepend( '<div class="add-on-title">Add Ons</div>' );
 	}
 
@@ -144,6 +158,8 @@ jQuery(document).ready(function() {
 		// });
 
 	}
+
+
 
 });
 

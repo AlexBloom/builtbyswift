@@ -26,32 +26,6 @@ get_header(); ?>
 		    lazyLoad: 'ondemand',
 		});
 
-		jQuery('.product-slider').slick({
-			arrows: true,
-			dots: false,
-			autoplay: false,
-			mobileFirst: true,
-		    lazyLoad: 'ondemand',
-			responsive: [
-				{
-			  		breakpoint: 1024,
-			  		settings: {
-						centered: true,
-						infinite: true,
-						slidesToScroll: 1,
-					    slidesToShow: 4,
-			  		}
-				},
-				{
-					breakpoint: 480,
-					settings: {
-					    slidesToScroll: 1,
-						slidesToShow: 1,
-			  		}
-				}
-			]
-		});
-
 	});
 
 </script>

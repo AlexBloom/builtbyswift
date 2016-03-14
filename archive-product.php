@@ -72,9 +72,11 @@ get_header(); ?>
 
 		<div class="page-content">
 
-			<?php get_template_part('shop-portals'); ?>
+				<?php get_template_part('shop-portals'); ?>
 
-			<?php get_template_part('story-portal'); ?>
+				<?php get_template_part('double-portals'); ?>
+
+				<?php get_template_part('story-portal'); ?>
 
 		</div>
 

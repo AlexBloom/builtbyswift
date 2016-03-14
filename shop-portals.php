@@ -1,4 +1,4 @@
-<div class="product-portal-row">
+<div class="collection-row">
 	<?php
 
 		$args = array(
@@ -8,7 +8,133 @@
 				array(
 					'taxonomy' => 'product_cat',
 					'field' => 'slug',
-					'terms' => 'hinterland',
+					'terms' => 'carbon-glacier-collection',
+				),
+			)
+		);
+		$query = new WP_Query($args);
+
+		if($query->have_posts()) : ?>
+
+		<h1 class="collection-title"><a href="/product-category/carbon-glacier-collection/">Carbon Glacier</a></h1>
+		<h4>Where the mountain meets the sky: an homage to Mount Rainier.</h4>
+
+		<section class="collection">
+
+			<?php while($query->have_posts()) : ?>
+
+				<?php $query->the_post(); ?>
+
+				<div class="product-portal">
+					<a href="<?php the_permalink(); ?>">
+						<?php the_post_thumbnail('portal-mobile'); ?>
+						<h3><?php the_title(); ?></h3>
+					</a>
+				</div>
+
+			<?php endwhile; ?>
+
+		  </section>
+
+	<?php endif; ?>
+
+</div>
+
+<div class="collection-row">
+	<?php
+
+		$args = array(
+			'post_type' => 'product',
+			'posts_per_page'=> -1,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'product_cat',
+					'field' => 'slug',
+					'terms' => 'hinterland-collection',
+				),
+			)
+		);
+		$query = new WP_Query($args);
+
+		if($query->have_posts()) : ?>
+
+		<h1 class="collection-title"><a href="/product-category/hinterland-collection/">Hinterland</a></h1>
+		<h4>Push to the outskirts with our X-Pac<sup>(tm)</sup> adventure baggage and accessories</h4>
+
+		<section class="collection">
+
+		  	<?php while($query->have_posts()) : ?>
+
+				<?php $query->the_post(); ?>
+
+				<div class="product-portal">
+					<a href="<?php the_permalink(); ?>">
+						<?php the_post_thumbnail('portal-mobile'); ?>
+						<h3><?php the_title(); ?></h3>
+					</a>
+				</div>
+
+			<?php endwhile; ?>
+
+		  </section>
+
+	<?php endif; ?>
+
+</div>
+
+<div class="collection-row">
+	<?php
+
+		$args = array(
+			'post_type' => 'product',
+			'posts_per_page'=> -1,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'product_cat',
+					'field' => 'slug',
+					'terms' => 'customizable-baggage',
+				),
+			)
+		);
+		$query = new WP_Query($args);
+
+		if($query->have_posts()) : ?>
+
+		<h1 class="collection-title"><a href="/product-category/customizable-baggage/">Customizable Baggage</a></h1>
+		<h4>Design your own. Choose your colors and features.</h4>
+
+		<section class="collection">
+
+		  	<?php while($query->have_posts()) : ?>
+
+				<?php $query->the_post(); ?>
+
+				<div class="product-portal">
+					<a href="<?php the_permalink(); ?>">
+						<?php the_post_thumbnail('portal-mobile'); ?>
+						<h3><?php the_title(); ?></h3>
+					</a>
+				</div>
+
+			<?php endwhile; ?>
+
+		  </section>
+
+	<?php endif; ?>
+
+</div>
+
+<div class="collection-row">
+	<?php
+
+		$args = array(
+			'post_type' => 'product',
+			'posts_per_page'=> -1,
+			'tax_query' => array(
+				array(
+					'taxonomy' => 'product_cat',
+					'field' => 'slug',
+					'terms' => 'readymade-bags',
 				),
 				array(
 					'taxonomy' => 'product_cat',
@@ -26,27 +152,23 @@
 
 		if($query->have_posts()) : ?>
 
-		<h2 class="product-row-description"><?php the_field('collection_title', 886); ?></h2>
-		<h1 class="collection-title"><a href="/product-category/hinterland/">Hinterland</a></h1>
+		<h1 class="collection-title"><a href="/product-category/readymade-bags/">ReadyMade Baggage</a></h1>
+		<h4>See what else is in stock and ready-to-go!</h4>
 
-		<section class="product-slider">
+		<section class="collection">
 
-			  <?php while($query->have_posts()) : ?>
+		  	<?php while($query->have_posts()) : ?>
 
 				<?php $query->the_post(); ?>
 
-				<div class="slide">
-
-					<div class="product-portal">
-						<a href="<?php the_permalink(); ?>">
-							<?php the_post_thumbnail('portal-mobile'); ?>
-							<h3><?php the_title(); ?></h3>
-						</a>
-					</div>
-
+				<div class="product-portal">
+					<a href="<?php the_permalink(); ?>">
+						<?php the_post_thumbnail('portal-mobile'); ?>
+						<h3><?php the_title(); ?></h3>
+					</a>
 				</div>
 
-			  <?php endwhile; ?>
+			<?php endwhile; ?>
 
 		  </section>
 
@@ -54,87 +176,84 @@
 
 </div>
 
-<div class="product-portal-row swift-designs">
+<script>
+	jQuery(document).ready(function(){
 
-	<h2 class="product-row-description"><a href="/product-category/swift-designs/"><?php the_field('design_title', 886); ?></a></h2>
+		jQuery('.adventure-slider').slick({
+			arrows: true,
+			dots: false,
+			autoplay: false,
+			mobileFirst: true,
+		    lazyLoad: 'ondemand',
+			responsive: [
+				{
+			  		breakpoint: 1024,
+			  		settings: {
+						centered: true,
+						infinite: true,
+						slidesToScroll: 1,
+					    slidesToShow: 4,
+			  		}
+				},
+				{
+					breakpoint: 480,
+					settings: {
+					    slidesToScroll: 1,
+						slidesToShow: 1,
+			  		}
+				}
+			]
+		});
 
-	<div class="product-slider">
+	});
 
-		<?php $taxonomyName = "product_cat";
-		//This gets top layer terms only.  This is done by setting parent to 0.
-		  $parent_terms = get_terms($taxonomyName, array('exclude' => array(170,167,232),'parent' => 220, 'orderby' => 'slug', 'hide_empty' => false));
+</script>
 
-		  foreach ($parent_terms as $pterm) {
+<div class="collection-row">
+	<h1 class="collection-title"><a href="/product-category/adventure-store/">Adventure Store</a></h1>
+	<h4>Gear up for your next adventure with our top picks.</h4>
 
-			  $thumbnail_id = get_woocommerce_term_meta($pterm->term_id, 'thumbnail_id', true);
-			  // get the image URL for parent category
-			  $image = wp_get_attachment_url($thumbnail_id, 'portal-mobile');
-			  // print the IMG HTML for parent category
-			  echo "<div class='slide'>";
-			  echo "<div class='product-portal'>";
-			  echo '<a href="' . get_term_link($pterm->name, $taxonomyName) . '">';
-			  echo "<img src='{$image}' alt='' />";
-			  echo '<h3>'. $pterm->name . '</h3></a></div>';
-			  echo '</div>';
+	<div class="adventure-slider">
+		<?php
 
+			$args = array(
+				'post_type' => 'product',
+				'posts_per_page' => -1,
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'product_cat',
+						'field' => 'slug',
+						'terms' => 'swift-picks'
+					),
+					array(
+						'taxonomy' => 'product_cat',
+						'field' => 'slug',
+						'terms' => array(
+							'bundled-simple',
+							'bundled-variable',
+							'set',
+							'each',
+						),
+						'operator' => 'NOT IN',
+					),
+				),
+			);
+			$query = new WP_Query($args);
 
-		  } ?>
+			if($query->have_posts()) : ?>
+
+				<?php while($query->have_posts()) : ?>
+
+					<?php $query->the_post(); ?>
+					<div class="slide product-portal">
+						<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('thumbnail'); ?></a>
+						<a href="<?php the_permalink(); ?>"><h3><?php the_title() ?></h3></a>
+					</div>
+
+				<?php endwhile; ?>
+
+		<?php endif; ?>
 
 	</div>
-
-</div>
-
-<div class="product-portal-row">
-	<?php
-
-		$args = array(
-			'post_type' => 'product',
-			'posts_per_page'=> -1,
-			'tax_query' => array(
-				array(
-					'taxonomy' => 'product_cat',
-					'field' => 'slug',
-					'terms' => 'adventure-store',
-				),
-				array(
-					'taxonomy' => 'product_cat',
-					'field' => 'slug',
-					'terms' => array(
-						'bundled-simple',
-						'bundled-variable',
-						'add-on'
-					),
-					'operator' => 'NOT IN'
-				)
-			)
-		);
-		$query = new WP_Query($args);
-
-		if($query->have_posts()) : ?>
-
-		<h2 class="product-row-description"><a href="/product-category/adventure-store"><?php the_field('adventure_title', 886); ?></a></h2>
-
-		<section class="product-slider">
-
-			  <?php while($query->have_posts()) : ?>
-
-				<?php $query->the_post(); ?>
-
-				<div class="slide">
-
-					<div class="product-portal">
-						<a href="<?php the_permalink(); ?>">
-							<?php the_post_thumbnail('portal-mobile'); ?>
-							<h3><?php the_title(); ?></h3>
-						</a>
-					</div>
-
-				</div>
-
-			  <?php endwhile; ?>
-
-		  </section>
-
-	<?php endif; ?>
 
 </div>

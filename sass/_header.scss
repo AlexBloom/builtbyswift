@@ -150,19 +150,19 @@
 			position: relative;
 			li {
 				display: inline;
-				margin-right: $fifty;
+				margin-right: $twenty;
 				a {
-					background-image: url(../images/chevron_down.svg);
-				    background-position: center right;
-				    background-repeat: no-repeat;
-				    background-size: 14px;
 					color: $slate;
+					font-size: 16px;
 					text-transform: uppercase;
 					padding-right: $fifteen;
+					@include transition(color .3s ease-in-out);
 				}
 				&:hover {
+					a {
+						color: $pink;
+					}
 					.sub-menu {
-						// display: block;
 						opacity: 1;
 						visibility: visible;
 					}

@@ -2,11 +2,21 @@
 	.content-area {
 		.color-picker-container {
 			@include outer-container;
-			padding: $hundred 0;
+			padding: $twentyfive 0;
+			@include media( $large-screen ) {
+				padding: $hundred 0;
+			}
 			.composite-images {
+				margin-bottom: $twentyfive;
 				position: relative;
 				@include media( $large-screen ) {
 					@include span-columns(6);
+					margin-bottom: 0;
+				}
+				em {
+					display: block;
+					font-size: 12px;
+					width: 50%;
 				}
 				.color-parts {
 					.images {
@@ -50,6 +60,20 @@
 				@include media( $large-screen ) {
 					@include span-columns(6);
 				}
+				.custom-ozette-randonneur-bag {
+					.product-add-ons {
+						.bundled_product {
+							@include row();
+							width: 100%;
+							.variations_form {
+								width: calc( 100% / 2 );
+								@include media( $large-screen ) {
+									width: calc( 100% / 3 );
+								}
+							}
+						}
+					}
+				}
 				&.two-choices {
 					.gform_fields {
 						.gfield {
@@ -74,6 +98,20 @@
 					.add-on-title {
 						border-bottom: 1px solid $medium-gray;
 						margin-bottom: $twenty;
+					}
+					.variations {
+						margin: 0;
+						.reset_variations {
+							display: none !important;
+						}
+						.attribute-options {
+							.label {
+								display: none;
+							}
+							.value {
+								padding: $five 0;
+							}
+						}
 					}
 					.bundled_product {
 						@include media( $large-screen ) {
