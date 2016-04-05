@@ -100,6 +100,8 @@ function swift_scripts() {
 
 	wp_enqueue_script( 'swift-matchHeight', get_template_directory_uri() . '/js/matchHeight.min.js', array(), '20130115', true );
 
+	wp_enqueue_script( 'swift-scrollTo', get_template_directory_uri() . '/js/jquery.scrollTo.min.js', array(), '20130115', true );
+
 	wp_enqueue_script( 'swift-slick', get_template_directory_uri() . '/js/slick.min.js', array(), '20130115', true );
 
 
@@ -132,6 +134,9 @@ function woocommerce_support() {
     add_theme_support( 'woocommerce' );
 }
 
+add_image_size( 'background-mobile', '480', '850', 'true' );
+add_image_size( 'background-tablet', '800', '420', 'true' );
+
 add_image_size( 'portal-mobile', '480', '360', 'true' );
 add_image_size( 'portal-tablet', '768', '576', 'true' );
 add_image_size( 'portal-desktop', '1280', '960', 'true' );
@@ -145,6 +150,12 @@ add_image_size( 'product-banner-mobile', '480', '315', 'true' );
 add_image_size( 'product-banner-tablet', '860', '344', 'true' );
 add_image_size( 'product-banner-desktop', '1280', '512', 'true' );
 add_image_size( 'product-banner-retina', '2000', '800', 'true' );
+
+// Buddypress image sizes
+define ( 'BP_AVATAR_THUMB_WIDTH', 300 );
+define ( 'BP_AVATAR_THUMB_HEIGHT', 240 );
+define ( 'BP_AVATAR_FULL_WIDTH', 800 );
+define ( 'BP_AVATAR_FULL_HEIGHT', 640 );
 
 // Remove Woo styling
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
@@ -287,10 +298,9 @@ function add_custom_post_menu(){
 /**
 * Change the test for "In Stock / Quantity Left / Out of Stock".
 */
-
 add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
 function wcs_custom_get_availability( $availability, $_product ) {
-	if( ! current_user_can('customer') && has_term('readymade','product_cat') ) {
+	if( ! current_user_can('customer') ) {
 		global $product;
 
 			// Change In Stock Text
@@ -312,8 +322,73 @@ function wcs_custom_get_availability( $availability, $_product ) {
 	}
 }
 
+add_action( 'gform_user_registered', 'pi_gravity_registration_autologin', 10, 4 );
+/**
+ * Auto login after registration.
+ */
+function pi_gravity_registration_autologin( $user_id, $user_config, $entry, $password ) {
+	$user = get_userdata( $user_id );
+	$user_login = $user->user_login;
+	$user_password = $password;
+
+    wp_signon( array(
+		'user_login' => $user_login,
+		'user_password' =>  $user_password,
+		'remember' => false
+    ) );
+}
+
+add_filter( 'geo_mashup_load_location_editor', 'filter_geo_mashup_load_location_editor' );
+
+/**
+ * Load location editor on the BuddyPress user profiles
+ */
+function filter_geo_mashup_load_location_editor( $load_flag ) {
+    global $user_id;
+    if ( bp_is_user_profile() ) {
+	$user_id = bp_displayed_user_id();
+        return true;
+    }
+    return $load_flag;
+}
+
 // This overrides the 2 blog posts per page setting. We want to see all products in a category in the store.
 add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 48;' ), 20 );
+
+// http://www.jordancrown.com/multi-column-gravity-forms/
+function gform_column_splits($content, $field, $value, $lead_id, $form_id) {
+	if(IS_ADMIN) return $content; // only modify HTML on the front end
+
+	$form = RGFormsModel::get_form_meta($form_id, true);
+	$form_class = array_key_exists('cssClass', $form) ? $form['cssClass'] : '';
+	$form_classes = preg_split('/[\n\r\t ]+/', $form_class, -1, PREG_SPLIT_NO_EMPTY);
+	$fields_class = array_key_exists('cssClass', $field) ? $field['cssClass'] : '';
+	$field_classes = preg_split('/[\n\r\t ]+/', $fields_class, -1, PREG_SPLIT_NO_EMPTY);
+
+	// multi-column form functionality
+	if($field['type'] == 'section') {
+
+		// check for the presence of multi-column form classes
+		$form_class_matches = array_intersect($form_classes, array('two-column', 'three-column'));
+
+		// check for the presence of section break column classes
+		$field_class_matches = array_intersect($field_classes, array('gform_column'));
+
+		// if field is a column break in a multi-column form, perform the list split
+		if(!empty($form_class_matches) && !empty($field_class_matches)) { // make sure to target only multi-column forms
+
+			// retrieve the form's field list classes for consistency
+			$ul_classes = GFCommon::get_ul_classes($form).' '.$field['cssClass'];
+
+			// close current field's li and ul and begin a new list with the same form field list classes
+			return '</li></ul><ul class="'.$ul_classes.'"><li class="gfield gsection empty">';
+
+		}
+	}
+
+	return $content;
+}
+add_filter('gform_field_content', 'gform_column_splits', 10, 5);
 
 /**
  * Apply a different tax rate based on the user role.
@@ -329,6 +404,20 @@ add_filter( 'woocommerce_product_tax_class', 'wc_diff_rate_for_user', 1, 2 );
 
 // Charge Tax for Local Pickup
 add_filter( 'woocommerce_apply_base_tax_for_local_pickup', '__return_false' );
+
+/*let us filter where to redirect */
+add_filter("login_redirect","bpdev_redirect_to_profile",10,3);
+
+function bpdev_redirect_to_profile($redirect_to_calculated,$redirect_url_specified,$user) {
+	if(empty($redirect_to_calculated))
+	$redirect_to_calculated=admin_url();
+
+	/*if the user is not site admin,redirect to his/her profile*/
+	if(!is_site_admin($user->user_login))
+		return bp_core_get_user_domain($user->ID );
+	else
+		return $redirect_to_calculated; /*if site admin or not logged in,do not do anything much*/
+}
 
 // Add Google Analytics
 add_action('wp_footer', 'google_analytics_script');

@@ -8,9 +8,13 @@
  */
 ?>
 
-	<footer class="footer" role="contentinfo">
-
+<?php if( is_page('swiftcampout') ) : ?>
+	<footer class="campout-footer" role="contentinfo">
+		<a href="/">&larr; Back to Swift</a>
 	</footer><!-- #colophon -->
+<?php else: ?>
+	<!-- Something should go here! -->
+<?php endif;?>
 
 <?php wp_footer(); ?>
 
