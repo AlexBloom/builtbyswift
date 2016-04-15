@@ -456,6 +456,12 @@
 						clear: both;
 						color: $white;
 						width: 100%;
+						a {
+							color: $white;
+							&:hover {
+								color: $orange;
+							}
+						}
 						h1 {
 							font-size: $h2-font-size;
 							padding-bottom: $ten;
@@ -531,6 +537,9 @@
 					@include span-columns(6);
 					@include omega(2n);
 					padding: $fifteen;
+					a:hover {
+						color: $orange;
+					}
 					img {
 						height: auto;
 					}

@@ -458,8 +458,10 @@ get_header('campout'); ?>
 								</picture>
 
 								<div class="portal-content">
-									<h1><?php the_field('blog_portal_title_text'); ?></h1>
-									<h3><?php the_field('blog_portal_text'); ?></h3>
+									<a href="/blog">
+										<h1><?php the_field('blog_portal_title_text'); ?></h1>
+										<h3><?php the_field('blog_portal_text'); ?></h3>
+									</a>
 								</div>
 
 							</div>
@@ -532,8 +534,10 @@ get_header('campout'); ?>
 								        <?php $query->the_post(); ?>
 
 										<div class="portal">
-											<?php the_post_thumbnail(); ?>
-									        <h4><?php the_title() ?></h4>
+											<a href="<?php the_permalink(); ?>">
+												<?php the_post_thumbnail(); ?>
+										        <h4><?php the_title() ?></h4>
+											</a>
 										</div>
 
 								    <?php endwhile; ?>

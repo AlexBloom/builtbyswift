@@ -65,8 +65,6 @@ get_header('campout'); ?>
 
 			<?php endif; ?>
 
-			<?php $public_profile = bp_get_profile_field_data( 'field=Public' ); ?>
-
 			<?php if( bp_is_my_profile() && bp_is_profile_edit() ) : ?>
 
 				<h2>Put your location on the map!</h2>
@@ -74,7 +72,19 @@ get_header('campout'); ?>
 
 			<?php endif; ?>
 
-			<?php the_content(); ?>
+			<?php $public_profile = bp_get_profile_field_data( 'field=Would you like your profile to be public?' ); ?>
+
+			<?php if( $public_profile == 'No' ) : ?>
+
+				<h2>This profile is not public.</h2>
+				<a href="/swiftcampout">Back to Swift Campout</a>
+
+			<?php else: ?>
+
+				<?php the_content(); ?>
+
+			<?php endif; ?>
+
 
 		</div>
 
