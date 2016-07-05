@@ -37,6 +37,16 @@
 
 }
 
+.collection-row {
+	.products {
+		.product {
+			.ajax_add_to_cart {
+				display: none;
+			}
+		}
+	}
+}
+
 .product-taxonomies {
 	@include outer-container;
 	margin-bottom: ($hundred * 2);

@@ -44,9 +44,9 @@ function geo_mashup_user_default_template( $user ) {
 		?>
 		<style>
 			.locationinfo .vcard {
-				position: absolute;
+				/*position: absolute;
 				top: 50%;
-				transform: translateY(-50%);
+				transform: translateY(-50%);*/
 			}
 		</style>
 		<a href="/campers/<?php echo $username; ?>"><?php echo $username; ?></a>

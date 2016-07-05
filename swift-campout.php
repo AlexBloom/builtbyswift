@@ -266,8 +266,9 @@ get_header('campout'); ?>
 							jQuery('.profile-slider').slick({
 								arrows: true,
 								dots: false,
+								adaptiveHeight: true,
 								autoplay: false,
-								mobileFirst: true,
+								mobileFirst: false,
 								lazyLoad: 'ondemand',
 							});
 
@@ -361,10 +362,6 @@ get_header('campout'); ?>
 											</div>
 
 											<div class="second-column">
-
-												<div class="camper-profile-pic">
-													<?php echo bp_core_fetch_avatar( array( 'item_id' => bp_get_member_user_id(), 'type' => 'full' ) ); ?>
-												</div>
 
 												<?php $public_campout = bp_get_profile_field_data( 'field=Are you organizing a public campout?&user_id=' . bp_get_member_user_id() ); ?>
 												<?php if( $public_campout == 'Yes' ) : ?>

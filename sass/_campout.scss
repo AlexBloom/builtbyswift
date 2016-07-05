@@ -43,6 +43,9 @@
 
 .swift-campout {
 	color: $brown;
+	@include media( $medium-screen ) {
+		padding: 0 $fifty;
+	}
 	input[type="submit"].button-primary {
 		background: $orange;
 		&:hover {

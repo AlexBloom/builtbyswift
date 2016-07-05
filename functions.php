@@ -299,22 +299,22 @@ function add_custom_post_menu(){
 * Change the test for "In Stock / Quantity Left / Out of Stock".
 */
 add_filter( 'woocommerce_get_availability', 'wcs_custom_get_availability', 1, 2);
-function wcs_custom_get_availability( $availability, $_product ) {
-	if( ! current_user_can('customer') ) {
+function wcs_custom_get_availability( $availability, $product ) {
+	if( current_user_can('customer') ) {
 		global $product;
 
 			// Change In Stock Text
-		if ( $_product->is_in_stock() ) {
+		if ( $product->is_in_stock() ) {
 		    $availability['availability'] = __('In stock', 'woocommerce');
 		}
 
 		// Change in Stock Text to only 1 or 2 left
-		if ( $_product->is_in_stock() && $product->get_stock_quantity() <= 5 ) {
+		if ( $product->is_in_stock() && $product->get_stock_quantity() <= 5 ) {
 			$availability['availability'] = sprintf( __('Stock low', 'woocommerce'), $product->get_stock_quantity());
 		}
 
 		// Change Out of Stock Text
-		if ( ! $_product->is_in_stock() ) {
+		if ( ! $product->is_in_stock() ) {
 			$availability['availability'] = __('Out of stock', 'woocommerce');
 		}
 

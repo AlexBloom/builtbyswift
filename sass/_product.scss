@@ -395,9 +395,9 @@
 							weight: 400;
 						}
 					}
-					// .single_variation_wrap {
-					// 	display: none !important;
-					// }
+					.in-stock {
+						display: none;
+					}
 					.bundled_item_wrap {
 						.quantity {
 							@include span-columns(5);
