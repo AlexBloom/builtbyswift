@@ -3,7 +3,8 @@
  * The template for displaying all single posts.
  *
  * @package Swift Industries
- */
+ * @version 1.6.4
+*/
 
 get_header(); ?>
 
