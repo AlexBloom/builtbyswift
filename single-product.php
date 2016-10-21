@@ -92,52 +92,6 @@ get_header(); ?>
 
 		<?php do_action( 'woocommerce_before_single_product' ); ?>
 
-		<div class="product-lifestyle-slider">
-
-			<?php if( have_rows('lifestyle_gallery') ) : ?>
-
-				<?php while ( have_rows('lifestyle_gallery') ) : ?>
-
-					<?php the_row(); ?>
-
-					<div class="slide">
-
-						<?php $mobile_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-mobile'); ?>
-						<?php $tablet_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-tablet'); ?>
-						<?php $desktop_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-desktop'); ?>
-						<?php $retina_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-retina'); ?>
-
-						<picture class="picture document-header-image">
-							<!--[if IE 9]><video style="display: none"><![endif]-->
-							<source
-								srcset="<?php echo $mobile_page_banner[0]; ?>"
-								media="(max-width: 500px)" />
-							<source
-								srcset="<?php echo $tablet_page_banner[0]; ?>"
-								media="(max-width: 860px)" />
-							<source
-								srcset="<?php echo $desktop_page_banner[0]; ?>"
-								media="(max-width: 1180px)" />
-							<source
-								srcset="<?php echo $retina_page_banner[0]; ?>"
-								media="(min-width: 1181px)" />
-							<!--[if IE 9]></video><![endif]-->
-							<img srcset="<?php echo $image[0]; ?>">
-						</picture>
-
-						<div class="slide-caption <?php if( get_sub_field( 'caption_position' ) == 'Top of image') : ?>top-caption <?php else: ?>bottom-caption <?php endif; ?>">
-							<a href="<?php echo the_sub_field('page_link'); ?>">
-								<?php the_sub_field('caption'); ?>
-							</a>
-						</div>
-
-					</div>
-
-				<?php endwhile; ?>
-
-			<?php endif; ?>
-
-		</div>
 
 		<?php get_template_part('partials/breadcrumbs'); ?>
 
@@ -581,6 +535,54 @@ get_header(); ?>
 				</div>
 			</section>
 		<?php endif; ?>
+
+		<div class="product-lifestyle-slider">
+
+			<?php if( have_rows('lifestyle_gallery') ) : ?>
+
+				<?php while ( have_rows('lifestyle_gallery') ) : ?>
+
+					<?php the_row(); ?>
+
+					<div class="slide">
+
+						<?php $mobile_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-mobile'); ?>
+						<?php $tablet_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-tablet'); ?>
+						<?php $desktop_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-desktop'); ?>
+						<?php $retina_page_banner = wp_get_attachment_image_src(get_sub_field('image'), 'product-banner-retina'); ?>
+
+						<picture class="picture document-header-image">
+							<!--[if IE 9]><video style="display: none"><![endif]-->
+							<source
+								srcset="<?php echo $mobile_page_banner[0]; ?>"
+								media="(max-width: 500px)" />
+							<source
+								srcset="<?php echo $tablet_page_banner[0]; ?>"
+								media="(max-width: 860px)" />
+							<source
+								srcset="<?php echo $desktop_page_banner[0]; ?>"
+								media="(max-width: 1180px)" />
+							<source
+								srcset="<?php echo $retina_page_banner[0]; ?>"
+								media="(min-width: 1181px)" />
+							<!--[if IE 9]></video><![endif]-->
+							<img srcset="<?php echo $image[0]; ?>">
+						</picture>
+
+						<div class="slide-caption <?php if( get_sub_field( 'caption_position' ) == 'Top of image') : ?>top-caption <?php else: ?>bottom-caption <?php endif; ?>">
+							<a href="<?php echo the_sub_field('page_link'); ?>">
+								<?php the_sub_field('caption'); ?>
+							</a>
+						</div>
+
+					</div>
+
+				<?php endwhile; ?>
+
+			<?php endif; ?>
+
+		</div>
+
 
 		<section class="product-section related-products">
 
