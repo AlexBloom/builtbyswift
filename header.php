@@ -159,7 +159,9 @@
 		</div>
 
 	</header>
+	<!-- <header class="notification" style="text-align:center; color:#FFF; background-color:#555555; padding:.5em; font-size:0.75em;">
 
+</header> -->
 	<header id="masthead" class="desktop-header" role="banner">
 
 		<div class="site-branding">
