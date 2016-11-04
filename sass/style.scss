@@ -170,22 +170,26 @@ body {
 						height: auto;
 					}
 					.slide-caption {
-						bottom: $hundred;
-						color: $white;
+						bottom: 1em;
+						//color: $white;
+						color:#121212;
+						background-color:#FFF;
+						box-shadow:0 .5rem 1rem
+						max-width:32rem;
 						left: 50%;
 						position: relative;
 						@include transform(translateX(-50%));
 						font: {
 							family: $orator;
-							size: 18px;
+							size: 1.25rem;
 						}
 						@include media( $large-screen ) {
 							font: {
-								size: 36px;
+								size: 2rem;
 							}
 						}
 						a {
-							color: $white;
+							//color: $white;
 							&:hover {
 								color: $pink;
 							}

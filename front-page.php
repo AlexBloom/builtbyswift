@@ -102,12 +102,45 @@ get_header(); ?>
 										<!--[if IE 9]></video><![endif]-->
 										<img srcset="<?php echo $image[0]; ?>">
 									</picture>
+								</a>
 
 									<div class="slide-caption">
-										<?php the_sub_field('caption'); ?>
+										<p> <?php the_sub_field('caption'); ?> </p>
+										<?php if( get_sub_field('category_toggle') ) : ?>
+											<?php
+												$category_links = get_sub_field('category_link');
+												if( $category_links ) :
+											?>
+											<?php foreach( $category_links as $cat_link ) : ?>
+												<a class="button" href="<?php echo get_term_link( $cat_link ); ?>">
+												<?php endforeach; ?>
+											<?php endif; ?>
+
+										<?php elseif( get_sub_field('page_toggle') ) : ?>
+											<a class="button" href="<?php the_sub_field('page_link'); ?>">
+
+										<?php elseif( get_sub_field('blog_post_toggle') ) : ?>
+											<?php
+												$blog_post_links = get_sub_field('blog_post_link');
+												if( $blog_post_links ) :
+
+													$post = $blog_post_links;
+													setup_postdata( $post );
+											?>
+											<a class="button" href="<?php the_permalink(); ?>">
+
+												<?php wp_reset_postdata(); ?>
+
+												<?php endif; ?>
+
+										<?php endif; ?>
+
+											<?php the_sub_field('call_to_action') ?>
+
+										 </a>
 									</div>
-									
-								</a>
+
+
 
 							</div>
 						<?php endif; ?>
