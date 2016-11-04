@@ -13,10 +13,10 @@
 */
 
 @import "variables";
-@import "bourbon/bourbon";
-@import "base/grid-settings";
-@import "neat/neat";
-@import "base/base";
+@import "../bourbon/bourbon";
+@import "../base/grid-settings";
+@import "../neat/neat";
+@import "../base/base";
 
 @import "header";
 @import "slick";
