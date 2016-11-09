@@ -153,7 +153,33 @@ get_header(); ?>
 
 		</section>
 
+
+
 <!-- End Gallery -->
+
+		<section class="promo-portals">
+			<div class="promo-portal" style="float:left; width:50%; padding:1.5rem; box-sizing:border-box; background-color:#eeeeee; color:#000">
+				<h6>Promo Area 1</h6>
+				<h2> Promotional Item or Info </h2>
+				<p>
+					Sugarloaf Giveaway Here or In Hero above.
+				</p>
+			</div>
+			<div class="promo-portal" style="float:left; width:50%; padding:1.5rem; box-sizing:border-box; background-color:#dddddd; color:#000">
+				<h6>Promo Area 2</h6>
+				<h2> Other Promotional Item. </h2>
+				<p>
+					Continually Featured Product info here or maybe email list form?
+				</p>
+			</div>
+		</section>
+		<section class="warning-portal" style="background-color:#222; color:#FFF; text-align:center; box-sizing:border-box; padding:1.5rem;">
+			<h2>Custom Bag Holiday Deadline November 28th.</h2>
+			<ul>
+				<li> Get your orders in now! </li>
+				<a href="#" class="button"> Custom Bags </a>
+			</ul>
+		</section>
 
 		<section class="page-content">
 

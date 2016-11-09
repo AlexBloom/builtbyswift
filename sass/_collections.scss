@@ -14,9 +14,13 @@
 		.product-portal,
 		.product {
 			margin-bottom: 2.35765%;
+			@include span-columns(6);
+			//@include omega(2n);
+			margin-right:0;
 			@include media( $large-screen ) {
 				@include span-columns(3);
 				@include omega(4n);
+				margin-right: 2.35765%;
 				margin-bottom: $fifty;
 			}
 			img {
@@ -24,9 +28,11 @@
 				width: 100%;
 			}
 			h3 {
-				font-weight: 400;
+				font-weight: 600;
+				text-transform:capitalize;
+				font-size:.875rem;
 				text-align: center;
-				@include transition(color .3s ease-in-out);
+				@include transition(color .2s ease-in-out);
 			}
 			.price,
 			.add_to_cart_button {

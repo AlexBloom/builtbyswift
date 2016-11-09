@@ -149,18 +149,30 @@
 	.main-navigation {
 		width:100%;
 		clear:both;
+		a {
+			font-size: .875rem;
+		}
 		ul.menu {
 			// padding-top: $five;
-			position: relative;
+			//position: relative;
 			li {
-				display: inline;
+				display: inline-block;
+				vertical-align:top;
 				margin-right: $twenty;
 				a {
 					color: $slate;
-					font-size: .875rem;
 					//text-transform: uppercase;
 					padding-right: $fifteen;
-					@include transition(color .3s ease-in-out);
+					@include transition(color .2s ease-in-out);
+				}
+				.menu-item-has-children{
+					> a{
+					padding-right: $fifteen;
+					background-image:url(../images/chevron_down.svg);
+					background-position: center right;
+					background-repeat: no-repeat;
+					background-size: 14px;	
+					}
 				}
 				&:hover {
 					a {
@@ -168,20 +180,27 @@
 					}
 					.sub-menu {
 						opacity: 1;
+						max-height:200px;
 						visibility: visible;
 					}
 				}
 				.sub-menu {
-					// display: none;
+					z-index: 1;
+					width: 100vw;
+					left: 0;
+					text-align:center;
+					background-color:#111111;
 					opacity: 0;
+					max-height:0px;
 					position: absolute;
-					top: $twentyfive;
+					margin-top:.75rem;
+					//top: $twentyfive;
 					visibility: hidden;
 					@include transition(opacity .3s ease-in-out);
 					li {
-						display: inline;
+						display: inline-block;
 						margin-right: 12px;
-						padding: $ten 0 $twentyfive;
+						padding: $ten 0 $ten;
 						a {
 							background-image: none;
 							color: $medium-gray;
