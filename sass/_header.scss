@@ -245,17 +245,13 @@
 	}
 
 	.menu-item-has-children{
-		&:first-child > a:after{
+		&:first-child:after{
 			content:'+';
 			padding-left:.5em;
 		}
 		a {
 		padding-right: .5em;
 		padding-left: .5em;
-		//background-image:url(../wp-content/themes/builtbyswift/images/chevron_down.svg);
-		//background-position: center right;
-		//background-repeat: no-repeat;
-		//background-size: 14px;
 		}
 	}
 

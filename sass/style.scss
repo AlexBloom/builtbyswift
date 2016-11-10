@@ -70,13 +70,20 @@ body {
 		background: $orange;
 		border-radius: 0;
 		color: $white;
-		font-size: 14px;
-		font-weight: 400;
+		font-size: 0.75rem;
+		font-weight: 800;
 		padding: $ten $fifteen;
 		text-transform: uppercase;
 		@include transition(background .2s ease-in-out);
+		margin-left:.5rem;
+		margin-right:.5rem;
+		text-shadow:none;
 		&:hover {
 			background: $dark-orange;
+			color:$white;
+		}
+		&:visited {
+			color: $white;
 		}
 	}
 	.woocommerce-info {
@@ -128,6 +135,15 @@ body {
 			}
 		}
 	}
+}
+
+.notification-portal{
+	text-align:center;
+	font-size: .875rem;
+  background-color: $light-gray;
+  padding: 1em 1em .1em;
+	max-width: 90rem;
+	margin: 0 auto;
 }
 
 .site-content {
