@@ -13,6 +13,8 @@
 		@include row();
 		.product-portal,
 		.product {
+			text-align:center;
+			font-size:.875rem;
 			margin-bottom: 2.35765%;
 			@include span-columns(6);
 			//@include omega(2n);
@@ -28,13 +30,13 @@
 				width: 100%;
 			}
 			h3 {
+				color:$black;
+				font-size:.875rem;
 				font-weight: 600;
 				text-transform:capitalize;
-				font-size:.875rem;
-				text-align: center;
 				@include transition(color .2s ease-in-out);
 			}
-			.price,
+
 			.add_to_cart_button {
 				display: none;
 			}

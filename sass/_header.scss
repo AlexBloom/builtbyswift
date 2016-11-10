@@ -135,20 +135,26 @@
 	@include media( $large-screen ) {
 		@include row();
 		@include outer-container;
-		padding: $ten;
+		padding: $ten 1em 0;
+		display:flex;
 	}
 	.site-branding {
-		@include span-columns(2);
+		width:160px;
+		//@include span-columns(2);
 		svg {
-			max-width: 150px;
+			max-height: 6rem;
+			//max-width: 140px;
 		}
 	}
 	.navigation-wrap{
-		@include span-columns(10);
+		//@include span-columns(10);
+		flex:1;
+		padding-left:2em;
 	}
 	.main-navigation {
 		width:100%;
 		clear:both;
+		padding-top:.5em;
 		a {
 			font-size: .875rem;
 		}
@@ -162,18 +168,11 @@
 				a {
 					color: $slate;
 					//text-transform: uppercase;
-					padding-right: $fifteen;
+					//padding-right: $fifteen;
+					padding:22px .5rem;
 					@include transition(color .2s ease-in-out);
 				}
-				.menu-item-has-children{
-					> a{
-					padding-right: $fifteen;
-					background-image:url(../images/chevron_down.svg);
-					background-position: center right;
-					background-repeat: no-repeat;
-					background-size: 14px;	
-					}
-				}
+
 				&:hover {
 					a {
 						color: $pink;
@@ -189,22 +188,24 @@
 					width: 100vw;
 					left: 0;
 					text-align:center;
-					background-color:#111111;
+					background-color:#FFF;
 					opacity: 0;
 					max-height:0px;
 					position: absolute;
-					margin-top:.75rem;
-					//top: $twentyfive;
+					//padding-top:.75rem;
+					border-top:1px solid $light-gray;
+					border-bottom:1px solid $light-gray;
+					margin-top:1rem;
 					visibility: hidden;
-					@include transition(opacity .3s ease-in-out);
+					@include transition(all .2s ease-in-out);
 					li {
 						display: inline-block;
 						margin-right: 12px;
 						padding: $ten 0 $ten;
 						a {
 							background-image: none;
-							color: $medium-gray;
-							font-size: 16px;
+							color: $slate;
+							//font-size: 16px;
 							text-transform: none;
 							&:hover {
 								color: $pink;
@@ -242,4 +243,20 @@
 			max-width: $fifteen;
 		}
 	}
+
+	.menu-item-has-children{
+		&:first-child > a:after{
+			content:'+';
+			padding-left:.5em;
+		}
+		a {
+		padding-right: .5em;
+		padding-left: .5em;
+		//background-image:url(../wp-content/themes/builtbyswift/images/chevron_down.svg);
+		//background-position: center right;
+		//background-repeat: no-repeat;
+		//background-size: 14px;
+		}
+	}
+
 }

@@ -283,6 +283,7 @@ get_header(); ?>
 				<div class="color-picker-controls <?php if( $selected == '1' ) { ?>one-choice<?php } elseif( $selected == '2') { ?>two-choices<?php } elseif( $selected == '3') { ?>three-choices<?php } elseif( $selected == '4') { ?>four-choices<?php } ?>">
 
 					<div class="product-add-to-cart <?php echo $post->post_name; ?>">
+						<h1><?php echo the_title(); ?></h1>
 
 						<?php
 							/**

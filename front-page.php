@@ -158,36 +158,69 @@ get_header(); ?>
 <!-- End Gallery -->
 
 		<section class="promo-portals">
-			<div class="promo-portal" style="float:left; width:50%; padding:1.5rem; box-sizing:border-box; background-color:#eeeeee; color:#000">
-				<h6>Promo Area 1</h6>
-				<h2> Promotional Item or Info </h2>
-				<p>
-					Sugarloaf Giveaway Here or In Hero above.
-				</p>
+			<!-- <div class="promo-portal" >
+				<a href="#">
+					<img src="" alt="" />
+
+					<a href="" class="button"> </a>
+				</a>
+			</div> -->
+			<div class="promo-portal portal">
+				<?php $mobile_page_banner = wp_get_attachment_image_src(get_field('featured_area_1_image', 886), 'portal-mobile'); ?>
+				<?php $tablet_page_banner = wp_get_attachment_image_src(get_field('featured_area_1_image', 886), 'portal-tablet'); ?>
+
+				<a href="<?php the_field('featured_area_1_link', 886); ?>">
+					<picture class="picture">
+						<!--[if IE 9]><video style="display: none"><![endif]-->
+						<source
+							srcset="<?php echo $mobile_page_banner[0]; ?>"
+							media="(max-width: 500px)" />
+						<source
+							srcset="<?php echo $tablet_page_banner[0]; ?>"
+							media="(min-width: 500px)" />
+						<!--[if IE 9]></video><![endif]-->
+						<img srcset="<?php echo $image[0]; ?>">
+					</picture>
+					<div class="portal-content">
+						<div class="h1 bold"><?php the_field('featured_area_1_content', 886); ?></div>
+					</div>
+				</a>
 			</div>
-			<div class="promo-portal" style="float:left; width:50%; padding:1.5rem; box-sizing:border-box; background-color:#dddddd; color:#000">
-				<h6>Promo Area 2</h6>
-				<h2> Other Promotional Item. </h2>
-				<p>
-					Continually Featured Product info here or maybe email list form?
-				</p>
+			<div class="promo-portal portal">
+				<?php $mobile_page_banner = wp_get_attachment_image_src(get_field('featured_area_2_image', 886), 'portal-mobile'); ?>
+				<?php $tablet_page_banner = wp_get_attachment_image_src(get_field('featured_area_2_image', 886), 'portal-tablet'); ?>
+
+				<a href="<?php the_field('featured_area_2_link', 886); ?>">
+					<picture class="picture">
+						<!--[if IE 9]><video style="display: none"><![endif]-->
+						<source
+							srcset="<?php echo $mobile_page_banner[0]; ?>"
+							media="(max-width: 500px)" />
+						<source
+							srcset="<?php echo $tablet_page_banner[0]; ?>"
+							media="(min-width: 500px)" />
+						<!--[if IE 9]></video><![endif]-->
+						<img srcset="<?php echo $image[0]; ?>">
+					</picture>
+					<div class="portal-content">
+						<div class="h1 bold"><?php the_field('featured_area_2_content', 886); ?></div>
+					</div>
+				</a>
 			</div>
 		</section>
-		<section class="warning-portal" style="background-color:#222; color:#FFF; text-align:center; box-sizing:border-box; padding:1.5rem;">
+		<!-- <section class="warning-portal" style="background-color:#222; color:#FFF; text-align:center; box-sizing:border-box; padding:1.5rem;">
 			<h2>Custom Bag Holiday Deadline November 28th.</h2>
 			<ul>
 				<li> Get your orders in now! </li>
 				<a href="#" class="button"> Custom Bags </a>
 			</ul>
-		</section>
+		</section> -->
 
 		<section class="page-content">
 
 			<?php get_template_part('shop-portals'); ?>
 
 			<?php get_template_part('double-portals'); ?>
-
-			<?php get_template_part('story-portal'); ?>
 
 		</section>
 

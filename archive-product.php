@@ -51,7 +51,6 @@ get_header(); ?>
 
 				<?php get_template_part('double-portals'); ?>
 
-				<?php get_template_part('story-portal'); ?>
 
 		</div>
 

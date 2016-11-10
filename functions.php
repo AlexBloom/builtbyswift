@@ -167,12 +167,24 @@ add_role('dealer', 'Dealer', array(
 ));
 
 // Force price to show on variation products
-add_filter('woocommerce_available_variation', function ($value, $object = null, $variation = null) {
-if ($value['price_html'] == '') {
-$value['price_html'] = '<span class="price">' . $variation->get_price_html() . '</span>';
-}
-return $value;
-}, 10, 3);
+// add_filter('woocommerce_available_variation', function ($value, $object = null, $variation = null) {
+// if ($value['price_html'] == '') {
+// $value['price_html'] = '<span class="price">' . $variation->get_price_html() . '</span>';
+// }
+// return $value;
+// }, 10, 3);
+
+// Re Order Price on Single Products
+remove_action('woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 2 );
+
+// Add Per Set to All Products
+// function sv_change_product_price_display( $price ) {
+// 	$price .= '/set';
+// 	return $price;
+// }
+// add_filter( 'woocommerce_get_price_html', 'sv_change_product_price_display' );
+// add_filter( 'woocommerce_cart_item_price', 'sv_change_product_price_display' );
 
 // allow SVG
 function custom_mime_types( $mimes=array() ) {
@@ -185,10 +197,10 @@ add_filter('upload_mimes', 'custom_mime_types');
 /**
  * TypeKit Fonts
  */
-function theme_typekit() {
-    wp_enqueue_script( 'theme_typekit', '//use.typekit.net/vmv6ysj.js');
-}
-add_action( 'wp_enqueue_scripts', 'theme_typekit' );
+// function theme_typekit() {
+//     wp_enqueue_script( 'theme_typekit', '//use.typekit.net/vmv6ysj.js');
+// }
+// add_action( 'wp_enqueue_scripts', 'theme_typekit' );
 
 function theme_typekit_inline() {
   if ( wp_script_is( 'theme_typekit', 'done' ) ) { ?>
@@ -197,12 +209,15 @@ function theme_typekit_inline() {
 }
 add_action( 'wp_head', 'theme_typekit_inline' );
 
+
 // Disable reviews on products
 add_filter( 'woocommerce_product_tabs', 'wcs_woo_remove_reviews_tab', 98 );
 function wcs_woo_remove_reviews_tab($tabs) {
  unset($tabs['reviews']);
  return $tabs;
 }
+
+
 
 // Swift Logo on login
 function custom_login_logo() {
