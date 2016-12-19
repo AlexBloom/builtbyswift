@@ -18,4 +18,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
-wc_get_template( 'archive-product.php' );
+if (is_product_category( 'mycategory' )){
+	wc_get_template( 'archive-customizable-baggage.php' );
+}
+else if {
+	wc_get_template( 'archive-handlebar-front-bags.php' );
+}
+else {
+	wc_get_template( 'archive-product.php' );
+}

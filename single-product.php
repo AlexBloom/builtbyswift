@@ -87,7 +87,15 @@ get_header(); ?>
 <?php endif; ?>
 
 <div id="primary" class="single-product-content content-area">
-
+	<?php if( has_term('customizable-baggage', 'product_cat') ) : ?>
+		<?php if( get_field('notification_toggle', 2908) ) : ?>
+		<section class="notification-portal">
+			<p>
+				<?php the_field('notification_text', 2908); ?>
+			</p>
+		</section>
+		<?php endif; ?>
+	<?php endif; ?>
 	<?php while ( have_posts() ) : the_post(); ?>
 
 		<?php do_action( 'woocommerce_before_single_product' ); ?>
